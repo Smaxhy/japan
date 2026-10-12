@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B0E22">
+<meta name="description" content="Tokyo trip companion for Dec 15–31: swipe-to-discover spots, local food, bike routes, day trips, a December calendar and a cash budget.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Azumabashi">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0E22'/%3E%3Cpath d='M30 56h4l-1-44h-2z' fill='%238C9BFF'/%3E%3Ccircle cx='32' cy='9' r='3' fill='%23F07B7B'/%3E%3Cpath d='M8 50q12-12 24 0q12-12 24 0' stroke='%23C5523F' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<title>Azumabashi Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a night-river masthead over a sticky tab rail; each tab is its own working surface, max 1120px wide. */
+:root{
+  --paper:#EDF0F5; --card:#FFFFFF; --ink:#141830; --muted:#596079; --line:#D3D8E4;
+  --ai:#2E3D96; --ai-soft:#DFE3F6; --yuzu:#C98E0E; --yuzu-soft:#FBF0D3; --plum:#8C3A5E; --plum-soft:#F4E0E9;
+  --moss:#3E7A55; --moss-soft:#DDEFE3; --alarm:#B23A3A;
+  --night:#0B0E22; --night2:#171C3D; --nightink:#E9EBF7; --lamp:#F4C25A; --bridge:#C5523F;
+  --f-display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",Georgia,serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:14px; --shadow:0 1px 2px rgba(20,24,48,.06),0 8px 24px rgba(20,24,48,.06);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1124; --card:#161A33; --ink:#E6E8F3; --muted:#9AA0BC; --line:#272C4C;
+  --ai:#9CA8FF; --ai-soft:#232A55; --yuzu:#F1C04E; --yuzu-soft:#3A3014; --plum:#E58AB0; --plum-soft:#3C2033;
+  --moss:#7CCB98; --moss-soft:#1C3527; --alarm:#F07B7B; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1124; --card:#161A33; --ink:#E6E8F3; --muted:#9AA0BC; --line:#272C4C;
+  --ai:#9CA8FF; --ai-soft:#232A55; --yuzu:#F1C04E; --yuzu-soft:#3A3014; --plum:#E58AB0; --plum-soft:#3C2033;
+  --moss:#7CCB98; --moss-soft:#1C3527; --alarm:#F07B7B; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.2}
+a{color:var(--ai)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ai);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+/* masthead */
+.mast{background:linear-gradient(180deg,var(--night) 0%,var(--night2) 100%);color:var(--nightink);position:relative;overflow:hidden}
+.mast-inner{position:relative;z-index:2;padding-block:22px 0;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+.mast h1{font-size:clamp(30px,6vw,54px);font-weight:800;letter-spacing:.01em}
+.mast h1 small{display:block;font-family:var(--f-body);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--lamp);margin-bottom:6px}
+.mast .sub{color:#B8BDDA;font-size:14px;max-width:46ch;margin-top:6px}
+.clock{text-align:right;min-width:0}
+.clock .t{font-family:var(--f-mono);font-size:clamp(22px,4vw,32px);font-weight:600;color:#fff;letter-spacing:.02em}
+.clock .d{font-size:12px;color:#B8BDDA}
+.clock .sync{font-size:11px;color:#8F95B8;margin-top:4px}
+.skyline{display:block;width:100%;height:clamp(110px,18vw,180px);margin-top:-6px}
+.skyline .tip{animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@media (prefers-reduced-motion:reduce){.skyline .tip{animation:none}}
+
+/* tabs */
+.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:10px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:0;background:transparent;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:500;color:var(--muted);display:flex;gap:7px;align-items:center;white-space:nowrap}
+.tab .k{font-family:var(--f-display);font-size:16px;line-height:1}
+.tab:hover{color:var(--ink);background:var(--ai-soft)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+main{padding-block:28px 80px}
+section[hidden]{display:none}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}
+.sec-head h2{font-size:clamp(24px,3.6vw,34px);font-weight:700}
+.sec-head p{margin:4px 0 0;color:var(--muted);max-width:62ch}
+
+/* chips & buttons */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.chip{border:1px solid var(--line);background:var(--card);padding:5px 12px;border-radius:999px;cursor:pointer;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:var(--paper)}
+.btn{border:1px solid var(--line);background:var(--card);padding:7px 13px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--ai)}
+.btn.primary{background:var(--ai);border-color:var(--ai);color:var(--paper)}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--alarm)}
+.btn.on{background:var(--yuzu-soft);border-color:var(--yuzu);color:var(--ink)}
+
+/* spot cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.spot{background:var(--card);border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;min-width:0;overflow:hidden;box-shadow:var(--shadow)}
+.spot .sbody{padding:14px 16px 14px;display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--ai-soft),var(--plum-soft));overflow:hidden;display:grid;place-items:center;flex:none}
+.ph .fb{font-family:var(--f-display);font-weight:800;font-size:88px;line-height:1;color:var(--card);opacity:.85}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease}
+.ph img.ld{opacity:1}
+.ph .credit{position:absolute;right:8px;bottom:6px;font-size:10px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);text-decoration:none;opacity:.85;z-index:2}
+.ph .badge{position:absolute;left:10px;top:10px;z-index:2;background:rgba(11,14,34,.72);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ph .seal{position:absolute;right:10px;top:10px;z-index:2;background:rgba(255,255,255,.88);color:#8C3A5E;border-color:#8C3A5E}
+.spot-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.spot h3{font-size:19px;font-weight:700}
+.spot .jp{font-family:var(--f-display);color:var(--muted);font-size:13px}
+.seal{flex:0 0 auto;width:38px;height:38px;border-radius:9px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:20px;color:var(--plum);border:1.5px solid var(--plum);transform:rotate(-4deg)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:500}
+.spot p{margin:0;font-size:14px}
+.tipline{font-size:13px;background:var(--yuzu-soft);border-radius:8px;padding:7px 10px}
+.tipline::before{content:"Local move: ";font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.when{font-size:12px;font-weight:700;color:var(--plum)}
+
+/* today */
+.today{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px}
+@media (max-width:820px){.today{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
+.panel h3{font-size:20px;margin-bottom:10px}
+.big{font-family:var(--f-display);font-size:clamp(44px,8vw,76px);font-weight:800;line-height:1}
+.statrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.stat{border-top:2px solid var(--ink);padding-top:6px;min-width:0}
+.stat .v{font-family:var(--f-mono);font-size:18px;font-weight:600}
+.stat .l{font-size:12px;color:var(--muted)}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.list li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.list li:last-child{border-bottom:0}
+.list .tm{font-family:var(--f-mono);font-size:13px;color:var(--muted);min-width:46px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer}
+.check input{margin-top:5px;accent-color:var(--ai)}
+.check.done span{text-decoration:line-through;color:var(--muted)}
+.daypick{display:flex;gap:4px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px}
+.daypick button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:4px 8px;cursor:pointer;text-align:center;min-width:44px}
+.daypick button b{display:block;font-family:var(--f-mono);font-size:15px}
+.daypick button span{font-size:10px;color:var(--muted)}
+.daypick button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.daypick button[aria-pressed="true"] span{color:var(--paper)}
+.sun{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cal .wd{font-size:11px;text-align:center;color:var(--muted);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:12px;min-height:118px;padding:7px;cursor:pointer;display:flex;flex-direction:column;gap:4px;text-align:left;min-width:0;overflow:hidden}
+.cell:hover{border-color:var(--ai)}
+.cell.blank{background:transparent;border-style:dashed;cursor:default;opacity:.5}
+.cell.today{outline:2px solid var(--yuzu);outline-offset:-2px}
+.cell .n{font-family:var(--f-mono);font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:baseline}
+.cell .n small{font-family:var(--f-body);font-size:10px;color:var(--muted);font-weight:500}
+.pill{font-size:11px;line-height:1.3;padding:2px 6px;border-radius:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.pill.ev{border:1px dashed var(--plum);color:var(--plum)}
+.pill.c-food{background:var(--yuzu-soft)} .pill.c-do{background:var(--ai-soft)} .pill.c-ride{background:var(--moss-soft)} .pill.c-trip{background:var(--plum-soft)} .pill.c-other{background:var(--paper)}
+@media (max-width:640px){.cell{min-height:84px;padding:5px}.pill{font-size:10px;padding:1px 4px}.cal{gap:4px}}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+
+/* modal */
+.scrim{position:fixed;inset:0;background:rgba(8,10,25,.55);z-index:50;display:grid;place-items:center;padding:16px}
+.modal{background:var(--card);border-radius:18px;width:min(560px,100%);max-height:88vh;overflow:auto;padding:20px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.modal h3{font-size:24px}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.form .full{grid-column:1/-1}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:500}
+.form input,.form select,.form textarea{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 10px;font-size:16px;min-width:0;width:100%}
+.form textarea{min-height:70px;resize:vertical}
+.rowend{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;flex-wrap:wrap}
+.daylist .item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.daylist .item .body{flex:1;min-width:0}
+.daylist .item .body b{display:block}
+.daylist .item .body span{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+
+/* budget */
+.budget{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:820px){.budget{grid-template-columns:1fr}}
+.meter{height:12px;border-radius:999px;background:var(--line);overflow:hidden;margin:10px 0 4px}
+.meter i{display:block;height:100%;background:var(--ai);border-radius:999px;transition:width .4s ease}
+.meter.warn i{background:var(--alarm)}
+.quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.bars{display:grid;grid-template-columns:repeat(17,minmax(0,1fr));gap:3px;align-items:end;height:120px;margin-top:12px;position:relative}
+.bars .b{background:var(--ai);border-radius:3px 3px 0 0;min-height:2px;position:relative}
+.bars .b.over{background:var(--alarm)}
+.bars .ideal{position:absolute;left:0;right:0;border-top:1.5px dashed var(--yuzu)}
+.barlbl{display:grid;grid-template-columns:repeat(17,minmax(0,1fr));gap:3px;font-size:9px;text-align:center;color:var(--muted);font-family:var(--f-mono)}
+.cats .row{display:grid;grid-template-columns:96px minmax(0,1fr) 84px;gap:10px;align-items:center;padding:5px 0;font-size:13px}
+.cats .track{height:8px;background:var(--line);border-radius:999px;overflow:hidden}
+.cats .track i{display:block;height:100%;background:var(--yuzu)}
+.ledger{max-height:340px;overflow:auto}
+.ledger table{width:100%;border-collapse:collapse;font-size:13px}
+.ledger td{padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.ledger td.amt{text-align:right;font-family:var(--f-mono);white-space:nowrap}
+.empty{border:1.5px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:14px}
+
+/* swipe */
+.swipe{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:22px;align-items:start}
+@media (max-width:860px){.swipe{grid-template-columns:minmax(0,1fr)}}
+.deck-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;min-width:0}
+.deck{position:relative;width:min(100%,420px);aspect-ratio:3/4;max-height:600px}
+.sc{position:absolute;inset:0;border-radius:24px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);padding:0;display:flex;flex-direction:column;gap:0;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;overflow:hidden;will-change:transform}
+.sc.drag{cursor:grabbing;transition:none}
+.sc.back{transform:scale(.95) translateY(14px);opacity:.7;pointer-events:none}
+.sc.back2{transform:scale(.9) translateY(28px);opacity:.35;pointer-events:none}
+.sc .ph{aspect-ratio:auto;height:50%}
+.sc .ph .fb{font-size:150px}
+.sc .ph::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(0,0,0,.35));z-index:1}
+.sc .txt{padding:16px 20px 18px;display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow:hidden}
+.sc .txt .why{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.sc .txt .tipline{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sc img{pointer-events:none;-webkit-user-drag:none}
+.sc .kind{display:inline-flex;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--plum);color:var(--plum);padding:3px 8px;border-radius:6px}
+.sc h3{font-size:clamp(24px,5vw,32px);font-weight:800}
+.sc .where{font-size:13px;color:var(--muted)}
+.sc .why{font-size:15px}
+.sc .stamp{position:absolute;top:22px;background:rgba(255,255,255,.9);font-family:var(--f-display);font-weight:800;font-size:30px;padding:2px 12px;border:3px solid;border-radius:8px;opacity:0;z-index:3;letter-spacing:.08em}
+.sc .stamp.keep{left:22px;color:var(--moss);transform:rotate(-12deg)}
+.sc .stamp.skip{right:22px;color:var(--alarm);transform:rotate(12deg)}
+.sc .ai{font-size:11px;color:var(--muted)}
+.swbtns{display:flex;gap:14px;align-items:center}
+.round{width:62px;height:62px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);cursor:pointer;display:grid;place-items:center;font-size:13px;font-weight:700;box-shadow:var(--shadow)}
+.round.no{color:var(--alarm)} .round.yes{color:var(--moss);width:74px;height:74px}
+.round.undo{width:46px;height:46px;font-size:11px;color:var(--muted)}
+.round:hover{border-color:currentColor}
+.notes .note{border-bottom:1px solid var(--line);padding:12px 0;display:flex;flex-direction:column;gap:6px}
+.notes .note .h{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.notes .note b{font-family:var(--f-display);font-size:17px}
+.notes textarea{width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:7px 9px;font-size:15px;resize:vertical}
+.notes .tools{display:flex;gap:6px;flex-wrap:wrap}
+.deckmsg{font-size:13px;color:var(--muted);text-align:center;max-width:42ch}
+
+/* ride */
+.route{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:18px}
+@media (max-width:760px){.route{grid-template-columns:1fr}}
+.route+.route{margin-top:14px}
+.stops{list-style:none;margin:0;padding:0;position:relative}
+.stops li{padding:0 0 12px 22px;position:relative;font-size:14px}
+.stops li::before{content:"";position:absolute;left:4px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--card);border:2px solid var(--moss)}
+.stops li::after{content:"";position:absolute;left:8px;top:18px;bottom:-2px;border-left:2px dotted var(--moss)}
+.stops li:last-child::after{display:none}
+.stops li b{display:block}
+.rules{columns:2 280px;column-gap:28px;font-size:14px}
+.rules p{break-inside:avoid;margin:0 0 10px}
+
+/* ask */
+.ask{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;max-width:780px}
+.askbox{display:flex;gap:8px}
+.askbox input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);font-size:16px}
+.answer{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-height:80px;font-size:15px}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:10px}
+.lnk{display:flex;flex-direction:column;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.lnk:hover{border-color:var(--ai)}
+.lnk b{font-weight:700}
+.lnk span{font-size:12px;color:var(--muted)}
+.callout{background:var(--plum-soft);border-radius:var(--r);padding:16px 18px;margin-bottom:18px}
+.callout b{color:var(--plum)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:12px;font-size:14px;z-index:60;box-shadow:var(--shadow)}
+footer{border-top:1px solid var(--line);padding-block:20px;font-size:12px;color:var(--muted)}
+.route .ph{border-radius:12px;margin-bottom:12px}
+.agenda{display:none;flex-direction:column;gap:8px}
+.arow{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;text-align:left;cursor:pointer;width:100%}
+.arow.today{border-color:var(--yuzu);box-shadow:0 0 0 1px var(--yuzu)}
+.arow .dt{display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid var(--line);padding-right:10px;min-height:44px}
+.arow .dt b{font-family:var(--f-mono);font-size:22px;line-height:1}
+.arow .dt span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.arow .its{display:flex;flex-wrap:wrap;gap:5px;min-width:0;align-items:center}
+.arow .its .pill{white-space:normal;font-size:12px}
+.arow .add{font-size:12px;color:var(--ai);font-weight:700}
+.bnav{display:none}
+.sheet .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.sheet .grid2 button{display:flex;align-items:center;gap:10px;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:15px;font-weight:500;text-align:left}
+.sheet .grid2 button .k{font-family:var(--f-display);font-size:24px;font-weight:800;color:var(--ai)}
+.backup textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:8px;font-family:var(--f-mono);font-size:12px}
+@media (max-width:760px){
+  body{font-size:15px}
+  .rail{display:none}
+  .mast-inner{padding-block:14px 0;grid-template-columns:1fr auto}
+  .mast h1{font-size:28px}
+  .mast h1 small{font-size:10.5px;margin-bottom:4px}
+  .mast .sub{display:none}
+  .clock .t{font-size:20px}
+  .clock .label,.clock .sync{display:none}
+  .skyline{height:64px;margin-top:4px}
+  main{padding-block:18px calc(100px + env(safe-area-inset-bottom,0px))}
+  .sec-head{margin-bottom:12px}
+  .sec-head h2{font-size:26px}
+  .sec-head p{font-size:14px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px;padding-bottom:2px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;padding:8px 14px;font-size:14px}
+  #swFilters{justify-content:flex-start!important;align-self:stretch;margin-inline:-16px!important}
+  .grid{gap:16px}
+  .btn{padding:10px 14px;font-size:14px}
+  .actions .btn{flex:1 1 auto;justify-content:center}
+  .panel{padding:16px;border-radius:18px}
+  .deck{aspect-ratio:auto;height:min(64vh,540px);width:100%}
+  .round{width:58px;height:58px}.round.yes{width:68px;height:68px}
+  .cal,.cal+.legend{display:none}
+  .agenda{display:flex}
+  .bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+  .bnav button{flex:1;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0;border-radius:12px;cursor:pointer;color:var(--muted);font-size:10.5px;font-weight:500}
+  .bnav button .k{font-family:var(--f-display);font-size:20px;font-weight:800;line-height:1.1}
+  .bnav button[aria-current="true"]{color:var(--ai);background:var(--ai-soft)}
+  .scrim{place-items:end center;padding:0}
+  .modal{width:100%;border-radius:22px 22px 0 0;max-height:88vh;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .route{padding:14px}
+  .statrow{gap:8px}.stat .v{font-size:15px}
+}
+</style>
+<style>.mast{padding-top:env(safe-area-inset-top,0px)}</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap mast-inner">
+    <div>
+      <h1><small>Tokyo · Dec 15 – 31, 2026</small>Azumabashi Base</h1>
+      <p class="sub">Home is 1-8-9 Azumabashi, Sumida, across the bridge from Asakusa, next to the Asahi gold flame. Eat, ride, wander, and keep the yen in check.</p>
+    </div>
+    <div class="clock" aria-live="off">
+      <div class="label" style="color:#8F95B8">Tokyo now</div>
+      <div class="t" id="clock">--:--</div>
+      <div class="d" id="clockDate"></div>
+      <div class="sync" id="sync">Saving on this device</div>
+    </div>
+  </div>
+  <svg class="skyline" viewBox="0 0 1200 180" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+    <g fill="#E9EBF7" opacity=".7">
+      <circle cx="80" cy="30" r="1.2"/><circle cx="210" cy="60" r="1"/><circle cx="330" cy="22" r="1.4"/><circle cx="470" cy="48" r="1"/><circle cx="610" cy="18" r="1.2"/><circle cx="700" cy="70" r="1"/><circle cx="1010" cy="30" r="1.3"/><circle cx="1120" cy="58" r="1"/><circle cx="1160" cy="20" r="1.1"/>
+    </g>
+    <!-- Asakusa low rooftops (left bank) -->
+    <path d="M0 150 L0 126 L40 126 L40 118 L90 118 L90 130 L120 130 L120 112 L150 104 L180 112 L180 128 L230 128 L230 120 L280 120 L280 132 L300 132 L300 150 Z" fill="#1F2550"/>
+    <!-- Senso-ji pagoda hint -->
+    <path d="M190 128 L190 84 M178 96 L202 96 M180 106 L200 106 M181 116 L199 116 M184 88 L196 88" stroke="#2C3366" stroke-width="5" fill="none"/>
+    <!-- Asahi tower (beer glass) + flame building (right bank, home) -->
+    <rect x="770" y="66" width="46" height="84" fill="#3A3220"/>
+    <rect x="770" y="58" width="46" height="10" rx="3" fill="#E9EBF7" opacity=".85"/>
+    <g fill="#F4C25A" opacity=".55"><rect x="776" y="76" width="34" height="2"/><rect x="776" y="86" width="34" height="2"/><rect x="776" y="96" width="34" height="2"/><rect x="776" y="106" width="34" height="2"/><rect x="776" y="116" width="34" height="2"/><rect x="776" y="126" width="34" height="2"/></g>
+    <path d="M824 150 L824 112 L874 104 L874 150 Z" fill="#141838"/>
+    <path d="M840 106 C836 88 852 86 848 74 C862 84 872 92 866 104 Z" fill="#F4C25A"/>
+    <text x="822" y="52" fill="#F4C25A" font-size="12" font-family="JetBrains Mono, monospace">home ↓</text>
+    <!-- Skytree -->
+    <path d="M1010 150 L1026 150 L1021 60 L1019 8 L1017 60 Z" fill="#2C3366"/>
+    <rect x="1009" y="64" width="18" height="6" rx="3" fill="#8C9BFF" opacity=".8"/>
+    <rect x="1012" y="40" width="12" height="4" rx="2" fill="#8C9BFF" opacity=".8"/>
+    <circle class="tip" cx="1019" cy="6" r="2.4" fill="#F07B7B"/>
+    <path d="M880 150 L880 132 L940 132 L940 124 L990 124 L990 150 Z M1040 150 L1040 128 L1100 128 L1100 136 L1200 136 L1200 150 Z" fill="#1F2550"/>
+    <!-- Azuma-bashi -->
+    <path d="M300 146 L770 146" stroke="#C5523F" stroke-width="4"/>
+    <path d="M330 146 Q392 116 455 146 M455 146 Q535 108 615 146 M615 146 Q685 116 750 146" stroke="#C5523F" stroke-width="3" fill="none"/>
+    <!-- river -->
+    <rect x="0" y="150" width="1200" height="30" fill="#0A0D1E"/>
+    <g stroke="#F4C25A" stroke-width="2" opacity=".35"><path d="M790 158 L805 158 M786 166 L812 166 M845 160 L852 160 M1012 160 L1026 160 M1015 170 L1022 170 M180 162 L200 162"/></g>
+  </svg>
+</header>
+
+<nav class="rail" aria-label="Sections">
+  <div class="wrap tabs" role="tablist" id="tabs"></div>
+</nav>
+
+<main class="wrap">
+
+<section id="t-today" role="tabpanel">
+  <div class="sec-head"><div><h2 id="todayTitle">Today</h2><p id="todaySub"></p></div></div>
+  <div class="daypick" id="daypick" aria-label="Preview a trip day"></div>
+  <div class="today">
+    <div class="panel">
+      <div class="label" id="dayLabel">Day</div>
+      <div class="big" id="dayBig">—</div>
+      <div class="sun mono" id="sun"></div>
+      <div class="statrow">
+        <div class="stat"><div class="v" id="stLeft">—</div><div class="l">yen left</div></div>
+        <div class="stat"><div class="v" id="stDay">—</div><div class="l">safe to spend today</div></div>
+        <div class="stat"><div class="v" id="stPlans">—</div><div class="l">plans on the calendar</div></div>
+      </div>
+      <h3 style="margin-top:22px">On the plan</h3>
+      <ul class="list" id="dayPlans"></ul>
+      <div class="rowend"><button class="btn primary" data-act="addDay">Add to this day</button></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+      <div class="panel"><h3>Happening around town</h3><ul class="list" id="dayEvents"></ul></div>
+      <div class="panel"><h3>Before you fly</h3><div id="checklist"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="t-swipe" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Discover</h2><p>Swipe right to keep, left to skip. Everything you keep lands in your notebook, where you can jot notes or drop it on the calendar. When the hand-picked deck runs dry, fresh places keep coming.</p></div></div>
+  <div class="swipe">
+    <div class="deck-wrap">
+      <div class="chips" id="swFilters" style="justify-content:center;margin:0"></div>
+      <div class="deck" id="deck"></div>
+      <div class="swbtns">
+        <button class="round undo" data-act="swUndo" aria-label="Undo last swipe">Undo</button>
+        <button class="round no" data-act="swNo" aria-label="Skip">Skip</button>
+        <button class="round yes" data-act="swYes" aria-label="Keep">Keep</button>
+      </div>
+      <div class="deckmsg" id="deckMsg">Arrow keys work too: ← skip, → keep.</div>
+    </div>
+    <aside class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3>Kept notebook</h3><span class="mono muted" id="keptCount">0</span></div>
+      <div class="notes" id="notes"></div>
+    </aside>
+  </div>
+</section>
+
+<section id="t-eat" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Eat &amp; drink</h2><p>Places a repeat visitor goes back to. Some are famous with locals, so lines happen; none are tourist traps. Hours shift around the holidays, so check before you go.</p></div></div>
+  <div class="chips" id="eatFilters"></div>
+  <div class="grid" id="eatGrid"></div>
+</section>
+
+<section id="t-do" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Things to do</h2><p>A loose menu. December extras like markets, lights and the New Year's Eve bells are flagged with their dates.</p></div></div>
+  <div class="chips" id="doFilters"></div>
+  <div class="grid" id="doGrid"></div>
+</section>
+
+<section id="t-ride" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Ride</h2><p>Loops that start at your door. Tokyo's east side is flat and the river paths are wide, so it's great biking. December mornings are cold and clear, and it's dark by about 4:30pm.</p></div></div>
+  <div id="routes"></div>
+  <div class="panel" style="margin-top:18px">
+    <h3>Getting a bike</h3>
+    <div class="links" id="bikeLinks"></div>
+    <h3 style="margin-top:18px">Rules locals actually follow</h3>
+    <div class="rules">
+      <p><b>Ride on the left</b> with traffic. Sidewalks only where a blue sign allows bikes, and pedestrians win.</p>
+      <p><b>Lights on after dark</b>, which is 4:30pm in December. Police do stop foreigners for this.</p>
+      <p><b>No phone, no umbrella, no earbuds</b> while riding. Fines got real in 2024.</p>
+      <p><b>Park only in racks or share ports.</b> Bikes left on the street get towed, and getting one back costs about ¥3,000–5,000.</p>
+      <p><b>Helmets</b> are officially "make an effort". Share bikes don't come with one.</p>
+      <p><b>Drinking and riding</b> is treated like drink driving. Walk the bike home from the izakaya.</p>
+    </div>
+  </div>
+</section>
+
+<section id="t-trips" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Day trips</h2><p>Leave early: the sun sets around 4:30pm. Asakusa Station, 8 minutes' walk from you, is the Tobu line terminal, so Nikko and Ashikaga leave from your doorstep.</p></div></div>
+  <div class="grid" id="tripGrid"></div>
+</section>
+
+<section id="t-cal" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Your December</h2><p>Tap a day to add, edit or delete plans. Dashed pills are things happening in the city that day.</p></div>
+    <button class="btn primary" data-act="addDay">Add a plan</button></div>
+  <div class="cal" id="cal"></div>
+  <div class="agenda" id="agenda"></div>
+  <div class="legend"><span><i style="background:var(--yuzu-soft)"></i>Food</span><span><i style="background:var(--ai-soft)"></i>Do</span><span><i style="background:var(--moss-soft)"></i>Ride</span><span><i style="background:var(--plum-soft)"></i>Day trip</span><span><i style="border:1px dashed var(--plum)"></i>City event</span></div>
+</section>
+
+<section id="t-budget" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Cash</h2><p>Your cash pot in yen, how much you can spend each day to make it last to the 31st, and where it's going.</p></div></div>
+  <div class="budget">
+    <div class="panel">
+      <div class="label">Remaining</div>
+      <div class="big mono" id="bLeft" style="font-family:var(--f-mono);font-size:clamp(36px,6vw,56px)">¥0</div>
+      <div class="meter" id="bMeter"><i style="width:0"></i></div>
+      <div class="meta"><span>Spent <b class="mono" id="bSpent">¥0</b></span><span>of <b class="mono" id="bPot">¥0</b></span><span>≈ <b class="mono" id="bUsdLeft">$0</b> left</span></div>
+      <div class="statrow">
+        <div class="stat"><div class="v" id="bDaily">—</div><div class="l">per day from here</div></div>
+        <div class="stat"><div class="v" id="bDays">—</div><div class="l">days to cover</div></div>
+        <div class="stat"><div class="v" id="bAvg">—</div><div class="l">your daily average</div></div>
+      </div>
+      <div class="bars" id="bars"></div><div class="barlbl" id="barlbl"></div>
+      <div class="muted" style="font-size:12px;margin-top:6px">Bars show spend per day. The dashed line is the even split of your pot.</div>
+      <h3 style="margin-top:20px">By category</h3>
+      <div class="cats" id="cats"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+      <div class="panel">
+        <h3>Log spending</h3>
+        <form class="form" id="expForm">
+          <label>Amount (¥)<input id="expAmt" type="number" inputmode="numeric" min="0" step="10" placeholder="1200" required></label>
+          <label>Category<select id="expCat"></select></label>
+          <label>Day<select id="expDate"></select></label>
+          <label>What<input id="expNote" type="text" placeholder="Ramen at Kikanbo"></label>
+          <div class="full rowend" style="margin-top:0"><button class="btn primary" type="submit">Add</button></div>
+        </form>
+        <div class="label" style="margin-top:12px">Quick add</div>
+        <div class="quick" id="quick"></div>
+      </div>
+      <div class="panel">
+        <h3>Ledger</h3>
+        <div class="ledger" id="ledger"></div>
+      </div>
+      <div class="panel">
+        <h3>Settings</h3>
+        <div class="form">
+          <label>Cash you're bringing (USD)<input id="setUsd" type="number" min="0" step="50"></label>
+          <label>Yen per dollar<input id="setRate" type="number" min="50" step="0.5"></label>
+          <label class="full" style="flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-size:14px"><input id="setHotel" type="checkbox" style="width:auto"> Hotel is already paid (not coming out of this cash)</label>
+          <label class="full" id="hotelYenWrap">Hotel total to pay from cash (¥)<input id="setHotelYen" type="number" min="0" step="1000"></label>
+        </div>
+        <p class="muted" style="font-size:12px;margin:10px 0 0">Change the rate to what your exchange counter or 7-Eleven ATM actually gives you. 7-Eleven and Japan Post ATMs take foreign cards if the cash runs low.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="t-ask" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Ask a local</h2><p>Ask anything: rain plans, what's near you right now, where to eat after the bells. Claude answers already knowing your hotel, dates, plans and budget.</p></div></div>
+  <div class="ask">
+    <form class="askbox" id="askForm"><input id="askIn" type="text" placeholder="It's raining and I'm in Ueno at 3pm, what now?" autocomplete="off"><button class="btn primary" type="submit">Ask</button></form>
+    <div class="chips" id="askChips" style="margin:0"></div>
+    <div class="answer" id="answer">Your answer will appear here.</div>
+  </div>
+</section>
+
+<section id="t-live" role="tabpanel" hidden>
+  <div class="sec-head"><div><h2>Live check</h2><p>The live sources locals use. These open in a new tab so you get today's real information, not a stale copy.</p></div></div>
+  <div class="callout"><b>Year-end heads-up.</b> From about Dec 29 to Jan 3 a lot of Tokyo shuts: independent restaurants, many museums, government offices, some shops. Depachika, konbini, chains and temples stay busy. Book anything special for Dec 28–31 early, and plan your Dec 31 dinner ahead.</div>
+  <div id="liveLinks"></div>
+</section>
+
+</main>
+<footer class="wrap">Places and dates are from a repeat visitor's notes, not live data. Hours change, especially around the holidays, so check the Live tab or Google Maps before you go. Your plans and spending are saved to your account when you're signed in, otherwise on this device. Photos come from Wikipedia and Wikimedia Commons contributors; tap a photo's credit to see its source.</footer>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+<nav class="bnav" id="bnav" aria-label="Sections"></nav>
+
+<script>
+(() => {
+"use strict";
+const HOTEL = "1-8-9 Azumabashi, Sumida City, Tokyo 130-0001, Japan";
+const IN_CLAUDE = !!(window.claude && window.claude.use) || /claude\.ai|claudeusercontent/.test(location.hostname);
+const CLAUDE_URL = "https://claude.ai/artifact/2QRmMT7UKQZubMZnfvKhYT";
+const TRIP = Array.from({length:17},(_,i)=>`2026-12-${String(15+i).padStart(2,"0")}`);
+const WD = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const yen = n => "¥" + Math.round(n||0).toLocaleString("en-US");
+const wdOf = d => WD[new Date(d+"T12:00:00Z").getUTCDay()];
+const dnum = d => +d.slice(8);
+const uid = () => Math.random().toString(36).slice(2,10);
+const maps = q => `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(HOTEL)}&destination=${encodeURIComponent(q)}&travelmode=transit`;
+const mapsSearch = q => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+const jstToday = () => new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+const SEALS = {eat:"食",drink:"酒",coffee:"珈",sweet:"菓",market:"市",bath:"湯",craft:"匠",view:"景",night:"夜",culture:"寺",ride:"輪",trip:"旅",lights:"灯",shop:"店",odd:"奇",nature:"森"};
+
+/* ---------------- content ---------------- */
+const EAT = [
+ {id:"yadoroku",name:"Onigiri Asakusa Yadoroku",jp:"おにぎり浅草 宿六",area:"Asakusa",kind:"eat",type:"Onigiri",mins:"12 min walk",yen:"¥1,500–3,000",why:"Tokyo's oldest onigiri shop (1954). Rice balls pressed by hand at a tiny counter while you watch, with Michelin Bib Gourmand cred and zero pretension.",tip:"Lunch sets sell out, so line up before opening. Dinner is order-by-piece and calmer, and good with a beer.",q:"Onigiri Asakusa Yadoroku"},
+ {id:"kamiya",name:"Kamiya Bar",jp:"神谷バー",area:"Asakusa",kind:"drink",type:"Old bar",mins:"4 min walk",yen:"¥1,500–3,000",why:"Open since 1880 at the foot of Azuma-bashi. Denki Bran, a brandy cocktail, was invented here. Pay-first ticket system, and the regulars are old Asakusa men on their third beer.",tip:"Denki Bran with a beer chaser is the order. The building has had renovation closures, so check it's open.",q:"Kamiya Bar Asakusa"},
+ {id:"yoshikami",name:"Yoshikami",jp:"ヨシカミ",area:"Asakusa",kind:"eat",type:"Yoshoku",mins:"12 min walk",yen:"¥2,000–4,000",why:"Japanese-Western comfort food since 1951: beef stew, omurice, hayashi rice, cooked in an open kitchen. The sign jokes that it's sorry the food is too good.",tip:"Sit at the counter to watch the cooks. Their beef stew is the thing for a cold night.",q:"Yoshikami Asakusa"},
+ {id:"sometaro",name:"Sometaro",jp:"染太郎",area:"Nishi-Asakusa",kind:"eat",type:"Okonomiyaki",mins:"18 min walk",yen:"¥1,500–2,500",why:"Cook-it-yourself okonomiyaki on tatami, inside an old wooden house buried in ivy. One of the most atmospheric cheap dinners in the city.",tip:"Shoes off. The staff will show you the flip if you look lost, which is half the fun.",q:"Sometaro okonomiyaki Asakusa"},
+ {id:"pelican",name:"Pelican Café",jp:"ペリカンカフェ",area:"Tawaramachi",kind:"coffee",type:"Breakfast",mins:"15 min walk",yen:"¥900–1,600",why:"The 1942 Pelican bakery makes only two kinds of bread. Their café serves it as thick charcoal-toasted slices with butter. A perfect slow breakfast.",tip:"Go on a weekday close to opening. The bakery shop's loaves sell out, so reserve one to take back.",q:"Pelican Cafe Tawaramachi"},
+ {id:"leaves",name:"Leaves Coffee",jp:"リーブスコーヒー",area:"Honjo, Sumida",kind:"coffee",type:"Specialty coffee",mins:"10 min walk",yen:"¥600–1,000",why:"Serious light-roast coffee in your own neighborhood, a few blocks inland from the hotel. Your daily first stop instead of a chain.",tip:"Hours are short and it closes some days. Pin it on Maps and check the morning you go.",q:"Leaves Coffee Apartment Honjo Sumida"},
+ {id:"tomoegata",name:"Chanko Tomoegata",jp:"ちゃんこ巴潟",area:"Ryogoku",kind:"eat",type:"Sumo hotpot",mins:"20 min",yen:"¥3,000–6,000",why:"Chanko nabe, the sumo wrestlers' hotpot, eaten in sumo town. Exactly what you want in December.",tip:"Lunch sets cost a fraction of the dinner course. Pair it with the free Sumo Museum next door at the Kokugikan.",q:"Chanko Tomoegata Ryogoku"},
+ {id:"isegen",name:"Isegen",jp:"いせ源",area:"Kanda Sudacho",kind:"eat",type:"Monkfish hotpot",mins:"25 min",yen:"¥6,000–10,000",why:"Monkfish hotpot (anko nabe) served on tatami since 1830, in a wooden building that survived the war. Winter-only food, and December is peak season.",tip:"Reserve. Finish with zosui, rice cooked in the leftover broth. Takemura sweets is across the street for dessert.",q:"Isegen Kanda anko nabe"},
+ {id:"botan",name:"Botan",jp:"ぼたん",area:"Kanda Sudacho",kind:"eat",type:"Chicken sukiyaki",mins:"25 min",yen:"¥7,000–9,000",why:"Since 1897 they've served one dish only: chicken sukiyaki cooked over binchotan charcoal at your table, in a wooden house.",tip:"Book ahead. A splurge night that feels like 1920s Tokyo.",q:"Botan torisuki Kanda"},
+ {id:"matsuya",name:"Kanda Matsuya",jp:"神田まつや",area:"Kanda",kind:"eat",type:"Soba",mins:"25 min",yen:"¥1,200–2,500",why:"An 1884 soba house with shared tables and salarymen drinking sake with their noodles at 3pm. As old-Tokyo as it gets.",tip:"Eating soba on Dec 31 (toshikoshi soba) is tradition and lines get huge. Go Dec 30, or early afternoon on the 31st.",q:"Kanda Matsuya soba"},
+ {id:"takemura",name:"Takemura",jp:"竹むら",area:"Kanda Sudacho",kind:"sweet",type:"Sweets",mins:"25 min",yen:"¥800–1,200",why:"A 1930s sweets shop. Awa-zenzai (millet with hot red-bean paste) is a winter thing and the house specialty.",tip:"Go after Botan or Isegen: the three sit on the same tiny block.",q:"Takemura Kanda sweets"},
+ {id:"tamahide",name:"Tamahide",jp:"玉ひで",area:"Ningyocho",kind:"eat",type:"Oyakodon",mins:"20 min",yen:"¥1,800–2,600",why:"They say they invented oyakodon, the chicken-and-egg rice bowl. Open since 1760.",tip:"The lunch line moves fast. Ningyocho's old shotengai, Amazake-yokocho, is right there for a wander.",q:"Tamahide Ningyocho"},
+ {id:"kayaba",name:"Kayaba Coffee",jp:"カヤバ珈琲",area:"Yanaka",kind:"coffee",type:"Kissaten",mins:"25 min",yen:"¥1,000–1,800",why:"A 1938 wooden corner house. The thick egg sandwich and the 'Russian' (coffee and cocoa) are the orders.",tip:"Perfect break on the Yanaka bike loop. Upstairs has tatami seating.",q:"Kayaba Coffee Yanaka"},
+ {id:"marugo",name:"Marugo",jp:"丸五",area:"Akihabara",kind:"eat",type:"Tonkatsu",mins:"20 min",yen:"¥2,000–3,500",why:"Top-tier tonkatsu without the influencer line: thick loin, rock salt, shredded cabbage on repeat.",tip:"Get the special loin (tokujo rosu). Come at lunch, then wander Akihabara's back alleys.",q:"Tonkatsu Marugo Akihabara"},
+ {id:"kikanbo",name:"Kikanbo",jp:"鬼金棒",area:"Kanda",kind:"eat",type:"Spicy miso ramen",mins:"22 min",yen:"¥1,100–1,600",why:"Miso ramen where you pick the chili heat and the sansho numbing separately, with taiko drums on the speakers.",tip:"Start at level 2 for both unless you're sure. Ordering is by ticket machine at the door.",q:"Kikanbo ramen Kanda"},
+ {id:"fuunji",name:"Fuunji",jp:"風雲児",area:"Shinjuku",kind:"eat",type:"Tsukemen",mins:"40 min",yen:"¥1,000–1,400",why:"Thick dipping noodles in a dense chicken-and-fish broth. The line is long, but locals are in it too.",tip:"Ask for the soup-wari at the end: they'll thin your leftover dip with broth to drink.",q:"Fuunji Shinjuku tsukemen"},
+ {id:"lambre",name:"Café de l'Ambre",jp:"カフェ・ド・ランブル",area:"Ginza",kind:"coffee",type:"Coffee-only kissa",mins:"25 min",yen:"¥1,000–1,800",why:"Only coffee since 1948, including beans aged for decades. Order the Blanc & Noir, chilled coffee with milk in a coupe glass.",tip:"Smoke-free now. Pair it with an evening at the Marunouchi lights.",q:"Cafe de l'Ambre Ginza"},
+ {id:"uogashi",name:"Uogashi Nihon-Ichi",jp:"魚がし日本一",area:"Several (Akihabara, Shibuya…)",kind:"eat",type:"Standing sushi",mins:"varies",yen:"¥1,500–3,000",why:"Standing sushi bar. Order one piece at a time straight from the chef, eat in 20 minutes, done. Office workers' after-work move.",tip:"Point at the board or say the fish name. Seasonal winter picks: buri (yellowtail) and kawahagi with its liver.",q:"Uogashi Nihonichi"},
+ {id:"hanamaru",name:"Nemuro Hanamaru",jp:"根室花まる",area:"KITTE, Tokyo Stn",kind:"eat",type:"Conveyor sushi",mins:"20 min",yen:"¥2,000–4,000",why:"Hokkaido-run conveyor sushi with quality well above its price.",tip:"Take a numbered ticket from the machine, then kill the wait on KITTE's free rooftop with its view over Tokyo Station.",q:"Nemuro Hanamaru KITTE Marunouchi"},
+ {id:"marumasu",name:"Marumasu-ya",jp:"まるます家",area:"Akabane",kind:"drink",type:"Morning izakaya",mins:"35 min",yen:"¥1,500–3,000",why:"Akabane is Tokyo's day-drinking capital, and this place pours from the morning. Eel, carp, chu-hi by the jug, retirees at long tables. Zero tourists.",tip:"Go on a weekday late morning. Afterwards, walk Akabane's Ichibangai bar streets.",q:"Marumasuya Akabane"},
+ {id:"fukagawa",name:"Fukagawa Juku",jp:"深川宿",area:"Kiyosumi-Shirakawa",kind:"eat",type:"Clam rice",mins:"20 min / 25 min ride",yen:"¥1,500–2,500",why:"Fukagawa-meshi, clams over rice, the dish of the old Edo fishing district. Simple and warming.",tip:"A natural lunch stop on the south-river bike loop, right by the Kiyosumi Garden.",q:"Fukagawa Juku Kiyosumi"},
+ {id:"kiyosumicoffee",name:"Kiyosumi roasteries",jp:"清澄白河",area:"Kiyosumi-Shirakawa",kind:"coffee",type:"Coffee district",mins:"20 min / 25 min ride",yen:"¥600–1,000 a cup",why:"Old warehouses turned roasteries, including Blue Bottle's first Japan café and Allpress. Tokyo's quiet coffee neighborhood.",tip:"Bike there along the Sumida, then crawl two or three shops. Most open by 8–9am.",q:"Kiyosumi-Shirakawa coffee"},
+ {id:"bondy",name:"Bondy",jp:"ボンディ",area:"Jimbocho",kind:"eat",type:"European curry",mins:"25 min",yen:"¥1,600–2,500",why:"Jimbocho is Tokyo's book town and its curry town. Bondy's rich curry comes with butter potatoes on the side, upstairs in a bookstore building.",tip:"Combine with an afternoon digging through the secondhand bookshops on Yasukuni-dori.",q:"Bondy curry Jimbocho"},
+ {id:"nonbei",name:"Nonbei Yokocho",jp:"のんべい横丁",area:"Shibuya",kind:"drink",type:"Tiny bars",mins:"40 min",yen:"¥2,000–4,000",why:"Two lanes of six-seat bars by the Shibuya tracks. Calmer and friendlier than Golden Gai.",tip:"Cover charges of ¥500–1,000 are normal. Pick a bar with an open door and an empty stool.",q:"Nonbei Yokocho Shibuya"},
+ {id:"sankaku",name:"Sankaku Chitai",jp:"三角地帯",area:"Sangenjaya",kind:"drink",type:"Bar maze",mins:"45 min",yen:"¥2,000–4,000",why:"A triangle of alleys packed with izakaya and bars in a residential neighborhood. Feels like the Tokyo of 20 years ago.",tip:"Two stops from Shibuya on the Den-en-toshi line. Wander until a place smells right.",q:"Sangenjaya Sankaku Chitai"},
+ {id:"depachika",name:"Nihonbashi depachika",jp:"デパ地下",area:"Nihonbashi",kind:"market",type:"Food hall",mins:"20 min",yen:"¥1,000–3,000",why:"Department-store basement food halls in December are theater: year-end gift boxes, wagashi, bento, sake tastings.",tip:"Mitsukoshi and Takashimaya are both here. After 7pm bento get discount stickers, which makes a great hotel-room dinner.",q:"Nihonbashi Mitsukoshi depachika"},
+ {id:"tsukiji",name:"Tsukiji Outer Market",jp:"築地場外市場",area:"Tsukiji",kind:"market",type:"Morning market",mins:"25 min",yen:"¥2,000–4,000",why:"The wholesale market moved out, but the outer market still feeds the city. Tamagoyaki on a stick, oysters, knife shops.",tip:"Come before 9am. Many shops close on Sundays and Wednesdays, and Dec 28–30 is the year-end shopping crush (fun but packed).",q:"Tsukiji Outer Market"},
+ {id:"torikizoku",name:"Torikizoku",jp:"鳥貴族",area:"Everywhere",kind:"eat",type:"Budget yakitori",mins:"varies",yen:"¥2,000–3,000",why:"A chain with one fixed price on everything, and the yakitori is legitimately good. Your cheap-night lifesaver.",tip:"Order on the tablet. The Asakusa branch is a short walk.",q:"Torikizoku Asakusa"},
+];
+
+const DO = [
+ {id:"boroichi",name:"Setagaya Boro-ichi",jp:"世田谷ボロ市",area:"Setagaya",kind:"market",type:"Flea market",dates:["2026-12-15","2026-12-16"],when:"Dec 15–16 only",mins:"55 min",cost:"Free",why:"A street market held since 1578, with roughly 700 stalls of antiques, old kimono, tools, junk and street food. It runs on your first two days.",tip:"Go early on the 15th, because the good stuff is gone by 10am. Bring coins. Take the little Setagaya Line tram to Kamimachi, and pop into Gotokuji, the lucky-cat temple, two stops away.",q:"Setagaya Boroichi"},
+ {id:"hagoita",name:"Hagoita-ichi at Senso-ji",jp:"羽子板市",area:"Asakusa",kind:"market",type:"Year-end market",dates:["2026-12-17","2026-12-18","2026-12-19"],when:"Dec 17–19",mins:"12 min walk",cost:"Free",why:"Ornate battledore paddles sold as New Year lucky charms. Vendors clap and cheer three-three-one for every sale.",tip:"Go after dark when the stalls are lit, and the temple is right there. Haggling a little is part of it.",q:"Senso-ji"},
+ {id:"ameyoko",name:"Ameyoko year-end rush",jp:"アメ横",area:"Ueno",kind:"market",type:"Market street",dates:["2026-12-28","2026-12-29","2026-12-30","2026-12-31"],when:"Peaks Dec 28–31",mins:"20 min",cost:"Free",why:"Vendors yell prices for crab, tuna and New Year food to a crowd shoulder to shoulder. Pure Tokyo theater.",tip:"Go Dec 28–30 in the afternoon. Watch the bidding-style selling at the fish stalls, then drink at the izakaya under the tracks.",q:"Ameyoko Ueno"},
+ {id:"joya",name:"New Year's Eve bells",jp:"除夜の鐘",area:"Citywide",kind:"culture",type:"NYE",dates:["2026-12-31"],when:"Dec 31, late",mins:"",cost:"Free",why:"Temples ring their bells 108 times to clear the year's 108 desires. Zojoji with Tokyo Tower lit behind it is the postcard; Senso-ji is the crowd.",tip:"Smaller neighborhood temples sometimes let visitors queue to strike the bell, so look for posted notices around Dec 25. Some train lines run late or all night on NYE; check the schedule.",q:"Zojoji Temple"},
+ {id:"marunouchi",name:"Marunouchi Illumination",jp:"丸の内イルミネーション",area:"Marunouchi",kind:"lights",type:"Winter lights",when:"All December",mins:"20 min",cost:"Free",why:"Naka-dori's rows of trees wrapped in champagne-gold lights, from Yurakucho up to Tokyo Station's red brick.",tip:"Walk it after a Ginza coffee, then head up to the KITTE rooftop for the station at night.",q:"Marunouchi Naka-dori"},
+ {id:"keyaki",name:"Roppongi Keyakizaka lights",jp:"けやき坂",area:"Roppongi",kind:"lights",type:"Winter lights",when:"Through Dec 25 (check)",mins:"35 min",cost:"Free",why:"A slope of blue-and-white trees with Tokyo Tower framed at the bottom. Roppongi Hills runs a German-style Christmas market nearby.",tip:"Best before Christmas. Go on a weeknight.",q:"Keyakizaka Roppongi Hills"},
+ {id:"yebisu",name:"Yebisu Garden Place",jp:"恵比寿ガーデンプレイス",area:"Ebisu",kind:"lights",type:"Winter lights",when:"Winter (check)",mins:"40 min",cost:"Free",why:"The giant Baccarat chandelier displayed outdoors is the classic. Ebisu Yokocho's food stalls are next door.",tip:"Eat at Ebisu Yokocho after: lively and local.",q:"Yebisu Garden Place"},
+ {id:"jakotsuyu",name:"Jakotsuyu",jp:"蛇骨湯",area:"Asakusa",kind:"bath",type:"Onsen sento",mins:"12 min walk",cost:"~¥550",why:"A neighborhood bathhouse with natural black onsen water and a little outdoor bath garden. Tokyo locals' end-of-day ritual.",tip:"Bring a small towel or buy one there. Tattoos are generally fine at sento. Go around Dec 22 for yuzu baths (see Calendar).",q:"Jakotsuyu Asakusa"},
+ {id:"mikokuyu",name:"Mikokuyu",jp:"御谷湯",area:"Ishiwara, Sumida",kind:"bath",type:"Sauna sento",mins:"20 min walk",cost:"~¥550 + sauna",why:"A modern sento the sauna crowd worships: black-water onsen, outdoor bath and a proper cold plunge.",tip:"Sauna (sauna-totonou culture) is a whole thing. Follow it with a beer at home.",q:"Mikokuyu Sumida"},
+ {id:"somei",name:"Tokyo Somei Onsen Sakura",jp:"東京染井温泉 SAKURA",area:"Komagome",kind:"bath",type:"Onsen + garden",mins:"35 min",cost:"~¥2,500–3,500",why:"A real hot-spring bath in a Japanese garden setting. Much calmer than the big spa theme parks.",tip:"Combine with Rikugien garden next door.",q:"Tokyo Somei Onsen Sakura"},
+ {id:"mokuhankan",name:"Mokuhankan woodblock printing",jp:"木版館",area:"Asakusa",kind:"craft",type:"Workshop",mins:"12 min walk",cost:"~¥2,500",why:"A woodblock print shop where you print your own ukiyo-e in a short, English-friendly session.",tip:"Book online. Their print shop is a far better souvenir than anything on Nakamise.",q:"Mokuhankan Asakusa"},
+ {id:"kiriko",name:"Edo Kiriko glass cutting",jp:"江戸切子",area:"Sumida",kind:"craft",type:"Workshop",mins:"Nearby",cost:"~¥4,000–6,000",why:"Sumida is the home of Edo Kiriko cut glass. Cut your own pattern into a glass and take it home.",tip:"Search 'Edo Kiriko experience Sumida'. Several workshops near Kinshicho and Kameido take walk-ins on weekdays.",q:"Edo Kiriko experience Sumida"},
+ {id:"kappabashi",name:"Kappabashi kitchen street",jp:"かっぱ橋道具街",area:"Asakusa/Kuramae",kind:"shop",type:"Shopping",mins:"15 min walk",cost:"Free to browse",why:"A whole street of restaurant supply: knives, pots, lacquer and plastic food samples. The best gift shopping near you.",tip:"Many shops close on Sundays. Knife shops will engrave your name in kanji while you wait.",q:"Kappabashi Dougu Street"},
+ {id:"kuramae",name:"Kuramae makers",jp:"蔵前",area:"Kuramae",kind:"shop",type:"Design walk",mins:"15 min walk",cost:"Free to browse",why:"Tokyo's small-maker neighborhood: Kakimori (build your own notebook, mix your own ink), leather studios and chocolate makers.",tip:"An easy ride or walk down the river. Kakimori lines up on weekends, so go on a weekday.",q:"Kakimori Kuramae"},
+ {id:"asahi",name:"Asahi Sky Room",jp:"アサヒスカイルーム",area:"Azumabashi",kind:"view",type:"View bar",mins:"5 min walk",cost:"~¥1,000 a beer",why:"The 22nd floor of the beer-glass tower next to your hotel, looking straight across at Asakusa and Skytree. Cheap view, fresh Asahi.",tip:"Get there around 4:15pm for the sunset and the city lights coming on.",q:"Asahi Sky Room"},
+ {id:"hokusai",name:"Sumida Hokusai Museum",jp:"すみだ北斎美術館",area:"Ryogoku/Kamezawa",kind:"culture",type:"Museum",mins:"20 min walk",cost:"~¥1,000–1,500",why:"Hokusai was born in Sumida. A small, sharp museum in a mirrored building by architect Kazuyo Sejima of SANAA.",tip:"Pair it with Ryogoku's chanko lunch and the free Sumo Museum.",q:"Sumida Hokusai Museum"},
+ {id:"shibamata",name:"Shibamata",jp:"柴又",area:"Katsushika",kind:"culture",type:"Old town",mins:"35 min",cost:"Free",why:"A Showa-era temple town. Taishakuten's walls are covered in carved wooden panels, the street sells kusa-dango, and a hand-rowed ferry crosses the Edo River.",tip:"The Yagiri ferry runs fewer days in winter, so check. A great end point for the Arakawa bike ride.",q:"Shibamata Taishakuten"},
+ {id:"yanesen",name:"Yanaka · Nezu · Sendagi",jp:"谷根千",area:"Yanaka",kind:"culture",type:"Old neighborhood",mins:"25 min",cost:"Free",why:"A district that survived the war: temples, a huge quiet cemetery, cats, wooden houses and Yanaka Ginza's menchi-katsu.",tip:"Best on a bike. Do the Yanaka loop on the Ride tab.",q:"Yanaka Ginza"},
+ {id:"kabuki",name:"Kabukiza single act",jp:"一幕見席",area:"Ginza",kind:"culture",type:"Theater",mins:"25 min",cost:"~¥1,000–2,500",why:"Kabuki without committing four hours: a single-act seat (hitomakumi-seki) up in the gods. Rent the English guide.",tip:"Single-act seats sell online the day before and on the day. Check the December program.",q:"Kabukiza Theatre"},
+ {id:"ghibli",name:"Ghibli Museum",jp:"三鷹の森ジブリ美術館",area:"Mitaka",kind:"culture",type:"Museum",mins:"55 min",cost:"~¥1,000",why:"Miyazaki's museum. Hand-built, playful, and it shows a short film you can only see there.",tip:"December tickets go on sale Nov 10 at 10:00 Japan time and sell out in minutes. Set an alarm.",q:"Ghibli Museum Mitaka"},
+ {id:"teamlab",name:"teamLab Planets",jp:"チームラボプラネッツ",area:"Toyosu",kind:"view",type:"Immersive art",mins:"30 min",cost:"~¥4,000",why:"Barefoot rooms of water, mirrors and light. Touristy, but genuinely unlike anything else.",tip:"Book a timed slot. The earliest weekday slot is the least crowded.",q:"teamLab Planets Toyosu"},
+ {id:"nakano",name:"Nakano Broadway",jp:"中野ブロードウェイ",area:"Nakano",kind:"shop",type:"Collectors' mall",mins:"45 min",cost:"Free to browse",why:"Four floors of vintage toys, watches, manga and oddities. What Akihabara was before it got polished.",tip:"Shops open around noon. Upstairs is the good part.",q:"Nakano Broadway"},
+ {id:"koenji",name:"Koenji",jp:"高円寺",area:"Koenji",kind:"night",type:"Neighborhood",mins:"45 min",cost:"Free",why:"Vintage clothes, live houses, and izakaya tucked under the tracks. Tokyo's punk-bohemian neighborhood.",tip:"Thrift in the afternoon, eat yakitori under the JR tracks after dark.",q:"Koenji Station"},
+ {id:"shimokita",name:"Shimokitazawa",jp:"下北沢",area:"Shimokitazawa",kind:"shop",type:"Neighborhood",mins:"45 min",cost:"Free",why:"Records, thrift, soup curry and tiny theaters. Bonus Track along the old rail line is a nice corner.",tip:"Go after noon on a weekday. Shops open late and so do the bars.",q:"Shimokitazawa"},
+ {id:"sumo",name:"Sumo morning practice",jp:"朝稽古",area:"Ryogoku",kind:"culture",type:"Sumo",mins:"20 min",cost:"Tour price varies",why:"December has no tournament, but the stables still train every morning. Watching keiko up close is unforgettable.",tip:"Book a guided stable visit in advance, since walk-ins are rarely allowed. Sit silently, no flash.",q:"Ryogoku sumo stable"},
+ {id:"comiket",name:"Comiket (winter)",jp:"コミケ",area:"Tokyo Big Sight",kind:"odd",type:"Convention",dates:["2026-12-30","2026-12-31"],when:"Usually Dec 30–31, check",mins:"45 min",cost:"Wristband ticket",why:"The world's biggest self-published comics fair. Overwhelming, fascinating people-watching.",tip:"Buy the wristband ticket online in advance. Dates move year to year, so confirm first.",q:"Tokyo Big Sight"},
+ {id:"kiyosumigarden",name:"Kiyosumi Garden",jp:"清澄庭園",area:"Kiyosumi",kind:"nature",type:"Garden",mins:"20 min",cost:"~¥150",why:"Stepping stones across a still pond, herons, and low winter light. A tiny ticket price for real calm.",tip:"Stop here on the south-river bike loop.",q:"Kiyosumi Teien"},
+];
+
+const TRIPS = [
+ {id:"nikko",name:"Nikko",area:"Tochigi",kind:"trip",when:"Full day",mins:"~1h50 Spacia X from Asakusa",cost:"~¥7,000–9,000 return + entries",why:"Toshogu's gold-and-lacquer shrines in cedar forest, the Kanmangafuchi abyss, and yuba (tofu skin) lunch. Often snowy and quiet in December.",tip:"The train leaves from Asakusa Station, 8 minutes from your bed. Book Spacia X seats, take the first train, and dress for the cold.",q:"Toshogu Nikko"},
+ {id:"ashikaga",name:"Ashikaga Flower Park lights",area:"Tochigi",kind:"lights",when:"Afternoon + night",mins:"~1h40 Tobu from Asakusa",cost:"~¥4,000–6,000",why:"One of Japan's biggest winter illuminations: millions of LEDs, including glowing 'wisteria' trellises.",tip:"Go on a weekday, arrive near dusk (4:30pm), and catch a train back by 8pm.",q:"Ashikaga Flower Park"},
+ {id:"kawagoe",name:"Kawagoe",area:"Saitama",kind:"culture",when:"Half / full day",mins:"~1h",cost:"~¥1,500 return",why:"'Little Edo': black clay warehouse streets, the Toki-no-kane bell tower, sweet potato everything, and Penny Candy Lane.",tip:"Weekdays are much quieter. Rent a bike at the station.",q:"Kawagoe Kurazukuri Street"},
+ {id:"kamakura",name:"Kamakura + Enoshima",area:"Kanagawa",kind:"trip",when:"Full day",mins:"~1h15",cost:"~¥2,500 return",why:"The Great Buddha, Hokokuji's bamboo grove, the Enoden coastal train, then Enoshima at sunset with Fuji across the bay in clear winter air.",tip:"Rent a bike in Kamakura for the temples, then ride the Enoden to Enoshima for sunset at 4:30pm.",q:"Kotoku-in Kamakura"},
+ {id:"hakone",name:"Hakone",area:"Kanagawa",kind:"bath",when:"Full day or overnight",mins:"~85 min Romancecar",cost:"~¥6,100 Free Pass",why:"The Hakone loop of mountain train, cable car, ropeway over the steaming volcanic valley and pirate ship, plus an onsen soak.",tip:"Splurge on one ryokan night if the budget allows: kaiseki dinner and a private bath.",q:"Hakone-Yumoto"},
+ {id:"kawaguchiko",name:"Kawaguchiko by bike",area:"Yamanashi",kind:"ride",when:"Full day",mins:"~2h bus from Shinjuku",cost:"~¥4,000–5,000 return + bike",why:"December is when Fuji is clearest. Rent a bike and loop the lake (about 20km) with the mountain in your face, then climb the Chureito pagoda steps.",tip:"Book the highway bus. Start early because clouds roll in after noon. Cold wind, bring gloves.",q:"Lake Kawaguchiko"},
+ {id:"takao",name:"Mt Takao + Diamond Fuji",area:"Hachioji",kind:"nature",when:"Half day",mins:"~1h from Shinjuku",cost:"~¥1,000 return",why:"An easy forest hike close to the city. Around the winter solstice (roughly Dec 19–25) the sun sets exactly on Fuji's peak from the summit: Diamond Fuji.",tip:"Hike Trail 6 up, eat Takao soba, and soak at Gokurakuyu onsen by the station after.",q:"Mount Takao"},
+ {id:"yokohama",name:"Yokohama + Noge",area:"Kanagawa",kind:"night",when:"Afternoon + night",mins:"~45 min",cost:"~¥1,000 return",why:"Sankeien Garden in the afternoon, then Noge's 200 tiny izakaya, the real local drinking district that tourists skip for Chinatown.",tip:"Noge comes alive after 6pm. Bar-hop, one drink and one plate per stop.",q:"Noge Yokohama"},
+ {id:"sawara",name:"Sawara",area:"Chiba",kind:"culture",when:"Full day",mins:"~1h40 bus",cost:"~¥4,000 return",why:"A canal town of Edo-era merchant houses and willows, sake breweries and small boats. Foreign visitors are rare.",tip:"Highway bus from Tokyo Station. Take the boat ride and the sake brewery tasting.",q:"Sawara Chiba"},
+ {id:"kusatsu",name:"Kusatsu Onsen",area:"Gunma",kind:"bath",when:"Overnight best",mins:"~4h bus",cost:"~¥7,000 return + stay",why:"Japan's most famous onsen town, steaming under snow in December, with the Yubatake hot-water field glowing at night.",tip:"Too far for a comfortable day trip. Do one night if you want a snow break.",q:"Kusatsu Onsen Yubatake"},
+];
+
+const EXTRA = [
+ {id:"gotokuji",name:"Gotokuji",area:"Setagaya",kind:"odd",why:"A temple crowded with thousands of white maneki-neko lucky cats. Two stops from Boro-ichi on the same tram.",tip:"Buy a small cat and add it to the rows yourself.",q:"Gotokuji Temple"},
+ {id:"kandamyojin",name:"Kanda Myojin",area:"Akihabara",kind:"culture",why:"A 1,300-year-old shrine where people get their laptops blessed. Sells IT-protection charms.",tip:"Pick up an electronics omamori for your phone.",q:"Kanda Myojin"},
+ {id:"tmg",name:"Tokyo Metropolitan Govt. observatory",area:"Shinjuku",kind:"view",why:"A free 45th-floor view. On clear December mornings you can see Fuji.",tip:"Go at opening for the clearest air. It's free, so skip the paid towers.",q:"Tokyo Metropolitan Government Building"},
+ {id:"hamarikyu",name:"Hama-rikyu tea house",area:"Shiodome",kind:"nature",why:"Matcha and a sweet in a tea house on a tidal pond, with skyscrapers behind the pines.",tip:"Arrive by the Sumida water bus from Asakusa pier, right by your hotel.",q:"Hama-rikyu Gardens"},
+ {id:"waterbus",name:"Sumida River water bus",area:"Asakusa pier",kind:"view",why:"Cruise from your neighborhood down the river under a dozen different bridges to the bay.",tip:"Board at Asakusa pier at Azuma-bashi, ride to Hama-rikyu, and walk back via Ginza.",q:"Asakusa Pier water bus"},
+ {id:"parasite",name:"Meguro Parasitological Museum",area:"Meguro",kind:"odd",why:"A free museum of parasites, including an 8.8-meter tapeworm. Gloriously weird, and a date-spot classic.",tip:"Small, so 30 minutes is enough. Free (donations welcome).",q:"Meguro Parasitological Museum"},
+ {id:"sword",name:"Japanese Sword Museum",area:"Ryogoku",kind:"craft",why:"Polished blades lit like jewels, a short walk from your hotel.",tip:"Next to the Kyu-Yasuda Garden, which is free to wander.",q:"Japanese Sword Museum Ryogoku"},
+ {id:"sumomuseum",name:"Sumo Museum",area:"Ryogoku",kind:"culture",why:"A small free gallery inside the Kokugikan with banzuke rankings and champions' aprons.",tip:"Weekdays only, and it shuts over the New Year. Go before Dec 28.",q:"Sumo Museum Ryogoku Kokugikan"},
+ {id:"jimbocho",name:"Jimbocho book town",area:"Jimbocho",kind:"shop",why:"About 150 secondhand bookshops: woodblock prints, old maps, vintage magazines.",tip:"Ohya Shobo sells original Edo-era prints and maps at fair prices.",q:"Jimbocho book town"},
+ {id:"kagurazaka",name:"Kagurazaka backstreets",area:"Kagurazaka",kind:"night",why:"Stone-paved geisha alleys mixed with French bistros. Lovely at night.",tip:"Take the side lanes off the main slope, especially Hyogo-yokocho.",q:"Kagurazaka Hyogo Yokocho"},
+ {id:"tsukuda",name:"Tsukudajima",area:"Tsukishima",kind:"culture",why:"An old fishing village wedged between towers, with tsukudani preserved-food shops running since the 1800s.",tip:"Tenyasu has been selling tsukudani since 1837. Eat monja on the next street over after.",q:"Tsukudajima Tenyasu"},
+ {id:"fudodo",name:"Fukagawa Fudodo fire ritual",area:"Monzen-Nakacho",kind:"culture",why:"Monks chant and pound taiko around a roaring goma fire several times a day. Free and intense.",tip:"Check the session times on the temple board. Sit quietly inside the main hall.",q:"Fukagawa Fudodo"},
+ {id:"camii",name:"Tokyo Camii",area:"Yoyogi-Uehara",kind:"culture",why:"Japan's most beautiful mosque, an Ottoman interior of blue-and-white tile. Visitors welcome outside prayer times.",tip:"Dress modestly. A Turkish grocery downstairs sells baklava.",q:"Tokyo Camii"},
+ {id:"rockabilly",name:"Yoyogi Park rockabillies",area:"Harajuku",kind:"odd",why:"A Sunday ritual: middle-aged men in leather and towering pompadours twisting to 50s rock at the park entrance.",tip:"Sundays only (Dec 20, 27). Late morning to afternoon, weather permitting.",q:"Yoyogi Park Harajuku entrance"},
+ {id:"daikokuyu",name:"Daikokuyu",area:"Kita-Senju",kind:"bath",why:"Nicknamed 'king of sento': a temple-style roof, outdoor bath and beer after. Kita-Senju's izakaya streets are right there.",tip:"Bring a towel. Combine with Kita-Senju's Nomiya Yokocho alley.",q:"Daikokuyu Kitasenju"},
+ {id:"dagashi",name:"Kamikawaguchiya dagashi shop",area:"Zoshigaya",kind:"odd",why:"Said to be Tokyo's oldest penny-candy shop, under a giant ginkgo by Kishimojin shrine.",tip:"Ride the Toden Arakawa streetcar there, Tokyo's last tram.",q:"Kishimojin Zoshigaya"},
+ {id:"toden",name:"Toden Arakawa streetcar",area:"Minowa ↔ Waseda",kind:"ride",why:"A one-car tram rattling through backyards and shopping streets. A flat fare takes you end to end.",tip:"Start at Minowabashi, not far from you, and hop off at Arakawa-Yuenchi or Zoshigaya.",q:"Minowabashi Station"},
+ {id:"ikegami",name:"Ikegami Honmonji",area:"Ota",kind:"culture",why:"A hilltop temple with Kanto's oldest five-story pagoda, plus kuzumochi shops at the gate. Almost no tourists.",tip:"Pair it with a sento in Kamata, the neighborhood famous for natural black onsen water.",q:"Ikegami Honmonji"},
+ {id:"hie",name:"Hie Shrine torii stairs",area:"Akasaka",kind:"culture",why:"A tunnel of red torii up a hillside, tucked behind office towers.",tip:"Go early on a weekday, when it's just you and suited salarymen bowing.",q:"Hie Shrine Akasaka"},
+ {id:"nippori",name:"Nippori Fabric Town",area:"Nippori",kind:"shop",why:"Around 90 shops selling textiles, tenugui and kimono fabric by the meter.",tip:"Tomato is the big one. Cheap tenugui make great gifts.",q:"Nippori Fabric Town"},
+ {id:"2k540",name:"2k540 Aki-Oka Artisan",area:"Okachimachi",kind:"craft",why:"Craft studios built into the arches under the train tracks: leather, glass, pottery and indigo.",tip:"Next door, Yanaka's Ueno side and Ameyoko make a good half-day.",q:"2k540 Aki-Oka Artisan"},
+ {id:"maach",name:"mAAch ecute Kanda Manseibashi",area:"Kanda",kind:"view",why:"A 1912 brick station turned into shops, with a glass deck where Chuo Line trains pass right beside your table.",tip:"Grab a coffee and sit on the platform deck between trains.",q:"mAAch ecute Kanda Manseibashi"},
+ {id:"batting",name:"Shinjuku Batting Center",area:"Kabukicho",kind:"odd",why:"Late-night batting cages in the middle of Kabukicho. Surprisingly satisfying with a beer in you.",tip:"Coins in, swing. Pick the 'slow' cage first.",q:"Shinjuku Batting Center"},
+ {id:"ushijima",name:"Ushijima Shrine",area:"Mukojima",kind:"culture",why:"A quiet shrine in Sumida Park with a stone cow you rub for healing. Five minutes from your hotel.",tip:"Do it on a morning jog or ride along the river.",q:"Ushijima Shrine"},
+ {id:"chomeiji",name:"Chomeiji sakura-mochi",area:"Mukojima",kind:"sweet",why:"Yamamotoya has been selling sakura-mochi wrapped in salted cherry leaves since 1717. Unfussy and local.",tip:"Stop here at the start of the Arakawa ride.",q:"Chomeiji Sakuramochi Yamamotoya"},
+ {id:"kyojima",name:"Kyojima backstreets",area:"Kyojima",kind:"culture",why:"Narrow lanes of prewar row houses that survived both the 1923 quake fires and the 1945 bombing. Real, lived-in old Tokyo.",tip:"Walk or ride slowly. People live here, so keep it quiet.",q:"Kyojima Sumida"},
+ {id:"kitasenjunomiya",name:"Kita-Senju izakaya alleys",area:"Kita-Senju",kind:"night",why:"A commuter neighborhood with dense, cheap drinking lanes. Very few foreigners, and very friendly.",tip:"Pair it with Daikokuyu sento. Look for 'senbero' signs (drunk for ¥1,000).",q:"Kitasenju Nomiya Yokocho"},
+ {id:"vinylkichijoji",name:"Kichijoji Harmonica Yokocho",area:"Kichijoji",kind:"night",why:"A tight grid of postwar market alleys turned into tiny bars and food counters.",tip:"Combine with the Ghibli Museum, a walk away through Inokashira Park.",q:"Harmonica Yokocho Kichijoji"},
+];
+
+const SEASON = [
+ {d:["2026-12-15","2026-12-16"],t:"Setagaya Boro-ichi",ref:"boroichi"},
+ {d:["2026-12-17","2026-12-18","2026-12-19"],t:"Hagoita-ichi, Senso-ji",ref:"hagoita"},
+ {d:["2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25"],t:"Diamond Fuji season, Mt Takao",ref:"takao"},
+ {d:["2026-12-20","2026-12-27"],t:"Sunday: Palace Cycling (check)",ref:null},
+ {d:["2026-12-22"],t:"Solstice: yuzu baths at sento",ref:"jakotsuyu"},
+ {d:["2026-12-24"],t:"Christmas Eve: date night, restaurants book out",ref:null},
+ {d:["2026-12-28","2026-12-29","2026-12-30","2026-12-31"],t:"Ameyoko year-end rush",ref:"ameyoko"},
+ {d:["2026-12-29","2026-12-30","2026-12-31"],t:"Holiday closures start",ref:null},
+ {d:["2026-12-30","2026-12-31"],t:"Comiket (check dates)",ref:"comiket"},
+ {d:["2026-12-31"],t:"Joya-no-kane bells + toshikoshi soba",ref:"joya"},
+];
+
+const ROUTES = [
+ {id:"r-south",name:"Down the Sumida to coffee town",km:"~14 km",time:"1h riding, half day with stops",level:"Flat",
+  why:"Follow the river south on the terrace paths, cut into Kuramae's maker shops, cross to sumo town and finish in Kiyosumi's roasteries and garden.",
+  stops:[["Base","Leave via Azuma-bashi to the Taito-side river terrace"],["Kuramae","Kakimori notebooks, coffee"],["Ryogoku","Hokusai Museum, Sumo Museum, Sword Museum"],["Kiyosumi Garden","Stepping stones, herons"],["Fukagawa Juku","Clam-rice lunch"],["Back up the Sumida","Golden hour on the river at 4pm"]],
+  way:["Kakimori Kuramae","Sumida Hokusai Museum","Kiyosumi Teien"]},
+ {id:"r-yanesen",name:"Old town loop: Ueno to Yanaka",km:"~13 km",time:"Half day",level:"A few short hills",
+  why:"Kitchen-tool street, the park, a hidden torii tunnel and the neighborhoods the war missed.",
+  stops:[["Kappabashi","Knife shops (closed Sundays)"],["Ueno Park","Shinobazu pond"],["Nezu Shrine","Small torii tunnel, quiet"],["Yanaka Cemetery","Long tree-lined lanes"],["Kayaba Coffee","Egg sandwich break"],["Yanaka Ginza","Menchi-katsu, cat shops"]],
+  way:["Kappabashi Dougu Street","Nezu Shrine","Kayaba Coffee Yanaka"]},
+ {id:"r-arakawa",name:"Arakawa levee to Shibamata",km:"~28 km",time:"Most of a day",level:"Flat, windy on the levee",
+  why:"Up through Mukojima and Kyojima's old lanes onto the huge Arakawa river path. On clear December mornings you can see Fuji from the levee.",
+  stops:[["Ushijima Shrine","Rub the stone cow"],["Chomeiji","Sakura-mochi since 1717"],["Kyojima","Prewar row-house lanes"],["Arakawa riverside path","Open sky, joggers, baseball fields"],["Shibamata","Taishakuten carvings, dango"],["Ride or train back","Keisei line if your legs are done"]],
+  way:["Chomeiji Sakuramochi Yamamotoya","Kyojima Sumida","Shibamata Taishakuten"]},
+ {id:"r-bay",name:"Night ride to the bay",km:"~22 km",time:"Evening",level:"Flat, bridges",
+  why:"Monzen-Nakacho's temple and fire ritual, then Toyosu's waterfront with the lit-up bay and Rainbow Bridge, then monja in Tsukishima.",
+  stops:[["Fukagawa Fudodo","Goma fire ritual (check times)"],["Toyosu waterfront park","Bay views, wide promenade"],["Harumi","City across the water"],["Tsukishima","Monja street dinner"],["Back via Sumida","River lights all the way home"]],
+  way:["Fukagawa Fudodo","Toyosu Gururi Park","Tsukishima Monja Street"]},
+ {id:"r-palace",name:"Palace Cycling Sunday",km:"~7 km there + 3 km loop",time:"Sunday 10:00–15:00",level:"Flat",
+  why:"On Sundays a road by the Imperial Palace closes to cars and free loaner bikes are handed out. Combine with Marunouchi and Hibiya.",
+  stops:[["Ride via Asakusa-dori & Kanda","Or take the train"],["Uchibori-dori","Car-free loop"],["Marunouchi","Coffee, KITTE rooftop"]],
+  way:["Palace Cycling Uchibori-dori"]},
+];
+
+/* Wikipedia article titles to pull a photo from, best first */
+const IMG = {
+ yadoroku:["Onigiri"],kamiya:["Kamiya Bar","Denki Bran","Azuma Bridge"],yoshikami:["Yōshoku","Omurice"],sometaro:["Okonomiyaki"],pelican:["Shokupan","Milk bread"],
+ leaves:["Pour-over coffee","Drip coffee"],tomoegata:["Chankonabe"],isegen:["Ankō nabe","Ankimo","Nabemono"],botan:["Sukiyaki"],matsuya:["Soba"],takemura:["Zenzai","Oshiruko"],
+ tamahide:["Oyakodon"],kayaba:["Kissaten","Yanaka, Tokyo"],marugo:["Tonkatsu"],kikanbo:["Miso ramen","Ramen"],fuunji:["Tsukemen"],lambre:["Ginza"],uogashi:["Sushi"],
+ hanamaru:["Conveyor belt sushi"],marumasu:["Akabane Station","Unagi"],fukagawa:["Fukagawa-meshi","Fukagawa, Tokyo"],kiyosumicoffee:["Kiyosumi-shirakawa Station","Kiyosumi Garden"],
+ bondy:["Japanese curry","Jimbōchō"],nonbei:["Nonbei Yokochō","Shibuya"],sankaku:["Sangenjaya"],depachika:["Depachika","Nihonbashi Mitsukoshi"],tsukiji:["Tsukiji Outer Market","Tsukiji fish market"],
+ torikizoku:["Yakitori"],boroichi:["Setagaya Boroichi","Setagaya"],hagoita:["Hagoita","Sensō-ji"],ameyoko:["Ameya-Yokochō","Ameyoko"],joya:["Zōjō-ji","Joya no Kane"],
+ marunouchi:["Marunouchi"],keyaki:["Roppongi Hills"],yebisu:["Yebisu Garden Place"],jakotsuyu:["Sentō"],mikokuyu:["Onsen"],somei:["Rikugi-en","Onsen"],
+ mokuhankan:["Woodblock printing in Japan","Ukiyo-e"],kiriko:["Edo kiriko"],kappabashi:["Kappabashi"],kuramae:["Kuramae","Kuramae Station"],asahi:["Asahi Beer Hall","Asahi Breweries"],
+ hokusai:["Sumida Hokusai Museum","Hokusai"],shibamata:["Shibamata Taishakuten","Shibamata"],yanesen:["Yanaka, Tokyo","Yanaka Cemetery"],kabuki:["Kabuki-za"],ghibli:["Ghibli Museum"],
+ teamlab:["TeamLab Planets","TeamLab"],nakano:["Nakano Broadway"],koenji:["Kōenji"],shimokita:["Shimokitazawa"],sumo:["Sumo","Ryōgoku Kokugikan"],comiket:["Comiket","Tokyo Big Sight"],
+ kiyosumigarden:["Kiyosumi Garden"],nikko:["Nikkō Tōshō-gū"],ashikaga:["Ashikaga Flower Park"],kawagoe:["Kawagoe, Saitama"],kamakura:["Kōtoku-in","Enoshima"],hakone:["Hakone"],
+ kawaguchiko:["Lake Kawaguchi","Chureito Pagoda"],takao:["Mount Takao"],yokohama:["Sankei-en","Yokohama"],sawara:["Sawara, Chiba"],kusatsu:["Kusatsu Onsen","Kusatsu, Gunma"],
+ gotokuji:["Gōtoku-ji"],kandamyojin:["Kanda Shrine"],tmg:["Tokyo Metropolitan Government Building"],hamarikyu:["Hama Rikyu Gardens"],waterbus:["Sumida River"],
+ parasite:["Meguro Parasitological Museum"],sword:["Japanese Sword Museum"],sumomuseum:["Ryōgoku Kokugikan"],jimbocho:["Jimbōchō"],kagurazaka:["Kagurazaka"],
+ tsukuda:["Tsukudajima","Tsukudani"],fudodo:["Fukagawa Fudōdō","Monzen-nakachō"],camii:["Tokyo Camii"],rockabilly:["Yoyogi Park"],daikokuyu:["Sentō","Kita-Senju"],
+ dagashi:["Dagashi","Kishimojin"],toden:["Toden Arakawa Line"],ikegami:["Ikegami Honmon-ji"],hie:["Hie Shrine"],nippori:["Nippori"],"2k540":["Okachimachi Station"],
+ maach:["Manseibashi Station","Mansei Bridge"],batting:["Batting cage","Kabukichō"],ushijima:["Ushijima Shrine","Sumida Park"],chomeiji:["Sakuramochi"],kyojima:["Kyōjima","Sumida, Tokyo"],
+ kitasenjunomiya:["Kita-Senju"],vinylkichijoji:["Kichijōji"],
+ "r-south":["Sumida River"],"r-yanesen":["Yanaka Cemetery"],"r-arakawa":["Arakawa River (Kantō)","Arakawa River"],"r-bay":["Toyosu"],"r-palace":["Tokyo Imperial Palace"],
+};
+const IMGKEY="azb-img-v1";
+let imgCache={}; try{ imgCache=JSON.parse(localStorage.getItem(IMGKEY)||"{}")||{}; }catch(e){}
+function imgFor(id){ const ts=IMG[id]; if(!ts) return null; for(const t of ts){ const v=imgCache[t]; if(v) return {src:v,title:t}; } return null; }
+function photo(id,kind,extra="",direct){
+  const im = direct ? {src:direct.src,title:direct.title} : imgFor(id);
+  return `<div class="ph">${extra}<span class="fb" aria-hidden="true">${SEALS[kind]||"・"}</span>${im?`<img src="${esc(im.src)}" alt="" loading="lazy" decoding="async" draggable="false"><a class="credit" href="https://en.wikipedia.org/wiki/${encodeURIComponent(im.title.replace(/ /g,"_"))}" target="_blank" rel="noopener">Photo · Wikipedia</a>`:""}</div>`;
+}
+document.addEventListener("load",e=>{ if(e.target.tagName==="IMG" && e.target.closest(".ph")) e.target.classList.add("ld"); },true);
+document.addEventListener("error",e=>{ if(e.target.tagName==="IMG" && e.target.closest(".ph")){ const c=e.target.nextElementSibling; if(c&&c.classList.contains("credit")) c.remove(); e.target.remove(); } },true);
+async function wikiThumbs(titles){
+  const out={};
+  for(let i=0;i<titles.length;i+=45){
+    const chunk=titles.slice(i,i+45);
+    const url=`https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=900&pilimit=50&titles=${encodeURIComponent(chunk.join("|"))}`;
+    const r=await fetch(url); if(!r.ok) throw new Error("wiki "+r.status); const j=await r.json(); const q=j.query||{};
+    const fwd={}; (q.normalized||[]).forEach(n=>fwd[n.from]=n.to); (q.redirects||[]).forEach(n=>fwd[n.from]=n.to);
+    const byTitle={}; (q.pages||[]).forEach(pg=>{ byTitle[pg.title]=pg.thumbnail&&pg.thumbnail.source||""; });
+    chunk.forEach(t=>{ let k=t, hop=0; while(fwd[k]&&hop++<3) k=fwd[k]; out[t]=byTitle[k]||""; });
+  }
+  return out;
+}
+async function loadImages(){
+  if(IN_CLAUDE) return;
+  try{
+    for(let round=0;round<3;round++){
+      const need=[];
+      Object.entries(IMG).forEach(([id,ts])=>{ if(imgFor(id)) return; const t=ts[round]; if(t && !(t in imgCache)) need.push(t); });
+      if(!need.length) continue;
+      Object.assign(imgCache, await wikiThumbs([...new Set(need)]));
+    }
+    try{ localStorage.setItem(IMGKEY,JSON.stringify(imgCache)); }catch(e){}
+    renderEat(); renderDo(); renderTrips(); renderRide(); if(current==="swipe") renderDeck();
+  }catch(e){ /* offline or blocked: keep the illustrated fallbacks */ }
+}
+
+const CHECK = [
+ ["ghibli","Ghibli Museum tickets: go on sale Nov 10, 10:00 Japan time"],
+ ["visitjp","Fill in Visit Japan Web (immigration + customs QR)"],
+ ["suica","Add a Suica or PASMO to your phone wallet"],
+ ["esim","Set up an eSIM or pocket Wi-Fi"],
+ ["bikeapp","Install Docomo Bike Share and HELLO CYCLING, and register a card"],
+ ["spacia","Book Spacia X seats if doing Nikko"],
+ ["isegen","Reserve Isegen or Botan for a December hotpot night"],
+ ["dec31","Pick your Dec 31 plan: soba lunch, bells, and where to stand at midnight"],
+ ["insure","Travel insurance"],
+ ["cash","Cash in a split wallet, plus a card that works at 7-Eleven ATMs"],
+];
+
+const LIVE = [
+ {h:"Weather",items:[["JMA Tokyo forecast","Japan Meteorological Agency, official","https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=130000"],["tenki.jp Sumida","Hourly forecast for your ward","https://tenki.jp/forecast/3/16/4410/13107/"],["Windy","Wind for bike days","https://www.windy.com/35.711/139.800"]]},
+ {h:"Trains",items:[["JR East train status","Delays across Kanto, in English","https://traininfo.jreast.co.jp/train_info/e/kanto.aspx"],["Tokyo Metro status","Ginza line etc.","https://www.tokyometro.jp/lang_en/"],["Toei status","Asakusa line, your nearest","https://www.kotsu.metro.tokyo.jp/eng/"],["Japan Transit Planner (Jorudan)","Routes and fares","https://world.jorudan.co.jp/mln/en/"]]},
+ {h:"What's on",items:[["Tokyo Cheapo events","Weekly, includes free stuff","https://tokyocheapo.com/events/"],["Time Out Tokyo","Openings, events, food","https://www.timeout.com/tokyo"],["GO TOKYO events","Official city calendar","https://www.gotokyo.org/en/"],["Japan Travel by NAVITIME","Spot guides, closures","https://japantravel.navitime.com/en/"]]},
+ {h:"Food",items:[["Tabelog","How locals rate restaurants (3.5+ is very good)","https://tabelog.com/en/tokyo/"],["TableCheck","Book restaurants in English","https://www.tablecheck.com/en/japan"],["Omakase","High-end sushi reservations","https://omakase.in/en"]]},
+ {h:"Bikes & money",items:[["Docomo Bike Share","Red e-bikes, ports everywhere in Sumida and Taito","https://docomo-cycle.jp/?lang=en"],["HELLO CYCLING","Second bike-share network","https://www.hellocycling.jp/"],["Yen rate (xe.com)","Today's USD→JPY rate","https://www.xe.com/currencyconverter/convert/?Amount=1&From=USD&To=JPY"]]},
+ {h:"Safety",items:[["Japan Safe Travel","Official alerts app info from JNTO","https://www.jnto.go.jp/safety-tips/eng/"],["JMA earthquake info","Live quake reports","https://www.jma.go.jp/bosai/map.html#contents=earthquake_map&lang=en"],["Emergency numbers","Police 110 · Ambulance/fire 119","https://www.japan.travel/en/plan/emergency/"]]},
+];
+
+const BIKELINKS = [
+ ["Docomo Bike Share","Red e-assist bikes. Ports near Honjo-azumabashi and all over Asakusa. Pay per 30 min, or a day pass.","https://docomo-cycle.jp/?lang=en"],
+ ["HELLO CYCLING","Second share network, often more ports on the Sumida side.","https://www.hellocycling.jp/"],
+ ["Tokyobike rentals","Nice lightweight city bikes by the day from a Yanaka shop.","https://www.google.com/maps/search/?api=1&query=tokyobike+rentals+yanaka"],
+ ["Guided cycling tours","Back-street tours by local guides, good for your first day.","https://www.google.com/search?q=Tokyo+guided+cycling+tour+Asakusa"],
+];
+
+/* ---------------- state ---------------- */
+const LS = "azb-state-v1";
+const defaults = () => ({events:[],expenses:[],settings:{usd:3000,rate:150,hotelPaid:true,hotelYen:0},saved:[],checks:{},swipe:{kept:[],passed:[],gen:[]}});
+let state = defaults();
+function normalize(s){ const d=defaults(); const o=Object.assign(d,s||{}); o.settings=Object.assign(defaults().settings,o.settings||{}); o.swipe=Object.assign(defaults().swipe,o.swipe||{}); return o; }
+try{ const s=JSON.parse(localStorage.getItem(LS)||"null"); if(s) state=normalize(s);}catch(e){}
+let docRef=null, saveTimer=null, writing=false, pendingWrite=false;
+const setSync = t => { const el=document.getElementById("sync"); if(el) el.textContent=t; };
+function save(){
+  try{ localStorage.setItem(LS,JSON.stringify(state)); }catch(e){}
+  clearTimeout(saveTimer); saveTimer=setTimeout(flush,700);
+}
+async function flush(){
+  if(!docRef) return;
+  if(writing){ pendingWrite=true; return; }
+  writing=true;
+  try{ await docRef.set(JSON.parse(JSON.stringify(state))); setSync("Synced to your account"); }
+  catch(e){ setSync("Saved on this device"); }
+  writing=false;
+  if(pendingWrite){ pendingWrite=false; flush(); }
+}
+async function connect(){
+  if(!window.claude || !window.claude.use){ setSync("Saved on this device"); return; }
+  try{
+    const [db,user] = await Promise.all([window.claude.use("db"),window.claude.use("user")]);
+    if(!db || !user){ setSync("Saved on this device"); return; }
+    const id = await user.id();
+    if(!id){ setSync("Saved on this device"); return; }
+    docRef = db.doc(`data/users/${id}/trip/state`);
+    const snap = await docRef.get();
+    if(snap.exists){ state = normalize(snap.data()); try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){} renderAll(); setSync("Synced to your account"); }
+    else { await flush(); }
+  }catch(e){ setSync("Saved on this device"); }
+}
+
+/* ---------------- tabs ---------------- */
+const TABS = [["today","今","Today"],["swipe","探","Discover"],["eat","食","Eat"],["do","遊","Do"],["ride","輪","Ride"],["trips","旅","Day trips"],["cal","暦","Calendar"],["budget","円","Cash"],["ask","問","Ask"],["live","報","Live"]];
+const tabsEl = document.getElementById("tabs");
+tabsEl.innerHTML = TABS.map(([id,k,l])=>`<button class="tab" role="tab" id="tab-${id}" aria-controls="t-${id}" data-tab="${id}"><span class="k" aria-hidden="true">${k}</span>${l}</button>`).join("");
+let current = "today";
+const BNAV=[["today","今","Today"],["swipe","探","Discover"],["eat","食","Eat"],["cal","暦","Plan"],["budget","円","Cash"],["more","…","More"]];
+document.getElementById("bnav").innerHTML=BNAV.map(([id,k,l])=>`<button data-${id==="more"?"act":"tab"}="${id}" data-bn="${id}"><span class="k" aria-hidden="true">${k}</span>${l}</button>`).join("");
+function openMore(){
+  modal(`<div class="sheet"><div style="display:flex;justify-content:space-between;align-items:center"><h3>More</h3><button class="btn ghost" data-act="close">Close</button></div><div class="grid2">${[["do","遊","Things to do"],["ride","輪","Bike rides"],["trips","旅","Day trips"],["ask","問","Ask a local"],["live","報","Live check"],["budget","円","Cash"]].map(([id,k,l])=>`<button data-tab="${id}"><span class="k" aria-hidden="true">${k}</span>${l}</button>`).join("")}</div></div>`);
+}
+function show(id){
+  if(!TABS.some(t=>t[0]===id)) id="today";
+  current=id;
+  TABS.forEach(([t])=>{ document.getElementById("t-"+t).hidden = t!==id; document.getElementById("tab-"+t).setAttribute("aria-selected", t===id?"true":"false"); });
+  try{ localStorage.setItem("azb-tab",id); }catch(e){}
+  if(history.replaceState) try{ history.replaceState(null,"","#"+id);}catch(e){}
+  document.querySelectorAll("#bnav [data-bn]").forEach(b=>b.setAttribute("aria-current", (b.dataset.bn===id || (b.dataset.bn==="more" && ["do","ride","trips","ask","live"].includes(id)))?"true":"false"));
+  if(id==="swipe") renderDeck();
+}
+
+/* ---------------- helpers ---------------- */
+function toast(msg){ const r=document.getElementById("toastRoot"); r.innerHTML=`<div class="toast" role="status">${esc(msg)}</div>`; clearTimeout(toast.t); toast.t=setTimeout(()=>r.innerHTML="",2200); }
+function tripDayIndex(d){ return TRIP.indexOf(d); }
+function defaultDay(){ const t=jstToday(); return TRIP.includes(t)?t:TRIP[0]; }
+function sunTimes(d){ // approximate Tokyo sunrise/sunset in December
+  const n=dnum(d); const rise=6*60+42+Math.round((n-15)*0.5); const set=16*60+28+Math.round((n-15)*0.55);
+  const f=m=>`${Math.floor(m/60)}:${String(m%60).padStart(2,"0")}`; return [f(rise),f(set)];
+}
+const CATS_E = {food:"Food",do:"Do",ride:"Ride",trip:"Day trip",other:"Other"};
+const kindToCat = k => ({eat:"food",drink:"food",coffee:"food",sweet:"food",market:"do",ride:"ride",trip:"trip"})[k]||"do";
+
+/* ---------------- spots ---------------- */
+function spotCard(s, extra=""){
+  const saved = state.saved.includes(s.id);
+  const badge = s.when ? `<span class="badge">${esc(s.when)}</span>` : (s.mins ? `<span class="badge">${esc(s.mins)}</span>` : "");
+  return `<article class="spot">${photo(s.id,s.kind,badge+`<div class="seal" aria-hidden="true">${SEALS[s.kind]||"・"}</div>`)}<div class="sbody">
+    <div class="spot-top"><div style="min-width:0"><h3>${esc(s.name)}</h3>${s.jp?`<div class="jp">${esc(s.jp)}</div>`:""}</div></div>
+    ${s.when?`<div class="when">${esc(s.when)}</div>`:""}
+    <div class="meta"><span><b>${esc(s.area)}</b></span>${s.type?`<span>${esc(s.type)}</span>`:""}${s.mins?`<span>${esc(s.mins)}</span>`:""}<span class="mono">${esc(s.yen||s.cost||"")}</span></div>
+    <p>${esc(s.why)}</p>
+    ${s.tip?`<div class="tipline">${esc(s.tip)}</div>`:""}
+    <div class="actions">
+      <a class="btn" href="${maps(s.q)}" target="_blank" rel="noopener">Directions</a>
+      <button class="btn" data-act="plan" data-name="${esc(s.name)}" data-cat="${kindToCat(s.kind)}" data-q="${esc(s.q)}" data-date="${s.dates?s.dates[0]:""}">Plan it</button>
+      <button class="btn ${saved?"on":""}" data-act="save" data-id="${esc(s.id)}" aria-pressed="${saved}">${saved?"Saved":"Save"}</button>
+      ${extra}
+    </div></div></article>`;
+}
+let eatFilter="All", doFilter="All";
+function renderFilters(elId, items, keyFn, cur, setter){
+  const keys=["All","Saved",...new Set(items.map(keyFn))];
+  const el=document.getElementById(elId);
+  el.innerHTML=keys.map(k=>`<button class="chip" aria-pressed="${k===cur}" data-filter="${esc(k)}">${esc(k)}</button>`).join("");
+  el.onclick=e=>{const b=e.target.closest("[data-filter]"); if(!b) return; setter(b.dataset.filter);};
+}
+const EAT_GROUP = s => ({eat:"Meals",drink:"Drinks",coffee:"Coffee & breakfast",sweet:"Sweets",market:"Markets"})[s.kind]||"Meals";
+const DO_GROUP = s => ({market:"Markets",lights:"Lights",bath:"Baths",craft:"Make things",shop:"Shopping",culture:"Culture",view:"Views",night:"Night",odd:"Odd & fun",nature:"Gardens"})[s.kind]||"Other";
+function renderEat(){
+  renderFilters("eatFilters",EAT,EAT_GROUP,eatFilter,v=>{eatFilter=v;renderEat();});
+  const list=EAT.filter(s=>eatFilter==="All"||(eatFilter==="Saved"?state.saved.includes(s.id):EAT_GROUP(s)===eatFilter));
+  document.getElementById("eatGrid").innerHTML=list.length?list.map(s=>spotCard(s)).join(""):`<div class="empty">Nothing saved yet. Tap Save on any place.</div>`;
+}
+function renderDo(){
+  renderFilters("doFilters",DO,DO_GROUP,doFilter,v=>{doFilter=v;renderDo();});
+  const list=DO.filter(s=>doFilter==="All"||(doFilter==="Saved"?state.saved.includes(s.id):DO_GROUP(s)===doFilter));
+  document.getElementById("doGrid").innerHTML=list.length?list.map(s=>spotCard(s)).join(""):`<div class="empty">Nothing saved yet. Tap Save on any activity.</div>`;
+}
+function renderTrips(){ document.getElementById("tripGrid").innerHTML=TRIPS.map(s=>spotCard(Object.assign({},s,{kind:s.kind,type:s.when,when:""}))).join(""); }
+function renderRide(){
+  document.getElementById("routes").innerHTML=ROUTES.map(r=>{
+    const wp=r.way.slice(0,-1).map(encodeURIComponent).join("|");
+    const url=`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(HOTEL)}&destination=${encodeURIComponent(r.way[r.way.length-1])}${wp?`&waypoints=${wp}`:""}&travelmode=bicycling`;
+    return `<article class="route">
+      <div style="min-width:0">${photo(r.id,"ride")}<div class="label">${esc(r.level)}</div><h3 style="font-size:24px;margin:4px 0 8px">${esc(r.name)}</h3>
+        <div class="meta" style="margin-bottom:10px"><span class="mono"><b>${esc(r.km)}</b></span><span>${esc(r.time)}</span></div>
+        <p style="margin:0 0 12px">${esc(r.why)}</p>
+        <div class="actions"><a class="btn primary" href="${url}" target="_blank" rel="noopener">Open route in Maps</a><button class="btn" data-act="plan" data-name="Ride: ${esc(r.name)}" data-cat="ride" data-q="">Plan it</button></div></div>
+      <ol class="stops">${r.stops.map(([a,b])=>`<li><b>${esc(a)}</b><span class="muted">${esc(b)}</span></li>`).join("")}</ol>
+    </article>`;}).join("");
+  document.getElementById("bikeLinks").innerHTML=BIKELINKS.map(([a,b,u])=>`<a class="lnk" href="${u}" target="_blank" rel="noopener"><b>${esc(a)}</b><span>${esc(b)}</span></a>`).join("");
+}
+function renderLive(){
+  document.getElementById("liveLinks").innerHTML=`<div class="panel backup" style="margin-bottom:8px"><h3>Your data</h3><p class="muted" style="margin:0 0 10px;font-size:14px">${IN_CLAUDE?"Saved to your Claude account.":"Saved in this browser only. Copy a backup now and then, or use it to move your plans to another phone."}</p><div class="actions"><button class="btn" data-act="copyBackup">Copy backup</button><button class="btn" data-act="restoreBackup">Restore from backup</button></div><textarea id="backupBox" placeholder="Paste a backup here, then tap Restore" aria-label="Backup text" style="margin-top:10px"></textarea></div>`+LIVE.map(g=>`<h3 style="font-size:20px;margin:18px 0 10px">${esc(g.h)}</h3><div class="links">${g.items.map(([a,b,u])=>`<a class="lnk" href="${u}" target="_blank" rel="noopener"><b>${esc(a)}</b><span>${esc(b)}</span></a>`).join("")}</div>`).join("");
+}
+
+/* ---------------- today ---------------- */
+let viewDay = defaultDay();
+function renderToday(){
+  const t=jstToday(); const inTrip=TRIP.includes(t);
+  const before = t < TRIP[0];
+  const daysTo = Math.ceil((Date.parse(TRIP[0]+"T00:00:00+09:00")-Date.now())/864e5);
+  document.getElementById("todayTitle").textContent = inTrip ? "Today in Tokyo" : (before ? "Getting ready" : "Trip recap");
+  document.getElementById("todaySub").textContent = before ? `${daysTo} day${daysTo===1?"":"s"} until you land. Tap any day below to preview it.` : (inTrip ? "Here's your day. Tap another date to look ahead." : "Back home? Your plans and spending are still here.");
+  document.getElementById("daypick").innerHTML=TRIP.map(d=>`<button data-day="${d}" aria-pressed="${d===viewDay}"><b>${dnum(d)}</b><span>${wdOf(d)}</span></button>`).join("");
+  const i=tripDayIndex(viewDay);
+  document.getElementById("dayLabel").textContent=`${wdOf(viewDay)} · December ${dnum(viewDay)}`;
+  document.getElementById("dayBig").textContent=`Day ${i+1} of 17`;
+  const [r,s]=sunTimes(viewDay);
+  document.getElementById("sun").innerHTML=`<span>Sunrise ~${r}</span><span>Sunset ~${s}</span><span>Avg ~3–11°C</span>`;
+  const b=budgetNums();
+  document.getElementById("stLeft").textContent=yen(b.left);
+  document.getElementById("stDay").textContent=yen(b.daily);
+  const plans=state.events.filter(e=>e.date===viewDay).sort((a,b)=>(a.time||"99").localeCompare(b.time||"99"));
+  document.getElementById("stPlans").textContent=state.events.length;
+  document.getElementById("dayPlans").innerHTML=plans.length?plans.map(e=>`<li><span class="tm">${esc(e.time||"—")}</span><div style="min-width:0"><b>${esc(e.title)}</b>${e.note?`<div class="muted" style="font-size:13px;overflow-wrap:anywhere">${esc(e.note)}</div>`:""}</div></li>`).join(""):`<li><div class="empty" style="width:100%">Nothing planned. Open loose days are the point, but tap Add if something comes up.</div></li>`;
+  const ev=SEASON.filter(x=>x.d.includes(viewDay));
+  document.getElementById("dayEvents").innerHTML=(ev.length?ev.map(x=>`<li><span class="tm" style="color:var(--plum)">●</span><div><b>${esc(x.t)}</b></div></li>`).join(""):`<li><div class="muted">No special events on this date. A good day for a ride or a day trip.</div></li>`)
+    + `<li><span class="tm">ideas</span><div class="muted" style="font-size:13px">${esc(pickIdeas(viewDay))}</div></li>`;
+  document.getElementById("checklist").innerHTML=CHECK.map(([k,l])=>`<label class="check ${state.checks[k]?"done":""}"><input type="checkbox" data-check="${k}" ${state.checks[k]?"checked":""}><span>${esc(l)}</span></label>`).join("");
+}
+function pickIdeas(d){
+  const pool=[...EAT,...DO.filter(x=>!x.dates)]; const n=dnum(d);
+  return [pool[(n*3)%pool.length],pool[(n*7+5)%pool.length],pool[(n*11+2)%pool.length]].map(x=>x.name).join(" · ");
+}
+
+/* ---------------- calendar ---------------- */
+function renderCal(){
+  const t=jstToday();
+  const heads=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(w=>`<div class="wd">${w}</div>`).join("");
+  const firstWd=(new Date(TRIP[0]+"T12:00:00Z").getUTCDay()+6)%7;
+  let cells="";
+  for(let i=0;i<firstWd;i++) cells+=`<div class="cell blank" aria-hidden="true"><div class="n">${14-firstWd+1+i}</div></div>`;
+  TRIP.forEach(d=>{
+    const ev=SEASON.filter(x=>x.d.includes(d));
+    const mine=state.events.filter(e=>e.date===d).sort((a,b)=>(a.time||"99").localeCompare(b.time||"99"));
+    cells+=`<button class="cell ${d===t?"today":""}" data-openday="${d}" aria-label="December ${dnum(d)}, ${mine.length} plans">
+      <div class="n">${dnum(d)}<small>${wdOf(d)}</small></div>
+      ${mine.map(e=>`<span class="pill c-${esc(e.cat)}">${e.time?esc(e.time)+" ":""}${esc(e.title)}</span>`).join("")}
+      ${ev.map(x=>`<span class="pill ev">${esc(x.t)}</span>`).join("")}
+    </button>`;
+  });
+  document.getElementById("cal").innerHTML=heads+cells;
+  document.getElementById("agenda").innerHTML=TRIP.map(d=>{
+    const ev=SEASON.filter(x=>x.d.includes(d));
+    const mine=state.events.filter(e=>e.date===d).sort((a,b)=>(a.time||"99").localeCompare(b.time||"99"));
+    return `<button class="arow ${d===t?"today":""}" data-openday="${d}"><div class="dt"><b>${dnum(d)}</b><span>${wdOf(d)}</span></div><div class="its">${mine.map(e=>`<span class="pill c-${esc(e.cat)}">${e.time?esc(e.time)+" ":""}${esc(e.title)}</span>`).join("")}${ev.map(x=>`<span class="pill ev">${esc(x.t)}</span>`).join("")}${!mine.length?`<span class="add">+ Add a plan</span>`:""}</div></button>`;}).join("");
+}
+function openDay(d, preset){
+  const mine=state.events.filter(e=>e.date===d).sort((a,b)=>(a.time||"99").localeCompare(b.time||"99"));
+  const ev=SEASON.filter(x=>x.d.includes(d));
+  modal(`<div style="display:flex;justify-content:space-between;align-items:start;gap:10px"><div><div class="label">${wdOf(d)}</div><h3>December ${dnum(d)}</h3></div><button class="btn ghost" data-act="close">Close</button></div>
+    ${ev.length?`<div style="margin-top:8px">${ev.map(x=>`<span class="pill ev" style="display:inline-block;margin:2px 4px 2px 0">${esc(x.t)}</span>`).join("")}</div>`:""}
+    <div class="daylist" style="margin-top:10px">${mine.map(e=>`<div class="item"><span class="mono muted" style="min-width:46px">${esc(e.time||"—")}</span><div class="body"><b>${esc(e.title)}</b>${e.note?`<span>${esc(e.note)}</span>`:""}</div><button class="btn ghost" data-act="editEv" data-id="${e.id}">Edit</button><button class="btn ghost danger" data-act="delEv" data-id="${e.id}">Delete</button></div>`).join("")||`<div class="muted" style="padding:8px 0">Nothing yet.</div>`}</div>
+    ${eventForm(Object.assign({date:d},preset||{}))}`);
+}
+function eventForm(e){
+  return `<form class="form" id="evForm" data-id="${esc(e.id||"")}">
+    <label class="full">What<input id="evTitle" required value="${esc(e.title||"")}" placeholder="Dinner at Isegen"></label>
+    <label>Day<select id="evDate">${TRIP.map(d=>`<option value="${d}" ${d===e.date?"selected":""}>${wdOf(d)} Dec ${dnum(d)}</option>`).join("")}</select></label>
+    <label>Time<input id="evTime" type="time" value="${esc(e.time||"")}"></label>
+    <label>Type<select id="evCat">${Object.entries(CATS_E).map(([k,v])=>`<option value="${k}" ${k===(e.cat||"do")?"selected":""}>${v}</option>`).join("")}</select></label>
+    <label>Est. cost (¥)<input id="evCost" type="number" min="0" step="100" value="${esc(e.cost||"")}"></label>
+    <label class="full">Notes<textarea id="evNote" placeholder="Book ahead, bring cash…">${esc(e.note||"")}</textarea></label>
+    <div class="full rowend" style="margin-top:0">${e.id?`<button class="btn ghost" type="button" data-act="cancelEdit" data-date="${e.date}">Cancel</button>`:""}<button class="btn primary" type="submit">${e.id?"Save changes":"Add to calendar"}</button></div>
+  </form>`;
+}
+function modal(html){ document.getElementById("modalRoot").innerHTML=`<div class="scrim" data-act="scrim"><div class="modal" role="dialog" aria-modal="true">${html}</div></div>`; const f=document.querySelector("#modalRoot input:not([type=checkbox])"); if(f) setTimeout(()=>f.focus({preventScroll:true}),30); }
+function closeModal(){ document.getElementById("modalRoot").innerHTML=""; }
+
+/* ---------------- budget ---------------- */
+const BCATS = {food:"Food & drink",transport:"Transport",activities:"Activities",shopping:"Shopping",stay:"Stay",other:"Other"};
+const QUICK = [["Konbini run",800,"food"],["Coffee",600,"food"],["Ramen",1300,"food"],["Izakaya night",4000,"food"],["Train hop",250,"transport"],["Bike share day",2000,"transport"],["Sento",550,"activities"],["Museum",1200,"activities"]];
+function budgetNums(){
+  const s=state.settings; const pot=Math.max(0,(+s.usd||0)*(+s.rate||0) - (s.hotelPaid?0:(+s.hotelYen||0)));
+  const spent=state.expenses.reduce((a,e)=>a+(+e.amt||0),0);
+  const left=pot-spent;
+  const t=jstToday(); let idx=TRIP.indexOf(t); if(t<TRIP[0]) idx=0; if(t>TRIP[16]) idx=16;
+  const spentBeforeToday = state.expenses.filter(e=>e.date<TRIP[idx]).reduce((a,e)=>a+(+e.amt||0),0);
+  const daysLeft=17-idx;
+  const daily=Math.max(0,(pot-spentBeforeToday)/daysLeft) - state.expenses.filter(e=>e.date===TRIP[idx]).reduce((a,e)=>a+(+e.amt||0),0);
+  const forward=Math.max(0,left/daysLeft);
+  const daysWithSpend=new Set(state.expenses.map(e=>e.date)).size;
+  return {pot,spent,left,daysLeft,daily:Math.max(0,daily),forward,avg:daysWithSpend?spent/daysWithSpend:0};
+}
+function renderBudget(){
+  const s=state.settings, b=budgetNums();
+  document.getElementById("bLeft").textContent=yen(b.left);
+  document.getElementById("bSpent").textContent=yen(b.spent);
+  document.getElementById("bPot").textContent=yen(b.pot);
+  document.getElementById("bUsdLeft").textContent="$"+Math.round(b.left/(+s.rate||150)).toLocaleString("en-US");
+  const pct=b.pot?Math.min(100,b.spent/b.pot*100):0;
+  const m=document.getElementById("bMeter"); m.firstElementChild.style.width=pct+"%"; m.classList.toggle("warn",b.left<0);
+  document.getElementById("bDaily").textContent=yen(b.forward);
+  document.getElementById("bDays").textContent=b.daysLeft;
+  document.getElementById("bAvg").textContent=b.avg?yen(b.avg):"—";
+  const per=TRIP.map(d=>state.expenses.filter(e=>e.date===d).reduce((a,e)=>a+(+e.amt||0),0));
+  const ideal=b.pot/17; const max=Math.max(ideal*1.6,...per,1);
+  document.getElementById("bars").innerHTML=per.map((v,i)=>`<div class="b ${v>ideal?"over":""}" style="height:${(v/max*100).toFixed(1)}%" title="Dec ${15+i}: ${yen(v)}"></div>`).join("")+`<div class="ideal" style="bottom:${(ideal/max*100).toFixed(1)}%"></div>`;
+  document.getElementById("barlbl").innerHTML=TRIP.map(d=>`<span>${dnum(d)}</span>`).join("");
+  const byCat=Object.keys(BCATS).map(k=>[k,state.expenses.filter(e=>e.cat===k).reduce((a,e)=>a+(+e.amt||0),0)]);
+  const cmax=Math.max(1,...byCat.map(x=>x[1]));
+  document.getElementById("cats").innerHTML=byCat.map(([k,v])=>`<div class="row"><span>${BCATS[k]}</span><div class="track"><i style="width:${(v/cmax*100).toFixed(1)}%"></i></div><span class="mono" style="text-align:right">${yen(v)}</span></div>`).join("");
+  const rows=[...state.expenses].sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);
+  document.getElementById("ledger").innerHTML=rows.length?`<table><tbody>${rows.map(e=>`<tr><td class="mono muted" style="white-space:nowrap">Dec ${dnum(e.date)}</td><td style="overflow-wrap:anywhere">${esc(e.note||BCATS[e.cat])}<div class="muted" style="font-size:11px">${BCATS[e.cat]||""}</div></td><td class="amt">${yen(e.amt)}</td><td style="width:1%"><button class="btn ghost danger" data-act="delExp" data-id="${e.id}" aria-label="Delete">✕</button></td></tr>`).join("")}</tbody></table>`:`<div class="empty">No spending logged yet. Add your first purchase above, or tap a quick-add button like "Konbini run".</div>`;
+  document.getElementById("setUsd").value=s.usd; document.getElementById("setRate").value=s.rate;
+  document.getElementById("setHotel").checked=!!s.hotelPaid; document.getElementById("setHotelYen").value=s.hotelYen||"";
+  document.getElementById("hotelYenWrap").hidden=!!s.hotelPaid;
+}
+function initBudgetForm(){
+  document.getElementById("expCat").innerHTML=Object.entries(BCATS).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
+  document.getElementById("expDate").innerHTML=TRIP.map(d=>`<option value="${d}">${wdOf(d)} Dec ${dnum(d)}</option>`).join("");
+  document.getElementById("expDate").value=defaultDay();
+  document.getElementById("quick").innerHTML=QUICK.map(([l,a,c])=>`<button class="btn" data-act="quick" data-amt="${a}" data-cat="${c}" data-note="${esc(l)}">${esc(l)} <span class="mono muted">${yen(a)}</span></button>`).join("");
+  document.getElementById("expForm").addEventListener("submit",e=>{
+    e.preventDefault(); const amt=+document.getElementById("expAmt").value; if(!amt) return;
+    addExp(amt,document.getElementById("expCat").value,document.getElementById("expDate").value,document.getElementById("expNote").value.trim());
+    document.getElementById("expAmt").value=""; document.getElementById("expNote").value="";
+  });
+  const bind=(id,fn)=>document.getElementById(id).addEventListener("change",fn);
+  bind("setUsd",e=>{state.settings.usd=+e.target.value||0;save();renderBudget();renderToday();});
+  bind("setRate",e=>{state.settings.rate=+e.target.value||150;save();renderBudget();renderToday();});
+  bind("setHotel",e=>{state.settings.hotelPaid=e.target.checked;save();renderBudget();renderToday();});
+  bind("setHotelYen",e=>{state.settings.hotelYen=+e.target.value||0;save();renderBudget();renderToday();});
+}
+function addExp(amt,cat,date,note){ state.expenses.push({id:uid(),amt,cat,date,note,ts:Date.now()}); save(); renderBudget(); renderToday(); toast(`Logged ${yen(amt)}`); }
+
+/* ---------------- swipe deck ---------------- */
+const SW_KINDS = {All:null,Food:["eat","drink","coffee","sweet"],Do:["market","culture","craft","shop","view","nature","lights"],Night:["night","drink"],Weird:["odd"],Baths:["bath"],Trips:["trip","ride"]};
+let swFilter="All", deck=[], fetching=false, lastSwipe=null;
+function allPool(){
+  const norm = x => ({id:x.id,name:x.name,area:x.area,kind:x.kind,why:x.why,tip:x.tip||"",q:x.q||x.name,gen:!!x.gen,img:x.img||"",imgTitle:x.imgTitle||"",src:x.src||""});
+  return [...EXTRA,...DO,...EAT,...TRIPS,...state.swipe.gen].map(norm);
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function buildDeck(){
+  const seen=new Set([...state.swipe.kept.map(k=>k.id),...state.swipe.passed]);
+  const ok=SW_KINDS[swFilter];
+  deck=shuffle(allPool().filter(x=>!seen.has(x.id)&&(!ok||ok.includes(x.kind))));
+  // curated hidden gems first, AI-generated after
+  deck.sort((a,b)=>(a.gen?1:0)-(b.gen?1:0));
+}
+function cardHTML(x,cls=""){
+  return `<div class="sc ${cls}" data-card="${esc(x.id)}">
+    ${photo(x.id,x.kind,"",x.img?{src:x.img,title:x.imgTitle||x.name}:null)}
+    <div class="stamp keep">KEEP</div><div class="stamp skip">SKIP</div>
+    <div class="txt"><span class="kind">${esc(DO_GROUP(x)==="Other"?(x.kind==="trip"?"Day trip":x.kind):(["eat","coffee","sweet","drink"].includes(x.kind)?EAT_GROUP(x):DO_GROUP(x)))}</span>
+    <h3>${esc(x.name)}</h3>
+    <div class="where">${esc(x.area)}</div>
+    <div class="why">${esc(x.why)}</div>
+    ${x.tip?`<div class="tipline">${esc(x.tip)}</div>`:""}
+    ${x.gen?`<div class="ai">${x.src==="wiki"?"Found on Wikipedia nearby":"Dealt by Claude"}. Check details before you go.</div>`:""}
+  </div></div>`;
+}
+function renderDeck(){
+  const f=document.getElementById("swFilters");
+  f.innerHTML=Object.keys(SW_KINDS).map(k=>`<button class="chip" aria-pressed="${k===swFilter}" data-swf="${k}">${k}</button>`).join("");
+  if(!deck.length) buildDeck();
+  const el=document.getElementById("deck");
+  const top=deck.slice(0,3);
+  if(!top.length){
+    el.innerHTML=`<div class="sc" style="cursor:default;justify-content:center;align-items:center;text-align:center;padding:24px;gap:12px"><div style="font-family:var(--f-display);font-size:90px;font-weight:800;color:var(--ai-soft);line-height:1" aria-hidden="true">探</div><h3 style="margin:0">${fetching?"Dealing new cards…":"You've seen the whole deck"}</h3><div class="why muted">${fetching?"Claude is digging up places you haven't seen.":"Tap Deal more and Claude will find fresh, unique spots."}</div>${fetching?"":`<button class="btn primary" data-act="dealMore">Deal more</button>`}</div>`;
+  } else {
+    el.innerHTML=top.map((x,i)=>cardHTML(x,i===0?"":i===1?"back":"back2")).reverse().join("");
+    attachDrag(el.querySelector(`.sc:not(.back):not(.back2)`));
+  }
+  if(deck.length<4) dealMore(true);
+  renderNotes();
+}
+function attachDrag(card){
+  if(!card) return;
+  let sx=0,sy=0,dx=0,dy=0,down=false;
+  const keep=card.querySelector(".stamp.keep"), skip=card.querySelector(".stamp.skip");
+  card.addEventListener("pointerdown",e=>{ if(e.target.closest("a,button")) return; down=true; sx=e.clientX; sy=e.clientY; card.setPointerCapture(e.pointerId); card.classList.add("drag"); });
+  card.addEventListener("pointermove",e=>{ if(!down) return; dx=e.clientX-sx; dy=e.clientY-sy;
+    card.style.transform=`translate(${dx}px,${dy*0.3}px) rotate(${dx/18}deg)`;
+    keep.style.opacity=Math.max(0,Math.min(1,dx/100)); skip.style.opacity=Math.max(0,Math.min(1,-dx/100)); });
+  const end=()=>{ if(!down) return; down=false; card.classList.remove("drag");
+    if(Math.abs(dx)>110) fling(card,dx>0); else { card.style.transition="transform .25s cubic-bezier(.2,.8,.2,1)"; card.style.transform=""; keep.style.opacity=0; skip.style.opacity=0; setTimeout(()=>card.style.transition="",260);} dx=0; dy=0; };
+  card.addEventListener("pointerup",end); card.addEventListener("pointercancel",end);
+}
+function fling(card,right){
+  if(!card) return;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  card.style.transition=reduce?"opacity .15s":"transform .32s cubic-bezier(.3,.7,.4,1), opacity .32s";
+  card.style.transform=reduce?"":`translate(${right?520:-520}px,40px) rotate(${right?22:-22}deg)`;
+  card.style.opacity="0";
+  card.querySelector(right?".stamp.keep":".stamp.skip").style.opacity=1;
+  setTimeout(()=>decide(right),reduce?150:300);
+}
+function decide(right){
+  const x=deck.shift(); if(!x) return;
+  if(right){ state.swipe.kept.unshift({id:x.id,name:x.name,area:x.area,kind:x.kind,why:x.why,tip:x.tip,q:x.q,img:x.img||"",note:"",ts:Date.now()}); toast(`Kept: ${x.name}`); }
+  else state.swipe.passed.push(x.id);
+  lastSwipe={x,right};
+  save(); renderDeck();
+}
+function swipeTop(right){ const c=document.querySelector("#deck .sc:not(.back):not(.back2)[data-card]"); if(c) fling(c,right); }
+function undo(){
+  if(!lastSwipe) { toast("Nothing to undo"); return; }
+  const {x,right}=lastSwipe; lastSwipe=null;
+  if(right) state.swipe.kept=state.swipe.kept.filter(k=>k.id!==x.id); else state.swipe.passed=state.swipe.passed.filter(id=>id!==x.id);
+  deck.unshift(x); save(); renderDeck();
+}
+const CENTERS=[["Asakusa",35.7148,139.7967],["Ueno",35.7138,139.7773],["Yanaka",35.7258,139.7668],["Ryogoku",35.6963,139.793],["Kiyosumi",35.6806,139.799],["Nihonbashi",35.684,139.7745],["Kanda",35.6918,139.7709],["Ginza",35.6717,139.765],["Shibuya",35.658,139.7016],["Shinjuku",35.69,139.7],["Koenji",35.7052,139.6496],["Kichijoji",35.703,139.5795],["Shimokitazawa",35.6616,139.668],["Setagaya",35.6431,139.653],["Meguro",35.634,139.7158],["Shibamata",35.7584,139.877],["Kita-Senju",35.7494,139.8048],["Akabane",35.7778,139.721],["Ikebukuro",35.7295,139.7109],["Kagurazaka",35.7019,139.7404],["Tsukishima",35.663,139.782],["Odaiba",35.6267,139.776],["Kamakura",35.3192,139.5467],["Yokohama",35.4437,139.638],["Kawagoe",35.9251,139.4858],["Nikko",36.75,139.6],["Hakone",35.2324,139.1069],["Kawaguchiko",35.517,138.752],["Mt Takao",35.625,139.2436],["Chichibu",35.9917,139.0856],["Yanaka",35.7232,139.7699],["Mukojima",35.7172,139.8098],["Fukagawa",35.6735,139.7955]];
+const SKIP_RE=/station|railway| line\b|school|university|college|hospital|expressway|route \d|interchange|junction|embassy|bank|corporation|company|headquarters|ward office|police|fire station|post office|apartment|kindergarten|court|prison|library|power plant|dam\b|substation|stadium|(^|\s)(the )?list of/i;
+function guessKind(t,x){ const s=(t+" "+x).toLowerCase();
+  if(/temple|shrine|-ji\b|jinja|pagoda|cathedral|church|mosque/.test(s)) return "culture";
+  if(/garden|park|forest|mount|river|lake|valley|falls|island|beach/.test(s)) return "nature";
+  if(/museum|gallery|art/.test(s)) return "culture";
+  if(/market|shopping|street|yokoch|arcade|ginza/.test(s)) return "market";
+  if(/onsen|bath|spa|sento/.test(s)) return "bath";
+  if(/tower|observ|bridge|view/.test(s)) return "view";
+  if(/restaurant|food|ramen|sushi|sake|brewery|bar\b/.test(s)) return "eat";
+  if(/theat|kabuki|hall|club|live/.test(s)) return "night";
+  return "odd"; }
+async function dealWiki(){
+  const c=CENTERS[Math.floor(Math.random()*CENTERS.length)];
+  const lat=c[1]+(Math.random()-.5)*.02, lon=c[2]+(Math.random()-.5)*.02, rad=1500+Math.floor(Math.random()*4500);
+  const url=`https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&origin=*&generator=geosearch&ggscoord=${lat.toFixed(5)}|${lon.toFixed(5)}&ggsradius=${rad}&ggslimit=50&ggsnamespace=0&prop=pageimages|extracts&piprop=thumbnail&pithumbsize=900&pilimit=50&exintro=1&explaintext=1&exsentences=2&exlimit=20`;
+  const r=await fetch(url); if(!r.ok) throw new Error("wiki "+r.status); const j=await r.json();
+  const have=new Set(allPool().map(x=>x.name.toLowerCase()));
+  return ((j.query&&j.query.pages)||[]).filter(pg=>pg.thumbnail&&pg.extract&&pg.extract.length>60&&!SKIP_RE.test(pg.title)&&!have.has(pg.title.toLowerCase())).map(pg=>({
+    id:"w-"+pg.pageid,name:pg.title,area:c[0],kind:guessKind(pg.title,pg.extract),why:pg.extract.replace(/\s*\([^)]*\)/g,"").slice(0,230),
+    tip:`Near ${c[0]}. Look it up on Maps for hours and how to get there.`,q:pg.title+" "+c[0],gen:true,src:"wiki",img:pg.thumbnail.source,imgTitle:pg.title}));
+}
+async function dealMore(silent){
+  if(fetching) return;
+  if(!IN_CLAUDE){
+    fetching=true; document.getElementById("deckMsg").textContent="Finding more places…";
+    try{
+      let fresh=[];
+      for(let tries=0;tries<4&&fresh.length<6;tries++){ const got=await dealWiki(); const ids=new Set(fresh.map(f=>f.id)); fresh.push(...got.filter(g=>!ids.has(g.id))); }
+      fresh=shuffle(fresh).slice(0,14);
+      state.swipe.gen.push(...fresh); if(state.swipe.gen.length>400) state.swipe.gen=state.swipe.gen.slice(-400);
+      const ok=SW_KINDS[swFilter]; deck.push(...fresh.filter(x=>!ok||ok.includes(x.kind))); save();
+      document.getElementById("deckMsg").textContent=fresh.length?"More places dealt. Arrow keys work: ← skip, → keep.":"Couldn't find new places just now. Tap Deal more.";
+    }catch(e){ document.getElementById("deckMsg").textContent="You look offline. Tap Deal more when you're back online."; }
+    fetching=false; if(current==="swipe") renderDeck(); return;
+  }
+  const sample = window.claude && window.claude.use ? await window.claude.use("sample") : null;
+  if(!sample){ if(!silent){ document.getElementById("deckMsg").textContent="Fresh cards need Claude, which isn't available in this view. Reset skipped cards to see them again."; } return; }
+  fetching=true; document.getElementById("deckMsg").textContent="Claude is dealing fresh cards…";
+  if(!deck.length) renderDeck();
+  const seen=allPool().map(x=>x.name).slice(-220).join("; ");
+  const focus=swFilter==="All"?"any mix of food, drink, odd museums, crafts, neighborhoods, nature, nightlife, markets, baths and day trips":`only this kind: ${swFilter}`;
+  const prompt=`You are a Tokyo regular who has been visiting for 15 years. Suggest 8 REAL places or experiences in or near Tokyo for a traveler staying at Azumabashi, Sumida (by Asakusa) from Dec 15–31, 2026. They love biking, good food that isn't touristy, and unique, specific experiences. Focus: ${focus}. Prefer specific named places over generic categories, favour lesser-known spots, and make each one feel different from the others. Each must actually exist; do not invent places. Do NOT repeat any of these: ${seen}.
+Reply with only a JSON array of 8 objects: {"name": string, "area": string (neighborhood), "kind": one of ["eat","drink","coffee","sweet","market","bath","craft","view","night","culture","shop","odd","nature","trip","ride","lights"], "why": string (max 30 words, concrete), "tip": string (max 22 words, practical local advice incl. December or year-end closures if relevant), "q": string (Google Maps search query)}.
+Example: [{"name":"Gotokuji","area":"Setagaya","kind":"odd","why":"Temple crowded with thousands of lucky-cat figurines.","tip":"Take the Setagaya tram; go early on a weekday.","q":"Gotokuji Temple"}]`;
+  try{
+    const arr = await sample.json(prompt,{modelTier:"default",cache:false});
+    const have=new Set(allPool().map(x=>x.name.toLowerCase()));
+    const fresh=(Array.isArray(arr)?arr:[]).filter(o=>o&&typeof o.name==="string"&&o.name&&!have.has(o.name.toLowerCase())).map(o=>({id:"g-"+uid(),name:String(o.name).slice(0,80),area:String(o.area||"Tokyo").slice(0,60),kind:SEALS[o.kind]?o.kind:"odd",why:String(o.why||"").slice(0,240),tip:String(o.tip||"").slice(0,200),q:String(o.q||o.name).slice(0,100),gen:true}));
+    state.swipe.gen.push(...fresh);
+    if(state.swipe.gen.length>400) state.swipe.gen=state.swipe.gen.slice(-400);
+    const ok=SW_KINDS[swFilter];
+    deck.push(...fresh.filter(x=>!ok||ok.includes(x.kind)));
+    save();
+    document.getElementById("deckMsg").textContent=fresh.length?`${fresh.length} fresh cards dealt. Arrow keys work: ← skip, → keep.`:"No new ones that time. Tap Deal more to try again.";
+  }catch(e){
+    const msg = e && e.code==="rate_limited" ? "Claude needs a breather. Try again in a minute." : e && e.code==="not_granted" ? "Allow Claude for this page to get fresh cards." : "Couldn't deal new cards. Tap Deal more to try again.";
+    document.getElementById("deckMsg").textContent=msg;
+  }
+  fetching=false;
+  if(current==="swipe") renderDeck();
+}
+function renderNotes(){
+  const k=state.swipe.kept;
+  document.getElementById("keptCount").textContent=k.length;
+  document.getElementById("notes").innerHTML=k.length?k.map(n=>`<div class="note">
+    <div class="h"><b>${esc(n.name)}</b><span class="muted" style="font-size:12px">${esc(n.area)}</span></div>
+    <textarea data-note="${esc(n.id)}" placeholder="Notes: who to go with, what to order, which day…" aria-label="Notes for ${esc(n.name)}">${esc(n.note||"")}</textarea>
+    <div class="tools"><a class="btn" href="${maps(n.q||n.name)}" target="_blank" rel="noopener">Directions</a><button class="btn" data-act="plan" data-name="${esc(n.name)}" data-cat="${kindToCat(n.kind)}" data-q="${esc(n.q||"")}" data-noteid="${esc(n.id)}">Plan it</button><button class="btn ghost danger" data-act="unkeep" data-id="${esc(n.id)}">Remove</button></div>
+  </div>`).join(""):`<div class="empty">Swipe right on anything that sounds good. It'll land here with space for your notes.</div>`;
+  const rst = state.swipe.passed.length ? `<div class="rowend"><button class="btn ghost" data-act="resetPassed">Bring back ${state.swipe.passed.length} skipped</button></div>` : "";
+  document.getElementById("notes").insertAdjacentHTML("beforeend",rst);
+}
+
+/* ---------------- ask ---------------- */
+const ASK_CHIPS=["It's raining tomorrow, what should I do near the hotel?","Best cheap dinner within 15 min of Azumabashi tonight?","Plan me a loose day for Dec 31","A day trip with snow that's doable in a day?","Where can I ride a bike with a Fuji view?","What's still open on Dec 30 for dinner?"];
+let askCtl=null;
+async function ask(q){
+  const out=document.getElementById("answer");
+  const sample = window.claude && window.claude.use ? await window.claude.use("sample") : null;
+  if(!sample){ out.innerHTML=`Asking needs the Claude version of this app. <a href="${CLAUDE_URL}" target="_blank" rel="noopener">Open it on claude.ai</a> (same tabs, plus Claude), or <a href="https://www.google.com/search?q=${encodeURIComponent(q+" Tokyo")}" target="_blank" rel="noopener">search Google for this</a>.`; return; }
+  if(askCtl) askCtl.abort(); askCtl=new AbortController();
+  const b=budgetNums();
+  const plans=state.events.map(e=>`${e.date.slice(5)} ${e.time||""} ${e.title}`).join("; ")||"none yet";
+  const kept=state.swipe.kept.slice(0,25).map(k=>k.name).join(", ")||"none yet";
+  const prompt=`You're a warm, plain-spoken friend who has visited Tokyo many times. Help this traveler.
+Context: Staying at 1-8-9 Azumabashi, Sumida-ku (east bank of the Sumida across Azuma-bashi from Asakusa, by the Asahi beer tower; nearest stations Honjo-azumabashi on the Toei Asakusa line and Asakusa). Trip Dec 15–31, 2026. Today in Tokyo is ${jstToday()}. Loves biking, good food that isn't touristy, unique experiences, open to day trips. Cash left about ${yen(b.left)}, roughly ${yen(b.forward)} a day from here. Calendar: ${plans}. Kept ideas: ${kept}.
+Rules: under 220 words. Name specific real places with neighborhood, rough travel time from the hotel and yen prices. Mention year-end closures (about Dec 29–Jan 3) when relevant. You have no live data, so say when they should check hours or weather. No markdown headings; short paragraphs or a tight list.
+Question: ${q}`;
+  out.textContent="Thinking…";
+  try{
+    await sample(prompt,{cache:false,signal:askCtl.signal,onText:({text})=>{out.textContent=text;}}).then(r=>{ if(r && r.text) out.textContent=r.text; });
+  }catch(e){
+    if(e && e.name==="AbortError") return;
+    out.textContent = e && e.code==="rate_limited" ? "Too many questions at once. Give it a minute." : e && e.code==="not_granted" ? "Allow Claude for this page to ask questions." : (e && e.text) || "Couldn't get an answer. Try again.";
+  }
+}
+
+/* ---------------- events ---------------- */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-tab],[data-act],[data-day],[data-openday],[data-swf]"); if(!t) return;
+  if(t.dataset.tab){ closeModal(); show(t.dataset.tab); window.scrollTo({top:0}); return; }
+  if(t.dataset.day){ viewDay=t.dataset.day; renderToday(); return; }
+  if(t.dataset.openday){ openDay(t.dataset.openday); return; }
+  if(t.dataset.swf){ swFilter=t.dataset.swf; deck=[]; renderDeck(); return; }
+  const a=t.dataset.act;
+  if(a==="scrim"){ if(e.target===t) closeModal(); return; }
+  if(a==="close") return closeModal();
+  if(a==="more") return openMore();
+  if(a==="copyBackup"){ const txt=JSON.stringify(state); const box=document.getElementById("backupBox"); box.value=txt; const done=()=>toast("Backup copied"); try{ navigator.clipboard.writeText(txt).then(done,()=>{box.select();toast("Backup is in the box. Copy it from there");}); }catch(err){ box.select(); toast("Backup is in the box. Copy it from there"); } return; }
+  if(a==="restoreBackup"){ const box=document.getElementById("backupBox"); try{ const s=JSON.parse(box.value); if(!s||typeof s!=="object"||!Array.isArray(s.events)) throw 0; state=normalize(s); save(); deck=[]; renderAll(); toast("Restored"); box.value=""; }catch(err){ toast("That doesn't look like a backup. Paste the whole text."); } return; }
+  if(a==="addDay") return openDay(current==="today"?viewDay:defaultDay());
+  if(a==="plan"){ let note=""; if(t.dataset.noteid){ const n=state.swipe.kept.find(k=>k.id===t.dataset.noteid); note=n&&n.note||""; } return openDay(t.dataset.date||defaultDay(),{title:t.dataset.name,cat:t.dataset.cat,note}); }
+  if(a==="save"){ const id=t.dataset.id; state.saved=state.saved.includes(id)?state.saved.filter(x=>x!==id):[...state.saved,id]; save(); renderEat(); renderDo(); renderTrips(); return; }
+  if(a==="editEv"){ const ev=state.events.find(x=>x.id===t.dataset.id); if(!ev) return; const f=document.getElementById("evForm"); f.outerHTML=eventForm(ev); document.getElementById("evTitle").focus(); return; }
+  if(a==="cancelEdit"){ openDay(t.dataset.date); return; }
+  if(a==="delEv"){ if(t.dataset.armed!=="1"){ t.dataset.armed="1"; t.textContent="Tap again"; setTimeout(()=>{t.dataset.armed="";t.textContent="Delete";},2500); return; } const ev=state.events.find(x=>x.id===t.dataset.id); state.events=state.events.filter(x=>x.id!==t.dataset.id); save(); renderCal(); renderToday(); if(ev) openDay(ev.date); toast("Deleted"); return; }
+  if(a==="quick"){ addExp(+t.dataset.amt,t.dataset.cat,document.getElementById("expDate").value,t.dataset.note); return; }
+  if(a==="delExp"){ state.expenses=state.expenses.filter(x=>x.id!==t.dataset.id); save(); renderBudget(); renderToday(); return; }
+  if(a==="swYes") return swipeTop(true);
+  if(a==="swNo") return swipeTop(false);
+  if(a==="swUndo") return undo();
+  if(a==="dealMore") return dealMore(false);
+  if(a==="unkeep"){ state.swipe.kept=state.swipe.kept.filter(k=>k.id!==t.dataset.id); save(); renderNotes(); return; }
+  if(a==="resetPassed"){ state.swipe.passed=[]; deck=[]; save(); renderDeck(); toast("Skipped cards are back in the deck"); return; }
+  if(a==="ask"){ document.getElementById("askIn").value=t.dataset.q; ask(t.dataset.q); return; }
+});
+document.addEventListener("submit",e=>{
+  if(e.target.id!=="evForm") return; e.preventDefault();
+  const f=e.target, id=f.dataset.id;
+  const ev={id:id||uid(),title:document.getElementById("evTitle").value.trim(),date:document.getElementById("evDate").value,time:document.getElementById("evTime").value,cat:document.getElementById("evCat").value,cost:document.getElementById("evCost").value,note:document.getElementById("evNote").value.trim()};
+  if(!ev.title) return;
+  if(id) state.events=state.events.map(x=>x.id===id?ev:x); else state.events.push(ev);
+  save(); renderCal(); renderToday(); openDay(ev.date); toast(id?"Saved":`Added to Dec ${dnum(ev.date)}`);
+});
+document.addEventListener("change",e=>{
+  if(e.target.dataset.check){ state.checks[e.target.dataset.check]=e.target.checked; save(); renderToday(); }
+});
+let noteTimer=null;
+document.addEventListener("input",e=>{
+  if(e.target.dataset.note===undefined) return;
+  const n=state.swipe.kept.find(k=>k.id===e.target.dataset.note); if(!n) return;
+  n.note=e.target.value; clearTimeout(noteTimer); noteTimer=setTimeout(save,500);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape" && document.getElementById("modalRoot").innerHTML) return closeModal();
+  if(current!=="swipe" || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) || document.getElementById("modalRoot").innerHTML) return;
+  if(e.key==="ArrowRight"){ e.preventDefault(); swipeTop(true); }
+  if(e.key==="ArrowLeft"){ e.preventDefault(); swipeTop(false); }
+});
+document.getElementById("askForm").addEventListener("submit",e=>{e.preventDefault(); const q=document.getElementById("askIn").value.trim(); if(q) ask(q);});
+document.getElementById("askChips").innerHTML=ASK_CHIPS.map(q=>`<button class="chip" data-act="ask" data-q="${esc(q)}">${esc(q)}</button>`).join("");
+
+/* ---------------- clock ---------------- */
+function tick(){
+  const now=new Date();
+  document.getElementById("clock").textContent=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Tokyo",hour:"2-digit",minute:"2-digit"}).format(now);
+  document.getElementById("clockDate").textContent=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Tokyo",weekday:"short",month:"short",day:"numeric"}).format(now)+" · JST";
+}
+tick(); setInterval(tick,15000);
+
+function renderAll(){ renderToday(); renderEat(); renderDo(); renderTrips(); renderRide(); renderCal(); renderBudget(); renderLive(); if(current==="swipe"){ deck=[]; renderDeck(); } else renderNotes(); }
+initBudgetForm();
+renderAll();
+let start="today"; const h=(location.hash||"").slice(1); if(h) start=h; else { try{ start=localStorage.getItem("azb-tab")||"today"; }catch(e){} }
+show(start);
+connect();
+loadImages();
+})();
+</script>
+
+</body>
+</html>
