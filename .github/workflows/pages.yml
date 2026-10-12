@@ -22,6 +22,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Stamp version
+        run: |
+          VER="$(date -u +%Y.%m.%d.%H%M)-${GITHUB_SHA::7}"
+          sed -i "s/__BUILD__/$VER/g" index.html sw.js
+          NOTES="$(git log -1 --pretty=%s)" VER="$VER" python3 -c 'import json,os; print(json.dumps({"version": os.environ["VER"], "notes": os.environ["NOTES"][:90]}))' > version.json
+          cat version.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
