@@ -4,9 +4,10 @@ A Tokyo trip companion for Dec 15–31, 2026, built around a home base at Azumab
 
 **Live site:** https://smaxhy.github.io/japan/
 
-- **Discover:** full-screen swipe cards. 150+ hand-picked spots (including 45 rural and unusual day trips), then an endless feed of real places: Google Places (ratings, English and Japanese reviews) when a key is added in More → Power-ups, otherwise Wikipedia. Filter by type and by where: anywhere, near me (GPS), near the hotel, Tokyo, countryside or one of 78 named areas. Tap a card for what you'll find there, written by Claude from the reviews when an Anthropic key is added.
-- **Eat / Do / Ride / Day trips:** local-favorite food, December events, bike loops from the hotel, and day trips, with photos and one-tap Google Maps directions from the hotel.
-- **Calendar:** Dec 15–31 planner with city events marked.
+- **Discover:** full-screen photo cards from a library of about 240 hand-picked places (must-sees, culture, nights out, rural day trips, food and local gems), each with what to expect, time needed, cost and best time. Tap for a photo gallery of the actual place, nearby picks and, with keys added, Google ratings, English and Japanese reviews and a Claude-written guide. With a Google key the deck also pulls unlimited top-rated places (4.2★+) around you or any of 70 areas.
+- **Explore:** every place in one searchable list with category filters, sorted by distance from the hotel or from you.
+- **Plan:** day-by-day planner with morning/afternoon/evening/night slots, two-tap adding from any card, walking times between stops, a day route in Google Maps and ideas from your notebook that fit the day.
+- **Ride / Day trips:** bike loops from the hotel and day-trip guides.
 - **Cash:** a yen budget for the trip's cash, with a daily allowance and spending log.
 - **Live:** links to live weather, train status and events.
 
