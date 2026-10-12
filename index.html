@@ -705,6 +705,96 @@ details.bg summary{font-size:13px;color:var(--muted);font-weight:700}
   .round{width:50px;height:50px}.round.yes{width:58px;height:58px}.round.undo,.round.info{width:40px;height:40px}
   .sc .ov .why,.sc .exp li:nth-child(2){display:none}
 }
+/* v5: where label, explore area, auto-planner */
+.wherepill #swWhereLbl{padding-right:22px;white-space:nowrap;max-width:46vw;overflow:hidden;text-overflow:ellipsis;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 10px) 9px,calc(100% - 5px) 9px;background-size:5px 5px;background-repeat:no-repeat;line-height:22px}
+.wherepill select{position:absolute;inset:0;width:100%;max-width:none!important;opacity:0;padding:0}
+.phr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.apbtn{gap:6px;font-weight:700}
+.apbtn .spark{color:var(--gold)}
+.ptheme{margin-top:6px;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--plum)}
+.apcall{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;margin:0 0 14px;padding:14px 16px;border-radius:18px;background:linear-gradient(120deg,var(--night),var(--night2));color:var(--nightink)}
+.apcall b{display:block;font-family:var(--f-display);font-size:18px;color:#fff}
+.apcall small{color:rgba(233,235,247,.75);font-size:13px}
+.apcall .btn{background:var(--gold);border-color:var(--gold);color:#1A1406;font-weight:700}
+.nbhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.modal.apm{width:min(640px,100%)}
+.ap .aph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.ap .aph>div:first-child{min-width:0;flex:1}
+.ap h3{font-size:24px}
+.apintro{margin:0 0 14px;font-size:14.5px;color:var(--muted)}
+.apintro b{color:var(--ink)}
+.apq{margin:14px 0}
+.apq .label small{text-transform:none;letter-spacing:0;font-weight:500;margin-left:6px}
+.apseg{display:grid;gap:6px;margin-top:6px}
+.apo{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;padding:9px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;transition:transform .14s var(--ease-out),background .2s,border-color .2s}
+.apo b{font-size:14px}
+.apo small{font-size:11px;color:var(--muted);line-height:1.3;white-space:nowrap}
+.apo:active{transform:scale(.97)}
+.apo.on{background:var(--ai);border-color:var(--ai);color:#fff}
+.apo.on small{color:rgba(255,255,255,.82)}
+.apfree .qd.on{background:var(--plum);border-color:var(--plum)}
+.aptog{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:14px;margin:14px 0;cursor:pointer;background:var(--paper)}
+.aptog input{margin-top:4px;width:18px;height:18px;accent-color:var(--ai);flex:none}
+.aptog span{min-width:0;flex:1}
+.aptog b{display:block;font-size:14.5px}
+.aptog small{display:block;color:var(--muted);font-size:12.5px;white-space:normal;overflow:visible;margin:0}
+.apgo{margin-top:4px}
+.apbusy{display:grid;place-items:center;gap:12px;padding:46px 0 34px;text-align:center}
+.apbusy .spinner{border-color:var(--line);border-top-color:var(--ai);width:34px;height:34px}
+.apbar{height:6px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:10px;max-width:260px}
+.apbar i{display:block;height:100%;background:linear-gradient(90deg,var(--ai),var(--plum));border-radius:99px;transition:width .35s var(--ease-out)}
+.apcard{border:1px solid var(--line);border-radius:20px;padding:18px;background:var(--paper);animation:apIn .38s var(--ease-out)}
+@keyframes apIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.apic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:22px;color:var(--plum);border:1.5px solid var(--plum);transform:rotate(-4deg);margin-bottom:12px;background:var(--card)}
+.apcard h3{font-size:21px;line-height:1.25}
+.apcard p{margin:8px 0 0;font-size:14.5px;color:var(--muted)}
+.aplist{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.apr{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 10px 6px 6px}
+.apr.out{opacity:.7}
+.apth{width:46px;height:46px;border-radius:10px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,var(--ai-soft),var(--plum-soft));font-family:var(--f-display);font-weight:800;color:var(--ai);flex:none}
+.apth img{width:100%;height:100%;object-fit:cover}
+.aptx{min-width:0;display:flex;flex-direction:column}
+.aptx b{font-size:14px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.aptx small{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.aptx em{font-style:normal;color:var(--plum);font-weight:700}
+.apwhen{text-align:right;font-family:var(--f-mono);font-size:13px;font-weight:600;line-height:1.2;white-space:nowrap}
+.apwhen small{display:block;font-family:var(--f-body);font-size:11px;color:var(--muted);font-weight:500}
+.apmore{font-size:13px;color:var(--muted);text-align:center;padding:4px}
+.apyn{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-top:14px;position:sticky;bottom:0;background:var(--card);padding-top:8px}
+.apnotes{border-left:3px solid var(--gold);background:var(--yuzu-soft);border-radius:0 12px 12px 0;padding:8px 12px;margin:6px 0 14px}
+.apnotes p{margin:3px 0;font-size:13px}
+.apdays{display:flex;flex-direction:column;gap:10px}
+.apday{border:1px solid var(--line);border-radius:16px;padding:10px 12px;background:var(--paper)}
+.apday header{display:flex;align-items:center;gap:10px}
+.apdn{display:flex;flex-direction:column;align-items:center;min-width:38px;line-height:1.05}
+.apdn b{font-family:var(--f-mono);font-size:19px}
+.apdn small{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.apdt{font-weight:700;font-size:14.5px;min-width:0}
+.apday.trip{border-color:var(--plum);background:var(--plum-soft)}
+.apday.trip .apdt{color:var(--plum)}
+.apday.empty .apdt,.apday.free .apdt{color:var(--muted);font-weight:500}
+.apday ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.apday li{display:grid;grid-template-columns:42px minmax(0,1fr) 34px;gap:10px;align-items:center;background:var(--card);border-radius:12px;padding:5px 5px 5px 5px;border:1px solid var(--line)}
+.apday li .apth{width:42px;height:42px}
+.apday li.man{border-style:dashed}
+.apx{width:34px;height:34px;border-radius:10px;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:15px}
+.apx:hover{background:var(--paper);color:var(--alarm)}
+.aplock{width:34px;text-align:center;color:var(--moss);font-weight:700}
+.apun{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.aprefine{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.aprow{display:flex;gap:8px;margin-top:6px}
+.aprow input{flex:1;min-width:0;height:44px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:0 12px;font-size:15px}
+.apfoot{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;position:sticky;bottom:0;background:var(--card);padding:12px 0 2px;margin-top:14px;border-top:1px solid var(--line)}
+@media (max-width:760px){
+  .ap h3{font-size:21px}
+  .apcard{padding:15px}
+  .apcard h3{font-size:19px}
+  .phr{width:100%}
+  .phr .apbtn{flex:1;justify-content:center}
+  .phr .seg{flex:1.4;width:auto}
+  .apyn,.apfoot{padding-bottom:calc(4px + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion: reduce){ .apcard{animation:none} }
 </style>
 <style>.mast{padding-top:env(safe-area-inset-top,0px)}</style>
 </head>
@@ -790,7 +880,7 @@ details.bg summary{font-size:13px;color:var(--muted);font-weight:700}
     <button class="nbpill" data-act="notebook" aria-label="Open notebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h11a2 2 0 012 2v14a2 2 0 01-2 2H6z"/><path d="M6 3v18M9.5 8h6M9.5 12h6"/></svg><b class="nbcount">0</b></button>
   </div>
   <div class="sw-controls">
-    <label class="wherepill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11.3A6.5 6.5 0 0112 3.2a6.5 6.5 0 016.5 6.5C18.5 14.8 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.3"/></svg><span class="sr">Where</span><select id="swWhere" aria-label="Where to discover"></select></label>
+    <label class="wherepill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11.3A6.5 6.5 0 0112 3.2a6.5 6.5 0 016.5 6.5C18.5 14.8 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.3"/></svg><span class="sr">Where</span><span id="swWhereLbl" aria-hidden="true">Anywhere</span><select id="swWhere" aria-label="Where to discover"></select></label>
     <div class="chips" id="swFilters"></div>
   </div>
   <div class="swipe">
@@ -806,7 +896,7 @@ details.bg summary{font-size:13px;color:var(--muted);font-weight:700}
       <div class="deckmsg" id="deckMsg">Arrow keys work too: ← skip, → keep, ↑ details.</div>
     </div>
     <aside class="panel nbpanel">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3>Notebook</h3><span class="mono muted" id="keptCount">0</span></div>
+      <div class="nbhead"><h3>Notebook <span class="mono muted" id="keptCount" style="font-size:15px">0</span></h3><button class="btn small" data-act="autoplan">✦ Plan these</button></div>
       <div class="notes" id="notes"></div>
     </aside>
   </div>
@@ -848,7 +938,7 @@ details.bg summary{font-size:13px;color:var(--muted);font-weight:700}
 </section>
 
 <section id="t-cal" role="tabpanel" hidden>
-  <div class="plan-head"><div><h2>Plan</h2><p class="muted" id="planSum"></p></div><div class="seg" id="planMode"><button data-pm="day" class="on">Day by day</button><button data-pm="overview">Overview</button></div></div>
+  <div class="plan-head"><div><h2>Plan</h2><p class="muted" id="planSum"></p></div><div class="phr"><button class="btn primary apbtn" data-act="autoplan"><span class="spark" aria-hidden="true">✦</span>Auto-plan</button><div class="seg" id="planMode"><button data-pm="day" class="on">Day by day</button><button data-pm="overview">Overview</button></div></div></div>
   <div class="pdays" id="pdays"></div>
   <div id="planDay"></div>
   <div id="planOverview" hidden>
@@ -861,6 +951,7 @@ details.bg summary{font-size:13px;color:var(--muted);font-weight:700}
 <section id="t-explore" role="tabpanel" hidden>
   <div class="sec-head"><div><h2>Explore</h2><p>Every hand-picked place in one list: must-sees, culture, nights out, rural escapes, food and local gems. Tap one for photos and what to expect, or add it straight to a day.</p></div></div>
   <div class="exbar"><div class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="exQ" type="search" placeholder="Search places, areas, ramen, jazz, onsen…" autocomplete="off"></div>
+    <label class="sortsel"><span class="sr">Area</span><select id="exRegion" aria-label="Area"></select></label>
     <label class="sortsel"><span class="sr">Sort</span><select id="exSort"><option value="near">Closest to the hotel</option><option value="me">Closest to me</option><option value="locals">Locals' favorites first</option><option value="icons">Must-sees first</option></select></label></div>
   <div class="chips exchips" id="exCats"></div>
   <div class="excount muted" id="exCount"></div>
@@ -940,6 +1031,7 @@ details.bg summary{font-size:13px;color:var(--muted);font-weight:700}
 <div id="updRoot"></div>
 <nav class="bnav" id="bnav" aria-label="Sections"></nav>
 
+<script src="places.js?v=__BUILD__"></script>
 <script>
 (() => {
 "use strict";
@@ -1654,6 +1746,14 @@ const COORDS={yadoroku:[35.7135,139.7935],kamiya:[35.7108,139.7975],yoshikami:[3
 const LOVE={yadoroku:"Locals",pelican:"Locals",leaves:"Locals",isegen:"Locals",botan:"Locals",matsuya:"Locals",takemura:"Locals",lambre:"Locals",uogashi:"Locals",marumasu:"Locals",fukagawa:"Locals",kiyosumicoffee:"Locals",bondy:"Locals",sankaku:"Locals",torikizoku:"Locals",jakotsuyu:"Locals",mikokuyu:"Locals",somei:"Locals",kiriko:"Locals",kuramae:"Locals",asahi:"Locals",shibamata:"Locals",koenji:"Locals",kiyosumigarden:"Locals",boroichi:"Locals",hagoita:"Locals",ghibli:"Tourists",teamlab:"Tourists",sumo:"Tourists",mokuhankan:"Tourists",tsukiji:"Both",kawaguchiko:"Both",hakone:"Tourists",nikko:"Both",kamakura:"Both",kyojima:"Locals",chureito:"Tourists"};
 const ICONS=new Set(["tsukiji","kabuki","teamlab","ghibli","nikko","kamakura","hakone","kawaguchiko","takao","ameyoko","marunouchi","sumo","yanesen","shibamata"]);
 
+/* ================= v5: ~700 more hand-checked places, grouped into 29 regions (places.js) ================= */
+const V5=window.AZB_V5||{regions:[],centers:[],assign:{},rows:[]};
+const V5_LET={i:"icon",c:"culture",n:"night",r:"rural",f:"food",l:"local",o:"onsen",s:"shop",d:"december"}, V5_LOVE={L:"Locals",T:"Tourists",B:"Both"};
+const REGIONS=V5.regions.map(r=>({id:r[0],name:r[1],ja:r[2],lat:r[3],lng:r[4],rural:!!r[5]}));
+const REGION_BY_ID=new Map(REGIONS.map(r=>[r.id,r]));
+const V5_ROWS=V5.rows.map(r=>({region:r[0],id:r[1],name:r[2],jp:r[3],area:r[4],cats:String(r[5]).split(",").map(c=>V5_LET[c]).filter(Boolean),kind:r[6],love:V5_LOVE[r[7]]||"Both",lat:r[8],lng:r[9],time:r[10],cost:r[11],best:r[12],why:r[13],expect:String(r[14]).split("|"),tip:r[15],w:r[16]}));
+const regionName=id=>(REGION_BY_ID.get(id)||{}).name||"";
+
 /* ================= places: build one library from every list ================= */
 const RURAL_IMG = {okutamalake:["Lake Okutama","Ogōchi Dam"],nippara:["Nippara Limestone Cave","Nippara Cave"],hatonosu:["Hatonosu Station","Okutama, Tokyo"],mitake:["Musashi-Mitake Shrine","Mount Mitake (Tokyo)"],hossawa:["Hossawa Falls","Hinohara, Tokyo"],akigawa:["Akigawa Valley","Akiruno, Tokyo"],sawanoi:["Sawanoi","Ōme, Tokyo"],jinba:["Mount Jinba"],nagatoro:["Nagatoro, Saitama"],ogawawashi:["Hosokawa-shi","Washi"],yoshimi:["Yoshimi Hyakuana"],gaikaku:["Metropolitan Area Outer Underground Discharge Channel"],jogashima:["Jōgashima","Misaki, Kanagawa"],sarushima:["Sarushima"],oyama:["Mount Ōyama (Kanagawa)","Ōyama Afuri Shrine"],miyagase:["Lake Miyagase","Miyagase Dam"],manazuru:["Manazuru, Kanagawa"],iwaya:["Enoshima"],tenen:["Kenchō-ji","Kamakura"],dobuita:["Dobuita Street","Yokosuka, Kanagawa"],nokogiri:["Mount Nokogiri","Nihon-ji"],yoro:["Yōrō Valley","Ōtaki, Chiba"],kominato:["Kominato Railway","Isumi Railway"],choshi:["Inubōsaki Lighthouse","Chōshi Electric Railway"],narita:["Naritasan Shinshō-ji"],ashio:["Ashio Copper Mine"],oya:["Ōya History Museum","Ōya stone"],mashiko:["Mashiko ware","Mashiko, Tochigi"],ryujin:["Ryūjin Suspension Bridge","Ryūjin Gorge"],fukuroda:["Fukuroda Falls"],ushiku:["Ushiku Daibutsu"],tomioka:["Tomioka Silk Mill"],ikaho:["Ikaho Onsen"],oshino:["Oshino Hakkai"],shosenkyo:["Shōsenkyō"],fujiyoshida:["Fujiyoshida","Arakurayama Sengen Park"],jogasaki:["Jōgasaki Coast"],shuzenji:["Shuzen-ji","Shuzenji Onsen"],oshima:["Izu Ōshima","Mount Mihara"],takahata:["Takahata Fudō"],sunamachi:["Sunamachi Ginza"],togoshi:["Togoshi Ginza"],tachibana:["Kyōjima"]};
 Object.assign(IMG, RURAL_IMG);
@@ -1680,16 +1780,29 @@ function toPlace(x,src){
   if(love==="Locals") cats.add("local");
   if(ICONS.has(x.id)) cats.add("icon");
   if(x.dates||x.kind==="lights") cats.add("december");
+  const reg=x.region||V5.assign[x.id]||null; if(reg&&(REGION_BY_ID.get(reg)||{}).rural) cats.add("rural");
   const w=x.w||(IMG[x.id]&&IMG[x.id][0])||"";
   if(w && !IMG[x.id]) IMG[x.id]=[w];
   let expect=x.expect||x.find||null, derived=false;
   if(!expect||!expect.length){ expect=String(x.why||"").split(/(?<=[.!?])\s+(?=[A-Z])/).map(t=>t.replace(/\.$/,"").trim()).filter(t=>t.length>8); if(x.when&&!/^Any/i.test(x.when)) expect.push(`On: ${x.when}`); derived=expect.length>0; }
   return {id:x.id,name:x.name,jp:x.jp||"",area:x.area,kind:x.kind,cats:[...cats],love,lat:c?c[0]:null,lng:c?c[1]:null,
     time:x.time||"",cost:x.cost||x.yen||"",best:x.best||x.when||"",why:x.why,expect:expect&&expect.length?expect:null,tip:x.tip||"",
-    q:x.q||`${x.name}, ${x.area}`,w,derived,generic:GENERIC_W.test(w),from:x.from||(x.mins&&!/walk|varies/.test(x.mins)?x.mins:""),dates:x.dates||null,src};
+    q:x.q||`${x.name}, ${x.area}`,w,derived,generic:GENERIC_W.test(w),from:x.from||(x.mins&&!/walk|varies/.test(x.mins)?x.mins:""),dates:x.dates||null,src,region:reg};
 }
 const PLACES=[...NEW_ROWS.map(x=>toPlace(x,"new")),...RURAL.map(x=>toPlace(x,"rural")),...EXTRA.filter(x=>x.id!=="tmg").map(x=>toPlace(x,"extra")),...DO.map(x=>toPlace(x,"do")),...EAT.map(x=>toPlace(x,"eat")),...TRIPS.map(x=>toPlace(x,"trips"))];
+{ const have=new Set(PLACES.map(p=>p.id)); V5_ROWS.forEach(x=>{ if(!have.has(x.id)) PLACES.push(toPlace(x,"v5")); }); }
 const PLACE_BY_ID=new Map(PLACES.map(p=>[p.id,p]));
+function regionOf(p){
+  if(!p) return null; if(p.region) return p.region;
+  if(V5.assign[p.id]) return p.region=V5.assign[p.id];
+  if(!(p.lat&&p.lng)||!V5.centers.length) return null;
+  let best=null,bd=1e9; for(const c of V5.centers){ const d=km({lat:c[1],lng:c[2]},p); if(d<bd){ bd=d; best=c[0]; } }
+  const r=REGION_BY_ID.get(best); if(!r||bd>(r.rural?70:12)) return null;
+  return p.region=best;
+}
+let regionCountCache=null;
+function regionCounts(){ if(regionCountCache) return regionCountCache; const c={}; PLACES.forEach(p=>{ const r=regionOf(p); if(r) c[r]=(c[r]||0)+1; }); return regionCountCache=c; }
+const regionShort=r=>r.name.split(/,| & /)[0];
 const CAT_LABEL={icon:"Must-see",culture:"Culture",night:"Night",rural:"Rural",food:"Food",local:"Local gem",onsen:"Onsen",shop:"Shopping",december:"December"};
 const KIND_LABEL={eat:"Eat",drink:"Drinks",coffee:"Coffee & tea",sweet:"Sweets",market:"Market",bath:"Onsen & bath",craft:"Craft",view:"View",night:"Nightlife",culture:"Culture",ride:"Ride",trip:"Day trip",lights:"Lights",shop:"Shopping",odd:"Unusual",nature:"Nature"};
 const loveLabel=p=>p.love==="Locals"?"Locals love it":p.love==="Tourists"?"Traveler favorite":"Locals + travelers";
@@ -1700,6 +1813,8 @@ const AREAS=[["Asakusa","浅草",35.7148,139.7967],["Kuramae","蔵前",35.7035,1
 const RURAL_AREAS=[["Okutama","奥多摩",35.8093,139.0965],["Hinohara","檜原村",35.7268,139.1486],["Itsukaichi","五日市",35.7297,139.2259],["Ome","青梅",35.7889,139.2758],["Mt Takao","高尾山",35.625,139.2436],["Chichibu","秩父",35.9917,139.0856],["Nagatoro","長瀞",36.1153,139.1093],["Kawagoe","川越",35.9251,139.4858],["Kamakura","鎌倉",35.3192,139.5467],["Enoshima","江の島",35.3,139.48],["Miura","三浦",35.144,139.6206],["Yokosuka","横須賀",35.281,139.672],["Yokohama","横浜",35.4437,139.638],["Hakone","箱根",35.2324,139.1069],["Odawara","小田原",35.2562,139.1552],["Atami","熱海",35.096,139.072],["Kawaguchiko","河口湖",35.517,138.752],["Fujiyoshida","富士吉田",35.4876,138.8075],["Kofu","甲府",35.6621,138.5684],["Nikko","日光",36.75,139.6],["Utsunomiya","宇都宮",36.5551,139.8828],["Mashiko","益子",36.4633,140.0937],["Kasama","笠間",36.3826,140.2627],["Tsukuba","つくば",36.0835,140.0764],["Narita","成田",35.786,140.318],["Sawara","佐原",35.892,140.4995],["Choshi","銚子",35.7347,140.8266],["Kyonan","鋸南",35.107,139.835],["Otaki","大多喜",35.285,140.2453],["Izu Oshima","伊豆大島",34.75,139.36],["Ito","伊東",34.9658,139.102],["Shuzenji","修善寺",34.9707,138.9282],["Tomioka","富岡",36.2597,138.8899],["Ikaho","伊香保",36.495,138.9188],["Kusatsu","草津",36.6206,138.596],["Karuizawa","軽井沢",36.348,138.597]].map(a=>({name:a[0],ja:a[1],lat:a[2],lng:a[3],rural:true}));
 const ALL_AREAS=[...AREAS,...RURAL_AREAS];
 let swWhere=(()=>{ try{ return localStorage.getItem("azb-where")||"any"; }catch(e){ return "any"; } })();
+if(!["any","near","hotel","tokyo","rural"].includes(swWhere) && !(swWhere.startsWith("r:")&&REGION_BY_ID.has(swWhere.slice(2)))){ const a=ALL_AREAS.find(x=>x.name===swWhere); const r=a&&regionOf({id:"_where",lat:a.lat,lng:a.lng}); swWhere=r?"r:"+r:"any"; }
+function whereRegion(){ return swWhere.startsWith("r:")?REGION_BY_ID.get(swWhere.slice(2))||null:null; }
 let userPos=null, userPosAt=0;
 function getPosition(){
   if(userPos && Date.now()-userPosAt<10*60e3) return Promise.resolve(userPos);
@@ -1710,7 +1825,7 @@ function getPosition(){
 }
 function km(a,b){ const R=6371,dLa=(b.lat-a.lat)*Math.PI/180,dLo=(b.lng-a.lng)*Math.PI/180; const h=Math.sin(dLa/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
 const fmtKm=d=>d<1?`${Math.round(d*1000/50)*50} m`:d<20?`${d.toFixed(1)} km`:`${Math.round(d)} km`;
-function anchorPos(){ if(swWhere==="near"&&userPos) return userPos; const a=ALL_AREAS.find(x=>x.name===swWhere); return a||HOTEL_POS; }
+function anchorPos(){ if(swWhere==="near"&&userPos) return userPos; return whereRegion()||HOTEL_POS; }
 function distLabel(x){
   if(!(x.lat&&x.lng)) return x.from?`${x.from} away`:"";
   const near=swWhere==="near"&&userPos; const d=km(near?userPos:HOTEL_POS,{lat:x.lat,lng:x.lng});
@@ -1719,8 +1834,11 @@ function distLabel(x){
 }
 function renderWhere(){
   const sel=document.getElementById("swWhere"); if(!sel) return;
-  sel.innerHTML=`<option value="any">Anywhere</option><option value="near">Near me (GPS)</option><option value="hotel">Near the hotel</option><option value="tokyo">Tokyo</option><option value="rural">Countryside</option><optgroup label="Tokyo areas">${AREAS.map(a=>`<option value="${esc(a.name)}">${esc(a.name)}</option>`).join("")}</optgroup><optgroup label="Day-trip areas">${RURAL_AREAS.map(a=>`<option value="${esc(a.name)}">${esc(a.name)}</option>`).join("")}</optgroup>`;
-  sel.value=swWhere;
+  const n=regionCounts(), opt=r=>`<option value="r:${r.id}">${esc(r.name)} · ${n[r.id]||0}</option>`;
+  sel.innerHTML=`<option value="any">Anywhere</option><option value="near">Near me (GPS)</option><option value="hotel">Near the hotel</option><option value="tokyo">All of Tokyo</option><option value="rural">All countryside</option><optgroup label="Tokyo neighborhoods">${REGIONS.filter(r=>!r.rural).map(opt).join("")}</optgroup><optgroup label="Day trips">${REGIONS.filter(r=>r.rural).map(opt).join("")}</optgroup>`;
+  sel.value=swWhere; if(sel.value!==swWhere){ swWhere="any"; sel.value="any"; }
+  const lbl=document.getElementById("swWhereLbl"), reg=whereRegion();
+  if(lbl) lbl.textContent=reg?`${regionShort(reg)} · ${n[reg.id]||0}`:({any:"Anywhere",near:"Near me",hotel:"Near the hotel",tokyo:"All of Tokyo",rural:"Countryside"})[swWhere]||"Anywhere";
 }
 async function pickArea(){
   const rnd=a=>a[Math.floor(Math.random()*a.length)];
@@ -1728,7 +1846,8 @@ async function pickArea(){
   if(swWhere==="hotel") return {name:"Near the hotel",ja:"浅草",lat:HOTEL_POS.lat,lng:HOTEL_POS.lng,rural:false,near:true};
   if(swWhere==="tokyo") return rnd(AREAS);
   if(swWhere==="rural") return rnd(RURAL_AREAS);
-  const named=ALL_AREAS.find(a=>a.name===swWhere); if(named) return named;
+  const reg=whereRegion();
+  if(reg){ const subs=ALL_AREAS.filter(a=>regionOf({id:"_a",lat:a.lat,lng:a.lng})===reg.id); return rnd([...subs,{name:regionShort(reg),ja:reg.ja.split("・")[0],lat:reg.lat,lng:reg.lng,rural:reg.rural}]); }
   const ruralBias = swFilter==="Rural" ? 1 : swFilter==="Food"||swFilter==="Night" ? .25 : .45;
   return rnd(Math.random()<ruralBias?RURAL_AREAS:AREAS);
 }
@@ -1926,10 +2045,11 @@ function buildDeck(){
   let pool=allPool().filter(x=>!seen.has(x.id)&&matchKind(x,swFilter));
   if(swWhere==="tokyo") pool=pool.filter(x=>!(x.cats||[]).includes("rural"));
   if(swWhere==="rural") pool=pool.filter(x=>(x.cats||[]).includes("rural"));
-  const located = swWhere==="near"||swWhere==="hotel"||ALL_AREAS.some(a=>a.name===swWhere);
+  const reg=whereRegion(); if(reg) pool=pool.filter(x=>regionOf(x)===reg.id);
+  const located = swWhere==="near"||swWhere==="hotel";
   if(located){
-    const a=swWhere==="near"?(userPos||HOTEL_POS):swWhere==="hotel"?HOTEL_POS:ALL_AREAS.find(x=>x.name===swWhere);
-    const lim=(swWhere==="near"||swWhere==="hotel")?8:(ALL_AREAS.find(x=>x.name===swWhere)||{}).rural?40:6;
+    const a=swWhere==="near"?(userPos||HOTEL_POS):HOTEL_POS;
+    const lim=8;
     pool=pool.filter(x=>x.lat&&km(a,{lat:x.lat,lng:x.lng})<lim).map(x=>[x,km(a,{lat:x.lat,lng:x.lng})+Math.random()*1.2]).sort((u,v)=>u[1]-v[1]).map(u=>u[0]);
     deck=pool; return;
   }
@@ -2075,7 +2195,7 @@ function openDetail(x){
       <div class="where">${esc(x.area)}${x.jp&&x.jp!==x.name?` · <span lang="ja">${esc(x.jp)}</span>`:""}</div>
       ${facts.length?`<div class="facts">${facts.map(([k,v])=>`<div><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div>`:""}
       ${x.derived?"":`<p class="lead">${esc(x.why)}</p>`}
-      <div class="find"><div class="fhead"><span class="label">What to expect</span><span class="aitag" id="dFindSrc">${hasExp?(x.src==="new"||x.src==="rural"||x.src==="claude"?"AI guide":"Guide"):"Gathering…"}</span></div>
+      <div class="find"><div class="fhead"><span class="label">What to expect</span><span class="aitag" id="dFindSrc">${hasExp?(x.src==="new"||x.src==="rural"||x.src==="v5"||x.src==="claude"?"AI guide":"Guide"):"Gathering…"}</span></div>
         <ul id="dFind">${hasExp?x.expect.map(f=>`<li>${esc(f)}</li>`).join(""):`<li class="sk"></li><li class="sk"></li><li class="sk"></li>`}</ul></div>
       <div id="dLocals" class="locals" hidden></div>
       ${x.tip?`<div class="tipline">${esc(x.tip)}</div>`:""}
@@ -2194,7 +2314,7 @@ function renderNotes(){
   const sheet=document.getElementById("notesSheet"); if(sheet) sheet.innerHTML=notesHTML();
 }
 function openNotebook(){
-  modal(`<div class="sheet"><div class="grab" aria-hidden="true"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>Notebook <span class="mono muted" style="font-size:16px">${state.swipe.kept.length}</span></h3><button class="btn ghost" data-act="close">Done</button></div><div class="notes" id="notesSheet">${notesHTML()}</div></div>`);
+  modal(`<div class="sheet"><div class="grab" aria-hidden="true"></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3>Notebook <span class="mono muted" style="font-size:16px">${state.swipe.kept.length}</span></h3><div style="display:flex;gap:6px">${state.swipe.kept.length?`<button class="btn primary" data-act="autoplan">✦ Plan these</button>`:""}<button class="btn ghost" data-act="close">Done</button></div></div><div class="notes" id="notesSheet">${notesHTML()}</div></div>`);
 }
 /* ================= planning ================= */
 const SLOTS=[["morning","Morning","before noon","☀"],["afternoon","Afternoon","12–5pm","◐"],["evening","Evening","5–9pm","☾"],["night","Night","after 9pm","✦"]];
@@ -2293,8 +2413,11 @@ function renderPlan(){
   const kept=state.swipe.kept.filter(k=>!plannedIds.has(k.id)).map(k=>asPlace(k)).map(p=>[p,p.lat?km(c,p):99]).sort((a,b)=>a[1]-b[1]);
   const fallback=!kept.length?PLACES.filter(p=>p.lat&&!plannedIds.has(p.id)&&(evs.length?true:km(HOTEL_POS,p)<4)).map(p=>[p,km(c,p)]).sort((a,b)=>a[1]-b[1]).slice(0,10):[];
   const ideas=(kept.length?kept:fallback).slice(0,12);
-  host.innerHTML=`<div class="pday">
-    <div class="pdhead"><div><div class="label">${wdOf(planDay)} · Day ${i+1} of 17</div><h3>December ${dnum(planDay)}</h3><div class="muted small">Sunrise ~${sr} · sunset ~${ss}</div></div>
+  const thc={}; evs.forEach(e=>{ const p=e.pid&&findItem(e.pid); const r=p&&regionOf(p); if(r) thc[r]=(thc[r]||0)+1; });
+  const theme=Object.entries(thc).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([r])=>REGION_BY_ID.get(r)).filter(Boolean);
+  const call=unplanned.length>=3?`<div class="apcall"><div><b>${unplanned.length} kept places aren't on a day yet</b><small>Auto-plan sorts them into days by area and opening times, then checks with you.</small></div><button class="btn" data-act="autoplan">Plan them for me</button></div>`:"";
+  host.innerHTML=`${call}<div class="pday">
+    <div class="pdhead"><div><div class="label">${wdOf(planDay)} · Day ${i+1} of 17</div><h3>December ${dnum(planDay)}</h3><div class="muted small">Sunrise ~${sr} · sunset ~${ss}</div>${theme.length?`<div class="ptheme">${theme.some(r=>r.rural)?"Day trip · ":""}${esc(theme.map(r=>regionShort(r)).join(" & "))}</div>`:""}</div>
       <div class="pdacts">${r?`<a class="btn" href="${r}" target="_blank" rel="noopener">Day route</a>`:""}<button class="btn primary" data-act="padd" data-slot="">+ Add</button></div></div>
     ${ev.length?`<div class="pevs">${ev.map(s=>`<span class="pill ev">${esc(s.t)}</span>`).join("")}</div>`:""}
     <div class="slots">${slots}</div>
@@ -2343,12 +2466,14 @@ function openEditEvent(id){
 
 /* ================= Explore: browse every place ================= */
 const EXC=[["all","All"],["icon","Must-sees"],["culture","Culture"],["night","Night"],["rural","Rural & day trips"],["food","Food"],["local","Local gems"],["onsen","Onsen"],["shop","Shopping"],["december","December"]];
+let exRegion=(()=>{ try{ const v=localStorage.getItem("azb-exregion")||"all"; return v==="all"||REGION_BY_ID.has(v)?v:"all"; }catch(e){ return "all"; } })();
 let exCat="all", exSort=(()=>{ try{ return localStorage.getItem("azb-exsort")||"near"; }catch(e){ return "near"; } })(), exShown=24;
 function exList(){
   const term=((document.getElementById("exQ")||{}).value||"").trim().toLowerCase();
   let list=PLACES.filter(p=>exCat==="all"||(p.cats||[]).includes(exCat));
+  const reg=exRegion!=="all"&&REGION_BY_ID.get(exRegion); if(reg) list=list.filter(p=>regionOf(p)===reg.id);
   if(term) list=list.filter(p=>[p.name,p.area,p.jp,(p.cats||[]).map(c=>CAT_LABEL[c]).join(" "),p.why,(p.expect||[]).join(" ")].join(" ").toLowerCase().includes(term));
-  const from=exSort==="me"&&userPos?userPos:HOTEL_POS;
+  const from=exSort==="me"&&userPos?userPos:(reg||HOTEL_POS);
   if(exSort==="near"||exSort==="me") list=list.map(p=>[p,p.lat?km(from,p):999]).sort((a,b)=>a[1]-b[1]).map(v=>v[0]);
   else if(exSort==="locals") list=list.slice().sort((a,b)=>(b.love==="Locals")-(a.love==="Locals")||(b.cats.includes("local"))-(a.cats.includes("local")));
   else if(exSort==="icons") list=list.slice().sort((a,b)=>(b.cats.includes("icon"))-(a.cats.includes("icon"))||(a.love==="Locals")-(b.love==="Locals"));
@@ -2371,8 +2496,10 @@ function renderExplore(reset){
   if(reset) exShown=24;
   document.getElementById("exCats").innerHTML=EXC.map(([k,l])=>`<button class="chip" aria-pressed="${k===exCat}" data-exc="${k}">${l}</button>`).join("");
   const s=document.getElementById("exSort"); if(s) s.value=exSort;
+  const rs=document.getElementById("exRegion"); if(rs && !rs.options.length){ const n=regionCounts(); rs.innerHTML=`<option value="all">All areas · ${PLACES.length}</option><optgroup label="Tokyo neighborhoods">${REGIONS.filter(r=>!r.rural).map(r=>`<option value="${r.id}">${esc(r.name)} · ${n[r.id]||0}</option>`).join("")}</optgroup><optgroup label="Day trips">${REGIONS.filter(r=>r.rural).map(r=>`<option value="${r.id}">${esc(r.name)} · ${n[r.id]||0}</option>`).join("")}</optgroup>`; }
+  if(rs) rs.value=exRegion;
   const list=exList();
-  document.getElementById("exCount").textContent=`${list.length} place${list.length===1?"":"s"}`;
+  document.getElementById("exCount").textContent=`${list.length} place${list.length===1?"":"s"}${exRegion!=="all"?` in ${regionName(exRegion)}`:""}`;
   g.innerHTML=list.slice(0,exShown).map(xcardHTML).join("")||`<div class="empty">No matches. Try another word or category.</div>`;
   document.getElementById("exMore").hidden=list.length<=exShown;
   if(!IN_CLAUDE && "IntersectionObserver" in window){
@@ -2416,6 +2543,7 @@ document.addEventListener("input",e=>{
   if(e.target.id==="exQ"){ clearTimeout(renderExplore.t); renderExplore.t=setTimeout(()=>renderExplore(true),150); }
 });
 document.addEventListener("change",e=>{
+  if(e.target.id==="exRegion"){ exRegion=e.target.value; try{ localStorage.setItem("azb-exregion",exRegion); }catch(err){} renderExplore(true); return; }
   if(e.target.id==="exSort"){ exSort=e.target.value; try{ localStorage.setItem("azb-exsort",exSort); }catch(err){} if(exSort==="me") getPosition().then(()=>renderExplore(true)).catch(()=>{ toast("Couldn't get your location"); exSort="near"; renderExplore(true); }); else renderExplore(true); }
 });
 
@@ -2496,7 +2624,7 @@ document.addEventListener("submit",e=>{
 document.addEventListener("change",e=>{
   if(e.target.id==="swWhere"){ swWhere=e.target.value; try{ localStorage.setItem("azb-where",swWhere); }catch(err){} deck=[]; lastDealFail=0;
     if(swWhere==="near"){ getPosition().then(()=>{ toast("Showing spots around you"); deck=[]; renderDeck(); }).catch(()=>{ toast("Couldn't get your location. Showing the hotel area."); swWhere="hotel"; renderWhere(); deck=[]; renderDeck(); }); return; }
-    renderDeck(); return; }
+    renderWhere(); renderDeck(); return; }
   if(e.target.id==="autoUpd"){ autoUpdate=e.target.checked; try{ localStorage.setItem("azb-autoupd",autoUpdate?"1":"0"); }catch(err){} return; }
   if(e.target.dataset.check){ state.checks[e.target.dataset.check]=e.target.checked; save(); renderToday(); }
 });
@@ -2576,7 +2704,496 @@ connect();
 loadImages();
 renderCountdown();
 requestAnimationFrame(moveIndicator);
-window.__azb={openDetail:x=>openDetail(typeof x==="string"?findItem(x):x),deck:()=>deck};
+/* ================= auto-planner: kept places -> day-by-day plan -> yes/no questions -> review ================= */
+const AP_OPTS={
+  pace:[["easy","Easy","2–3 stops a day"],["balanced","Balanced","3–4 stops"],["packed","Packed","5 stops"]],
+  trips:[["auto","My likes","1 per area"],["0","None","Tokyo only"],["2","1–2","trips"],["4","3–4","trips"]],
+  nights:[["rarely","Early nights",""],["some","Some nights out",""],["most","Most nights out",""]],
+};
+const AP_CAP={easy:3,balanced:4,packed:5};
+const WD3=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const WDL=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const wdIdx=d=>new Date(d+"T12:00:00Z").getUTCDay();
+const apD=d=>`${WD3[wdIdx(d)]} ${dnum(d)}`;
+const AP_LAST=TRIP[TRIP.length-1];
+let ap=null;
+function apDefaults(){ const p=Object.assign({pace:"balanced",trips:"auto",nights:"some",free:[],fill:true},state.apPrefs||{}); p.free=(p.free||[]).filter(d=>TRIP.includes(d)); return p; }
+const apP=id=>findItem(id);
+function apMid(ps){ const q=ps.filter(p=>p&&p.lat); if(!q.length) return HOTEL_POS; return {lat:q.reduce((a,p)=>a+p.lat,0)/q.length,lng:q.reduce((a,p)=>a+p.lng,0)/q.length}; }
+
+/* opening rules read from the place text: "Closed Wednesdays", "Weekends", "Sundays only", New Year museum closures */
+function apRules(p){
+  if(p._apr) return p._apr;
+  const t=`${p.tip||""} ${p.why||""}`.toLowerCase(), b=(p.best||"").toLowerCase();
+  const closed=new Set(); let only=null;
+  for(const m of t.matchAll(/closed (?:on )?((?:(?:mon|tues|wednes|thurs|fri|satur|sun)days?(?:, | and | & |,|\/)?)+)/g)) for(const w of m[1].matchAll(/mon|tue|wed|thu|fri|sat|sun/g)) closed.add(["sun","mon","tue","wed","thu","fri","sat"].indexOf(w[0]));
+  if(/^weekends?\b/.test(b)||/weekends only|only (?:on|at) weekends/.test(t)) only=new Set([0,6]);
+  if(/sundays? only|only on sundays?/.test(t)||/^sunday/.test(b)) only=new Set([0]);
+  const museum=/museum|gallery|garden|castle|palace|villa|aquarium|library|teien/i.test(p.name)&&!["eat","drink","night","coffee","sweet","lights","market"].includes(p.kind);
+  return p._apr={closed,only,museum};
+}
+function apOk(p,d){
+  if(!p) return false;
+  if(p.dates&&p.dates.length) return p.dates.includes(d);
+  const r=apRules(p), w=wdIdx(d);
+  if(r.closed.has(w)) return false;
+  if(r.only&&!r.only.has(w)) return false;
+  if(r.museum&&d>="2026-12-28") return false;
+  return true;
+}
+function apFar(p){ const r=REGION_BY_ID.get(regionOf(p)); return r?r.rural:(p.lat?km(HOTEL_POS,p)>30:p.kind==="trip"); }
+
+/* taste: what the kept places have in common */
+function apTaste(){
+  const w={},k={}; let n=0,loc=0;
+  for(const r of state.swipe.kept){ const p=findItem(r.id)||asPlace(r); if(!p) continue; n++; (p.cats||[]).forEach(c=>w[c]=(w[c]||0)+1); k[p.kind]=(k[p.kind]||0)+1; if(p.love==="Locals") loc++; }
+  const top=Object.entries(w).filter(([c])=>!["december","rural","icon"].includes(c)).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([c])=>CAT_LABEL[c].toLowerCase()+(c==="local"?"s":""));
+  return {w,k,n,loc:n?loc/n:.5,passed:new Set(state.swipe.passed),kept:new Set(state.swipe.kept.map(k=>k.id)),words:top.length?top.join(" and "):"a bit of everything"};
+}
+function apScore(p,t){
+  if(!t.n) return ((p.cats||[]).includes("icon")?.8:0)+(p.love==="Locals"?.6:.35)+Math.random()*.4;
+  let s=0; for(const c of p.cats||[]) if(c!=="december"&&c!=="rural") s+=(t.w[c]||0)/t.n;
+  s+=.8*(t.k[p.kind]||0)/t.n;
+  s+=.5*(p.love==="Locals"?t.loc:p.love==="Tourists"?1-t.loc:.5);
+  return s+Math.random()*.15;
+}
+
+/* draft bookkeeping. dr.items: [{pid,date,slot,src:"kept"|"suggest",why}] */
+const apMan=d=>state.events.filter(e=>!e.auto&&e.date===d);
+const apDay=(dr,d)=>dr.items.filter(i=>i.date===d&&!i.dropped);
+const apLoad=(dr,d)=>apDay(dr,d).length+apMan(d).length;
+function apCap(dr,d){ if(dr.free.has(d)) return 0; const c=AP_CAP[dr.pr.pace]; if(d===TRIP[0]) return 2; return dr.trip[d]?c+1:c; }
+const apRoom=(dr,d)=>apCap(dr,d)-apLoad(dr,d);
+const apHas=(dr,id)=>dr.items.some(i=>i.pid===id&&!i.dropped)||state.events.some(e=>!e.auto&&e.pid===id);
+function apSlotCap(dr,d,s){ if(dr.trip[d]) return {morning:2,afternoon:2,evening:1,night:0}[s]; if(d===TRIP[0]) return {morning:0,afternoon:1,evening:1,night:1}[s]; const x=AP_CAP[dr.pr.pace]>=5; return {morning:1,afternoon:x?3:2,evening:x?2:1,night:1}[s]; }
+const apSlotLoad=(dr,d,s)=>apDay(dr,d).filter(i=>i.slot===s).length+apMan(d).filter(e=>slotOf(e)===s).length;
+const AP_NEXT={morning:["morning","afternoon"],afternoon:["afternoon","morning","evening"],evening:["evening","night","afternoon"],night:["night","evening"]};
+function apSlotFor(dr,d,p,want){ if(apRoom(dr,d)<=0) return null; for(const s of AP_NEXT[want||guessSlot(p)]) if(apSlotLoad(dr,d,s)<apSlotCap(dr,d,s)) return s; return null; }
+function apCenter(dr,d){ const pts=[...apDay(dr,d).map(i=>apP(i.pid)),...apMan(d).map(evPos)].filter(x=>x&&x.lat); return pts.length?apMid(pts):null; }
+function apLast(dr,d){ const its=apDay(dr,d).sort((a,b)=>SLOTS.findIndex(s=>s[0]===a.slot)-SLOTS.findIndex(s=>s[0]===b.slot)); const p=its.length?apP(its[its.length-1].pid):null; return p&&p.lat?p:apCenter(dr,d); }
+function apPut(dr,p,d,src,why){ const slot=apSlotFor(dr,d,p); if(!slot) return false; dr.items.push({pid:p.id,date:d,slot,src,why:why||""}); return true; }
+const apOrder=ps=>ps.slice().sort((a,b)=>(guessSlot(a)==="afternoon")-(guessSlot(b)==="afternoon"));
+function apDayRegion(dr,d){ const c={}; apDay(dr,d).forEach(i=>{ const r=regionOf(apP(i.pid)); if(r) c[r]=(c[r]||0)+1; }); const top=Object.entries(c).sort((a,b)=>b[1]-a[1]); return top.length?top[0][0]:null; }
+function apDayTitle(dr,d){
+  if(dr.free.has(d)) return "Free day";
+  if(dr.trip[d]) return `Day trip · ${regionName(dr.trip[d])||"countryside"}`;
+  const c={}; apDay(dr,d).forEach(i=>{ const r=regionOf(apP(i.pid)); if(r) c[r]=(c[r]||0)+1; });
+  const names=Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([r])=>regionShort(REGION_BY_ID.get(r)));
+  const base=names.length?names.join(" & "):apLoad(dr,d)?"Your plans":"Open day";
+  return d===TRIP[0]?`Arrival · ${names.length?base:"near the hotel"}`:d===AP_LAST?`New Year's Eve · ${base}`:base;
+}
+
+/* best day for a place in Tokyo: close to what's already on that day, else an empty day */
+function apPutBest(dr,p,src,why){
+  let best=null,bs=1e9;
+  for(const d of TRIP){
+    if(dr.trip[d]||dr.free.has(d)||!apOk(p,d)||!apSlotFor(dr,d,p)) continue;
+    const c=apCenter(dr,d); let s=c?km(c,p):3.5;
+    if(d===TRIP[0]) s+=km(HOTEL_POS,p)>3?99:-1;
+    s+=TRIP.indexOf(d)*0.02;
+    if(s<bs){ bs=s; best=d; }
+  }
+  return best?apPut(dr,p,best,src,why):false;
+}
+function apTripDay(dr,ps){
+  let best=null,bs=-1e9;
+  for(const d of TRIP){
+    if(dr.free.has(d)||dr.trip[d]||d===TRIP[0]||d===AP_LAST||apLoad(dr,d)>0) continue;
+    const w=wdIdx(d); let s=(w>=1&&w<=4)?2:w===5?1:0;
+    s-=3*ps.filter(p=>!apOk(p,d)).length;
+    for(const t of Object.keys(dr.trip)){ const gap=Math.abs(TRIP.indexOf(t)-TRIP.indexOf(d)); s-=gap<=1?3:gap===2?1:0; }
+    s-=TRIP.indexOf(d)*0.01;
+    if(s>bs){ bs=s; best=d; }
+  }
+  return best;
+}
+function apTripFill(dr,g,d){
+  dr.trip[d]=g.rid;
+  const name=regionName(g.rid)||"countryside", over=[];
+  for(const p of apOrder(g.ps)){
+    if(!apOk(p,d)){ dr.unplaced.push({pid:p.id,why:`Closed on ${WDL[wdIdx(d)]}s, the day of your ${regionShort(REGION_BY_ID.get(g.rid)||{name})} trip`}); continue; }
+    if(!apPut(dr,p,d,"kept")) over.push(p);
+  }
+  if(over.length) dr.leftTrips.push({rid:g.rid,ps:over,c:apMid(over),second:true});
+}
+function apTokyo(dr,ps){
+  const cap=AP_CAP[dr.pr.pace], by={};
+  ps.forEach(p=>{ const r=regionOf(p)||"x"; (by[r]=by[r]||[]).push(p); });
+  const chunks=[];
+  for(const list of Object.values(by)){ let left=list.slice(); while(left.length){ if(left.length<=cap){ chunks.push(left); break; } const c=apMid(left); left.sort((a,b)=>km(c,b)-km(c,a)); const seed=left.shift(); left.sort((a,b)=>km(seed,a)-km(seed,b)); chunks.push([seed,...left.splice(0,cap-1)]); } }
+  chunks.sort((a,b)=>b.length-a.length);
+  for(const ch of chunks){
+    const c=apMid(ch); let best=null,bs=1e9;
+    for(const d of TRIP){
+      if(dr.trip[d]||dr.free.has(d)||apRoom(dr,d)<ch.length||!ch.every(p=>apOk(p,d))) continue;
+      const dc=apCenter(dr,d); let s=dc?km(dc,c):3.5;
+      if(d===TRIP[0]) s+=km(HOTEL_POS,c)>3?99:-1;
+      s+=TRIP.indexOf(d)*0.02;
+      if(s<bs){ bs=s; best=d; }
+    }
+    for(const p of apOrder(ch)){
+      if(best && apPut(dr,p,best,"kept")) continue;
+      if(!apPutBest(dr,p,"kept")) dr.unplaced.push({pid:p.id,why:apRules(p).closed.size||apRules(p).only?"Its open days are all full at this pace":"Every day is full at this pace"});
+    }
+  }
+}
+
+function apPlan(pr){
+  const dr={pr,items:[],trip:{},free:new Set(pr.free),notes:[],unplaced:[],leftTrips:[],skip:new Set(),asked:new Set(),said:0};
+  const manualIds=new Set(state.events.filter(e=>!e.auto).map(e=>e.pid).filter(Boolean));
+  const kept=[], seen=new Set();
+  for(const r of state.swipe.kept){ if(seen.has(r.id)||manualIds.has(r.id)) continue; seen.add(r.id); const p=findItem(r.id)||asPlace(r); if(p) kept.push(p); }
+  // 1. things that only happen on certain dates
+  for(const p of kept.filter(p=>p.dates&&p.dates.length)){
+    const opts=p.dates.filter(d=>TRIP.includes(d)&&!dr.free.has(d)).sort((a,b)=>apLoad(dr,a)-apLoad(dr,b));
+    if(!opts.some(d=>apPut(dr,p,d,"kept"))) dr.unplaced.push({pid:p.id,why:p.dates.some(d=>TRIP.includes(d))?"Its dates fall on days you kept free":"Not on during your dates"});
+  }
+  let rest=kept.filter(p=>!(p.dates&&p.dates.length));
+  rest.filter(p=>!(p.lat&&p.lng)).forEach(p=>dr.unplaced.push({pid:p.id,why:"No map location, so add it by hand"}));
+  rest=rest.filter(p=>p.lat&&p.lng);
+  // 2. day trips: countryside likes grouped by region, a lone place folded into a nearby group
+  let groups=Object.values(rest.filter(apFar).reduce((g,p)=>{ const r=regionOf(p)||("x"+p.id); (g[r]=g[r]||{rid:r,ps:[]}).ps.push(p); return g; },{}));
+  groups.forEach(g=>g.c=apMid(g.ps));
+  groups.sort((a,b)=>b.ps.length-a.ps.length);
+  for(const g of groups){
+    if(g.ps.length>1||g.gone) continue;
+    const host=groups.filter(h=>h!==g&&!h.gone&&h.ps.length<AP_CAP[pr.pace]+1&&km(h.c,g.c)<35).sort((a,b)=>b.ps.length-a.ps.length)[0];
+    if(host){ host.ps.push(...g.ps); host.c=apMid(host.ps); g.gone=true; }
+  }
+  groups=groups.filter(g=>!g.gone).sort((a,b)=>b.ps.length-a.ps.length||km(HOTEL_POS,a.c)-km(HOTEL_POS,b.c));
+  const maxTrips=pr.trips==="auto"?6:+pr.trips; let used=0;
+  for(const g of groups){
+    if(g.ps.length===1&&pr.trips!=="0"){ dr.leftTrips.push(g); continue; }
+    const d=used<maxTrips?apTripDay(dr,g.ps):null;
+    if(!d){ if(pr.trips==="0") g.ps.forEach(p=>dr.unplaced.push({pid:p.id,why:"Out of Tokyo, and you picked no day trips"})); else dr.leftTrips.push(g); continue; }
+    apTripFill(dr,g,d); used++;
+  }
+  // 3. Tokyo likes packed into days by neighborhood
+  apTokyo(dr,rest.filter(p=>!apFar(p)));
+  // notes that explain choices
+  if(kept.some(p=>apRules(p).museum)) dr.notes.push("Museums, gardens and castles mostly close for New Year from about Dec 28, so they're earlier in the plan.");
+  const closedOnes=kept.filter(p=>apRules(p).closed.size||apRules(p).only).filter(p=>dr.items.some(i=>i.pid===p.id));
+  if(closedOnes.length) dr.notes.push(`Worked around closing days for ${closedOnes.slice(0,3).map(p=>p.name).join(", ")}${closedOnes.length>3?` and ${closedOnes.length-3} more`:""}.`);
+  if(Object.keys(dr.trip).length) dr.notes.push("Day trips are on weekdays where possible, when trains and sights are calmer.");
+  dr.notes.push("Dec 15 is kept light for arrival, with stops close to the hotel.");
+  return dr;
+}
+
+/* suggestions that match the taste */
+function apCands(dr,t,d,test){
+  const out=[];
+  for(const p of PLACES){ if(!p.lat||t.passed.has(p.id)||t.kept.has(p.id)||apHas(dr,p.id)||(p.dates&&p.dates.length)||!apOk(p,d)||!test(p)) continue; out.push([p,apScore(p,t)]); }
+  return out;
+}
+function apTake(dr,d,ps,n,why,want){
+  const out=[];
+  for(const p of ps){ if(out.length>=n) break; const slot=apSlotFor(dr,d,p,want); if(!slot) continue; const it={pid:p.id,date:d,slot,src:"suggest",why}; dr.items.push(it); out.push({p,slot,date:d,it}); }
+  out.forEach(o=>dr.items.splice(dr.items.indexOf(o.it),1));
+  return out;
+}
+const isFood=p=>["eat","drink","coffee","sweet"].includes(p.kind);
+function apPickRegion(dr,t,d,avoid,extra){
+  const th=Object.assign({},dr.theme||{},extra||{}), used={}; TRIP.forEach(x=>{ const r=th[x]||apDayRegion(dr,x); if(r) used[r]=(used[r]||0)+1; });
+  const near=[TRIP[TRIP.indexOf(d)-1],TRIP[TRIP.indexOf(d)+1]].filter(Boolean).map(x=>th[x]||apDayRegion(dr,x));
+  let best=null,bs=-1e9;
+  for(const r of REGIONS){ if(r.rural||(avoid&&avoid.has(r.id))) continue;
+    const c=apCands(dr,t,d,p=>regionOf(p)===r.id).map(v=>v[1]).sort((a,b)=>b-a).slice(0,3); if(c.length<2) continue;
+    let s=c.reduce((a,b)=>a+b,0)-.9*(used[r.id]||0)-(near.includes(r.id)?.8:0)+(km(HOTEL_POS,r)<5?.25:0)+Math.random()*.3;
+    if(d===TRIP[0]&&km(HOTEL_POS,r)>3) s-=99;
+    if(s>bs){ bs=s; best=r; } }
+  return best;
+}
+function apPicks(dr,t,d,reg,n,exclude){
+  const c=apCands(dr,t,d,p=>regionOf(p)===reg.id&&!(exclude&&exclude.has(p.id))).sort((a,b)=>b[1]-a[1]);
+  if(!c.length) return [];
+  const seed=c[0][0], picks=[seed]; let food=isFood(seed)?1:0;
+  for(const [p] of c.slice(1)){ if(picks.length>=n+2) break; if(km(seed,p)>2.6) continue; if(isFood(p)&&food>=(n>=4?2:1)) continue; if(isFood(p)) food++; picks.push(p); }
+  return apTake(dr,d,picks,n,`Matches your taste for ${t.words}`);
+}
+function apNear(dr,t,d,c,n,opt={}){
+  const lim=opt.km||2.2;
+  const cand=apCands(dr,t,d,p=>!(opt.exclude&&opt.exclude.has(p.id))&&km(c,p)<lim&&!apFar(p)&&(!opt.food||(opt.slot==="night"?["drink","night"].includes(p.kind):["eat","drink"].includes(p.kind))))
+    .map(([p,s])=>[p,s+.6*(1-km(c,p)/lim)]).sort((a,b)=>b[1]-a[1]).map(v=>v[0]);
+  return apTake(dr,d,cand,n,opt.why||"Close to your other stops",opt.slot);
+}
+const apEmpty=dr=>TRIP.filter(d=>!dr.free.has(d)&&!dr.trip[d]&&!dr.skip.has(d)&&apLoad(dr,d)===0);
+const apItems=(list,date)=>list.map(x=>({p:x.p,date:x.date||date,slot:x.slot}));
+
+function apQuestions(dr){
+  const Q=[]; const t=apTaste(); dr.theme={};
+  // a. more day trips: areas you kept that didn't get a day
+  for(let k=0;k<4;k++) Q.push({ic:"旅",make:()=>{
+    const g=dr.leftTrips.find(g=>!g.asked); if(!g) return null; g.asked=true;
+    const d=apTripDay(dr,g.ps); if(!d) return null;
+    const ok=g.ps.filter(p=>apOk(p,d)).slice(0,AP_CAP[dr.pr.pace]+1);
+    const nm=regionName(g.rid)||"the countryside";
+    dr.trip[d]=g.rid; const prev=apTake(dr,d,ok,ok.length,"",null); delete dr.trip[d];
+    return {title:`Add a${g.second?" second":""} day trip to ${nm} on ${apD(d)}?`,
+      body:g.second?`You kept more places there than fit in one day. A second day covers the rest.`:`You kept ${g.ps.length} place${g.ps.length>1?"s":""} out there that ${g.ps.length>1?"aren't":"isn't"} on a day yet.`,
+      items:apItems(prev,d),
+      apply:()=>{ dr.trip[d]=g.rid; prev.forEach(x=>dr.items.push({pid:x.p.id,date:d,slot:x.slot,src:"kept",why:""})); dr.unplaced=dr.unplaced.filter(u=>!g.ps.some(p=>p.id===u.pid)); },
+      decline:()=>g.ps.forEach(p=>dr.unplaced.push({pid:p.id,why:"You skipped that day trip"}))};
+  }});
+  // b. a slow day in a long busy run
+  Q.push({ic:"休",make:()=>{
+    if(dr.free.size) return null;
+    let run=[],best=[]; for(const d of TRIP){ if(apLoad(dr,d)>=3||dr.trip[d]){ run.push(d); if(run.length>best.length) best=run.slice(); } else run=[]; }
+    if(best.length<6) return null;
+    const mid=best.slice(2,-1).filter(d=>!dr.trip[d]&&!apMan(d).length&&!apDay(dr,d).some(i=>apP(i.pid)&&apP(i.pid).dates)).sort((a,b)=>apLoad(dr,a)-apLoad(dr,b))[0]; if(!mid) return null;
+    const its=apDay(dr,mid);
+    return {title:`Keep ${apD(mid)} as a slow day?`,body:`You'd be out ${best.length} days in a row with 3 or more stops. I'd move ${apD(mid)}'s ${its.length} stops to days with room and leave it for sleeping in, laundry and wandering.`,
+      items:its.map(i=>({p:apP(i.pid),date:i.date,slot:i.slot,x:true})),
+      apply:()=>{ dr.free.add(mid); const mv=apDay(dr,mid); dr.items=dr.items.filter(i=>i.date!==mid); mv.forEach(i=>{ const p=apP(i.pid); if(!p||!apPutBest(dr,p,i.src,i.why)) dr.unplaced.push({pid:i.pid,why:"Moved off your slow day, no room elsewhere"}); }); }};
+  }});
+  // c. December-only events
+  const evs=PLACES.filter(p=>p.dates&&p.dates.some(d=>TRIP.includes(d))&&p.id!=="joya"&&!t.passed.has(p.id)&&!t.kept.has(p.id)).sort((a,b)=>(a.lat?km(HOTEL_POS,a):20)-(b.lat?km(HOTEL_POS,b):20));
+  for(const p of evs.slice(0,3)) Q.push({ic:"祭",make:()=>{
+    if(apHas(dr,p.id)) return null;
+    const d=p.dates.filter(d=>TRIP.includes(d)&&!dr.free.has(d)&&!dr.trip[d]&&apSlotFor(dr,d,p)).sort((a,b)=>apLoad(dr,a)-apLoad(dr,b))[0]; if(!d) return null;
+    const slot=apSlotFor(dr,d,p);
+    return {title:`${p.name} is on during your trip. Add it on ${apD(d)}?`,body:`${p.why} ${p.best?`When: ${p.best}.`:""}`,items:[{p,date:d,slot}],
+      apply:()=>dr.items.push({pid:p.id,date:d,slot,src:"suggest",why:"December only"})};
+  }});
+  const joya=PLACE_BY_ID.get("joya");
+  if(joya) Q.push({ic:"鐘",make:()=>{
+    const d=AP_LAST; if(apHas(dr,"joya")||dr.free.has(d)||apSlotLoad(dr,d,"night")) return null;
+    return {title:"End the trip with the New Year's Eve bells?",body:`${joya.why} Senso-ji is a 12-minute walk from the hotel.`,items:[{p:joya,date:d,slot:"night"}],
+      apply:()=>dr.items.push({pid:"joya",date:d,slot:"night",src:"suggest",why:"New Year's Eve"})};
+  }});
+  // d. a stop far from the rest of its day
+  for(let k=0;k<2;k++) Q.push({ic:"移",make:()=>{
+    for(const d of TRIP){
+      if(dr.trip[d]) continue; const its=apDay(dr,d); if(its.length<2) continue;
+      const c=apCenter(dr,d); const far=its.filter(i=>!i.asked).map(i=>[i,apP(i.pid)]).filter(([,p])=>p&&p.lat&&!(p.dates&&p.dates.length)).map(([i,p])=>[i,p,km(c,p)]).sort((a,b)=>b[2]-a[2])[0];
+      if(!far||far[2]<4) continue; far[0].asked=true; const [it,p,dist]=far;
+      let best=null,bd=1e9;
+      for(const d2 of TRIP){ if(d2===d||dr.trip[d2]||dr.free.has(d2)||!apOk(p,d2)||!apSlotFor(dr,d2,p)) continue; const c2=apCenter(dr,d2); if(!c2) continue; const x=km(c2,p); if(x<bd){ bd=x; best=d2; } }
+      if(!best||bd>3||bd>dist-2) continue;
+      const slot=apSlotFor(dr,best,p);
+      return {title:`Move ${p.name} to ${apD(best)}?`,body:`On ${apD(d)} it's ${fmtKm(dist)} from your other stops. On ${apD(best)} you're already ${fmtKm(bd)} away, so it saves a long trip across town.`,items:[{p,date:best,slot}],
+        apply:()=>{ it.date=best; it.slot=slot; }};
+    }
+    return null;
+  }});
+  // e. a must-see that landed on a weekend
+  Q.push({ic:"人",make:()=>{
+    for(const i of dr.items){ const p=apP(i.pid), w=wdIdx(i.date);
+      if(i.asked||i.dropped||!p||!(p.cats||[]).includes("icon")||(p.cats||[]).includes("night")||["drink","night","lights"].includes(p.kind)||(w!==0&&w!==6)||(p.dates&&p.dates.length)||dr.trip[i.date]) continue; i.asked=true;
+      const alt=TRIP.filter(d=>{ const x=wdIdx(d); return x>=1&&x<=5&&d!==TRIP[0]&&d!==AP_LAST&&!dr.trip[d]&&!dr.free.has(d)&&apOk(p,d)&&apSlotFor(dr,d,p); }).map(d=>{ const c=apCenter(dr,d); return [d,c?km(c,p):3.5]; }).sort((a,b)=>a[1]-b[1])[0];
+      if(!alt||alt[1]>4) continue; const slot=apSlotFor(dr,alt[0],p);
+      return {title:`See ${p.name} on a weekday?`,body:`It's on ${apD(i.date)}, a weekend, when the crowds are worst. ${apD(alt[0])} has room${alt[1]<3.4?" and you'll be close by":""}.`,items:[{p,date:alt[0],slot}],
+        apply:()=>{ i.date=alt[0]; i.slot=slot; }};
+    }
+    return null;
+  }});
+  // f. open days -> themed days that match the taste
+  for(let k=0;k<4;k++) Q.push({ic:"空",make:()=>{
+    if(!dr.pr.fill) return null;
+    for(const d of apEmpty(dr)){
+      const reg=apPickRegion(dr,t,d); const picks=reg?apPicks(dr,t,d,reg,AP_CAP[dr.pr.pace]-(d===TRIP[0]?1:1)):[];
+      if(!picks.length){ dr.skip.add(d); continue; }
+      return {title:`${apD(d)} is open. Make it a ${regionShort(reg)} day?`,body:`${picks.length} spots in ${reg.name}, close together and picked for your taste for ${t.words}.`,items:apItems(picks,d),
+        apply:()=>{ picks.forEach(x=>dr.items.push({pid:x.p.id,date:d,slot:x.slot,src:"suggest",why:x.it.why})); dr.theme[d]=reg.id; },
+        decline:()=>dr.skip.add(d)};
+    }
+    return null;
+  }});
+  Q.push({ic:"埋",make:()=>{
+    if(!dr.pr.fill) return null; const ds=apEmpty(dr); if(!ds.length) return null;
+    const ex=new Set(), all=[], plan=[], themed={};
+    for(const d of ds){ const avoid=new Set(Object.values(themed)); const reg=apPickRegion(dr,t,d,avoid,themed); if(!reg) continue;
+      const picks=apPicks(dr,t,d,reg,AP_CAP[dr.pr.pace]-1,ex); if(!picks.length) continue;
+      picks.forEach(x=>{ ex.add(x.p.id); all.push({p:x.p,date:d,slot:x.slot,why:x.it.why}); }); themed[d]=reg.id; plan.push(`${apD(d)}: ${regionShort(reg)}`); }
+    if(!all.length) return null;
+    return {title:`Fill the other ${plan.length} open day${plan.length>1?"s":""} the same way?`,body:plan.join(" · "),items:all,
+      apply:()=>{ all.forEach(x=>dr.items.push({pid:x.p.id,date:x.date,slot:x.slot,src:"suggest",why:x.why})); Object.assign(dr.theme,themed); }};
+  }});
+  // g. light days -> a couple of stops nearby
+  for(let k=0;k<3;k++) Q.push({ic:"足",make:()=>{
+    if(!dr.pr.fill) return null;
+    for(const d of TRIP){
+      if(dr.trip[d]||dr.free.has(d)||dr.asked.has(d)) continue;
+      const l=apLoad(dr,d), want=Math.min(2,AP_CAP[dr.pr.pace]-(d===TRIP[0]?2:1)-l); if(!l||want<1) continue;
+      dr.asked.add(d);
+      const picks=apNear(dr,t,d,apCenter(dr,d)||HOTEL_POS,want); if(!picks.length) continue;
+      const names=apDay(dr,d).map(i=>apP(i.pid)).filter(Boolean).map(p=>p.name).slice(0,2).join(" and ")||"your plans";
+      return {title:`${apD(d)} is light. Add ${picks.length===1?"a stop":`${picks.length} stops`} near ${names}?`,body:`A short walk or ride from what's already there, and a match for your taste for ${t.words}.`,items:apItems(picks,d),
+        apply:()=>picks.forEach(x=>dr.items.push({pid:x.p.id,date:d,slot:x.slot,src:"suggest",why:"Close to your other stops"}))};
+    }
+    return null;
+  }});
+  // h. dinner (and bars) near where each day ends
+  Q.push({ic:"食",make:()=>{
+    if(dr.pr.nights==="rarely") return null;
+    let ds=TRIP.filter(d=>!dr.trip[d]&&!dr.free.has(d)&&apLoad(dr,d)>0&&apRoom(dr,d)>0&&!apDay(dr,d).some(i=>i.slot==="evening"||i.slot==="night")&&!apMan(d).some(e=>["evening","night"].includes(slotOf(e))));
+    if(dr.pr.nights==="some") ds=ds.filter((d,i)=>i%2===0);
+    const ex=new Set(), items=[];
+    for(const d of ds){ const slot=dr.pr.nights==="most"&&[5,6].includes(wdIdx(d))?"night":"evening"; const x=apNear(dr,t,d,apLast(dr,d)||HOTEL_POS,1,{slot,food:true,exclude:ex,km:1.8,why:"Dinner near your last stop"})[0]; if(x){ ex.add(x.p.id); items.push({p:x.p,date:d,slot:x.slot}); } }
+    if(!items.length) return null;
+    return {title:`Add dinner${dr.pr.nights==="most"?" or a bar":""} near your last stop on ${items.length} evening${items.length>1?"s":""}?`,body:"Local favorites a short walk from where each day ends. It's dark by 4:30pm, so this saves hunting for food.",items,
+      apply:()=>items.forEach(x=>dr.items.push({pid:x.p.id,date:x.date,slot:x.slot,src:"suggest",why:x.slot==="night"?"A drink near your last stop":"Dinner near your last stop"}))};
+  }});
+  return Q;
+}
+
+/* ---------- UI ---------- */
+function openAutoPlan(){ ap={step:"prefs",pr:apDefaults()}; renderAP(); }
+function apItemRow(x,opts={}){
+  const p=x.p; if(!p) return "";
+  return `<div class="apr ${x.x?"out":""}"><span class="apth" data-th="${esc(p.id)}">${thumbFor(p)}</span><span class="aptx"><b>${esc(p.name)}</b><small>${esc(p.area||"")}${p.love==="Locals"?" · locals love it":""}</small></span>${opts.noDate?"":`<span class="apwhen">${x.x==="drop"?"drop":x.x?"moves":esc(apD(x.date))}<small>${x.x==="drop"?esc(apD(x.date)):x.x?"elsewhere":esc(SLOT_NAME[x.slot]||"")}</small></span>`}</div>`;
+}
+function renderAP(keepScroll){
+  if(!ap) return;
+  const m0=document.querySelector("#modalRoot .modal.apm"), st=keepScroll&&m0?m0.scrollTop:0;
+  const head=(label,title,right)=>`<div class="grab" aria-hidden="true"></div><div class="aph"><div><div class="label">${label}</div>${title}</div>${right||`<button class="btn ghost" data-act="close">Close</button>`}</div>`;
+  let html="";
+  if(ap.step==="prefs"){
+    const pr=ap.pr, n=state.swipe.kept.length, man=state.events.filter(e=>!e.auto).length, auto=state.events.filter(e=>e.auto).length;
+    const seg=(k)=>`<div class="apseg" style="grid-template-columns:repeat(${AP_OPTS[k].length},minmax(0,1fr))">${AP_OPTS[k].map(([v,l,s])=>`<button class="apo ${String(pr[k])===v?"on":""}" data-apo="${k}:${v}"><b>${l}</b>${s?`<small>${s}</small>`:""}</button>`).join("")}</div>`;
+    html=`<div class="sheet ap">${head("Auto-plan",`<h3>Plan my trip from what I liked</h3>`)}
+      <p class="apintro">${n?`I'll use your <b>${n} kept place${n>1?"s":""}</b>${man?` and work around the ${man} thing${man>1?"s":""} you added yourself`:""}, then ask before I change anything.`:`You haven't kept any places yet, so I'll start from places locals and travelers both rate. Swipe a few in Discover first for a plan that's more you.`}${auto?` Your last auto-plan (${auto} stops) will be replaced.`:""}</p>
+      <div class="apq"><div class="label">Pace</div>${seg("pace")}</div>
+      <div class="apq"><div class="label">Day trips out of Tokyo</div>${seg("trips")}</div>
+      <div class="apq"><div class="label">Evenings</div>${seg("nights")}</div>
+      <div class="apq"><div class="label">Days to keep free <small>tap to toggle</small></div><div class="qdays apfree">${TRIP.map(d=>`<button class="qd ${pr.free.includes(d)?"on":""}" data-apfree="${d}" aria-pressed="${pr.free.includes(d)}"><span>${wdOf(d)}</span><b>${dnum(d)}</b><i>${pr.free.includes(d)?"free":""}</i></button>`).join("")}</div></div>
+      <label class="aptog"><input type="checkbox" id="apFill" ${pr.fill?"checked":""}><span><b>Suggest new places for open time</b><small>Chosen to match what you kept. You say yes or no to each one.</small></span></label>
+      <button class="btn big primary wide apgo" data-act="apGo">Make my plan</button></div>`;
+  } else if(ap.step==="busy"){
+    html=`<div class="sheet ap">${head("Auto-plan",`<h3>Planning…</h3>`)}<div class="apbusy"><div class="spinner" aria-hidden="true"></div><p class="muted">${esc(ap.busyMsg||"Grouping your places by neighborhood and checking closing days")}</p></div></div>`;
+  } else if(ap.step==="q"){
+    const c=ap.cur, total=ap.Q.length, pct=Math.round(100*ap.qi/Math.max(1,total));
+    const shown=c.items.slice(0,8);
+    html=`<div class="sheet ap">${head(ap.claude?"Claude's suggestions":"A few changes I'd suggest",`<div class="apbar" aria-hidden="true"><i style="width:${pct}%"></i></div>`,`<button class="btn ghost" data-act="apSkipQs">Skip to my plan</button>`)}
+      <div class="apcard" data-k="${ap.qi}"><div class="apic" aria-hidden="true">${esc(c.ic||"?")}</div><h3>${esc(c.title)}</h3>${c.body?`<p>${esc(c.body)}</p>`:""}
+        ${shown.length?`<div class="aplist">${shown.map(x=>apItemRow(x)).join("")}${c.items.length>shown.length?`<div class="apmore">and ${c.items.length-shown.length} more</div>`:""}</div>`:""}</div>
+      <div class="apyn"><button class="btn big" data-act="apNo">No thanks</button><button class="btn big primary" data-act="apYes">Yes, do it</button></div></div>`;
+  } else if(ap.step==="review"){
+    const dr=ap.dr, its=dr.items.filter(i=>!i.dropped), days=new Set(its.map(i=>i.date)).size, trips=Object.keys(dr.trip).filter(d=>its.some(i=>i.date===d)).length, open=TRIP.filter(d=>!apLoad(dr,d)).length;
+    const dayHTML=d=>{
+      const list=apDay(dr,d).sort((a,b)=>SLOTS.findIndex(s=>s[0]===a.slot)-SLOTS.findIndex(s=>s[0]===b.slot)), man=apMan(d);
+      const rows=[...man.map(e=>`<li class="man"><span class="apth">${e.pid&&findItem(e.pid)?thumbFor(findItem(e.pid)):`<span>${esc((e.title||"·").slice(0,1))}</span>`}</span><span class="aptx"><b>${esc(e.title)}</b><small>${esc(SLOT_NAME[slotOf(e)])} · added by you</small></span><span class="aplock" aria-label="Yours">✓</span></li>`),
+        ...list.map(i=>{ const p=apP(i.pid); if(!p) return ""; return `<li><span class="apth" data-th="${esc(p.id)}">${thumbFor(p)}</span><span class="aptx"><b>${esc(p.name)}</b><small>${esc(SLOT_NAME[i.slot])} · ${esc(p.area||"")}${i.src==="suggest"?` · <em>new pick</em>`:""}</small></span><button class="apx" data-act="apDrop" data-i="${dr.items.indexOf(i)}" aria-label="Remove ${esc(p.name)}">✕</button></li>`; })].join("");
+      return `<section class="apday ${dr.trip[d]?"trip":""} ${rows?"":"empty"} ${dr.free.has(d)?"free":""}"><header><span class="apdn"><b>${dnum(d)}</b><small>${WD3[wdIdx(d)]}</small></span><span class="apdt">${esc(apDayTitle(dr,d))}</span></header>${rows?`<ul>${rows}</ul>`:""}</section>`;
+    };
+    const un=dr.unplaced.filter((u,i,a)=>a.findIndex(v=>v.pid===u.pid)===i&&!its.some(x=>x.pid===u.pid));
+    const canClaude=IN_CLAUDE||!!keys.anthropic;
+    html=`<div class="sheet ap">${head("Your plan",`<h3>${its.length} stop${its.length===1?"":"s"} over ${days} day${days===1?"":"s"}</h3><div class="muted small">${trips} day trip${trips===1?"":"s"} · ${open} open day${open===1?"":"s"}${ap.said?` · ${ap.said} change${ap.said>1?"s":""} approved`:""}</div>`)}
+      ${dr.notes.length?`<div class="apnotes">${dr.notes.map(n=>`<p>${esc(n)}</p>`).join("")}</div>`:""}
+      <div class="apdays">${TRIP.map(dayHTML).join("")}</div>
+      ${un.length?`<div class="apun"><div class="label">Not placed (${un.length})</div>${un.map(u=>{ const p=apP(u.pid); return p?`<div class="apr"><span class="apth" data-th="${esc(p.id)}">${thumbFor(p)}</span><span class="aptx"><b>${esc(p.name)}</b><small>${esc(u.why)}</small></span></div>`:""; }).join("")}<p class="muted small">They stay in your notebook, and you can add them by hand from the Plan tab.</p></div>`:""}
+      <div class="aprefine"><div class="label">Want changes?</div>${canClaude?`<div class="aprow"><input id="apAsk" type="text" placeholder="More food in Shinjuku, no early mornings…" autocomplete="off"><button class="btn" data-act="apClaude">Ask Claude</button></div><p class="muted small">Claude suggests changes and you approve each one, same as above.</p>`:`<p class="muted small">Tap ✕ to drop a stop, or change the settings and re-plan. Add an Anthropic key in Power-ups to ask Claude for changes in your own words.</p>`}</div>
+      <div class="apfoot"><button class="btn big" data-act="apRedo">Settings</button><button class="btn big primary" data-act="apApply">Add to my plan</button></div></div>`;
+  }
+  modal(html,"apm"); apThumbs();
+  if(st){ const m=document.querySelector("#modalRoot .modal.apm"); if(m) m.scrollTop=st; }
+}
+/* real photos for thumbnails that don't have one yet, a few at a time */
+function apThumbs(){
+  if(IN_CLAUDE) return;
+  const els=[...document.querySelectorAll("#modalRoot .apth[data-th]")].filter(el=>!el.querySelector("img")).slice(0,36);
+  let i=0; const next=()=>{ const el=els[i++]; if(!el) return; const p=apP(el.dataset.th); if(!p){ next(); return; }
+    placePhotos(p,4).then(l=>{ const c=l&&l[0]; if(c) document.querySelectorAll(`#modalRoot .apth[data-th="${CSS.escape(p.id)}"]`).forEach(t=>{ if(!t.querySelector("img")) t.innerHTML=`<img src="${esc(c.src)}" alt="" loading="lazy">`; }); }).catch(()=>{}).then(next); };
+  for(let k=0;k<4;k++) next();
+}
+function apNext(){
+  while(ap.qi<ap.Q.length){ const q=ap.Q[ap.qi]; let cur=null; try{ cur=q.make(); }catch(e){ cur=null; } if(cur&&cur.items&&cur.items.length){ cur.ic=q.ic; ap.cur=cur; ap.step="q"; renderAP(); return; } ap.qi++; }
+  ap.claude=false; ap.step="review"; renderAP();
+}
+function apGo(){
+  const fill=document.getElementById("apFill"); if(fill) ap.pr.fill=fill.checked;
+  state.apPrefs=Object.assign({},ap.pr,{free:ap.pr.free.slice()}); save();
+  ap.step="busy"; ap.busyMsg=""; renderAP();
+  setTimeout(()=>{ ap.dr=apPlan(ap.pr); ap.Q=apQuestions(ap.dr); ap.qi=0; ap.said=0; apNext(); },420);
+}
+function apAnswer(yes){
+  const c=ap.cur; if(!c) return;
+  if(yes){ try{ c.apply(); ap.said++; }catch(e){} buzz(8); } else if(c.decline) c.decline();
+  ap.cur=null; ap.qi++; apNext();
+}
+function apApply(){
+  const dr=ap.dr, before=state.events.slice(), its=dr.items.filter(i=>!i.dropped);
+  state.events=state.events.filter(e=>!e.auto);
+  for(const i of its){ const p=apP(i.pid); if(!p) continue;
+    state.events.push({id:uid(),date:i.date,slot:i.slot,time:"",title:p.name,note:i.src==="suggest"?(i.why||"Suggested for you"):"",cat:dr.trip[i.date]&&!isFood(p)?"trip":kindToCat(p.kind),cost:"",pid:p.id,lat:p.lat||null,lng:p.lng||null,area:p.area||"",q:p.q||p.name,img:p.img||"",ts:Date.now(),auto:true});
+    if(!PLACE_BY_ID.has(p.id)&&p.gen&&!state.swipe.gen.some(g=>g.id===p.id)) state.swipe.gen.push(p); }
+  save(); ap=null; closeModal();
+  planMode="day"; planDay=its.length?its.map(i=>i.date).sort()[0]:defaultDay(); show("cal"); renderToday(); renderNotes(); renderCal();
+  const n=its.length, dn=new Set(its.map(i=>i.date)).size;
+  toastAct(`Planned ${n} stop${n===1?"":"s"} over ${dn} day${dn===1?"":"s"}`,"Undo",()=>{ state.events=before; save(); renderPlan(); renderToday(); renderCal(); });
+}
+
+/* Claude: free-text changes, returned as more yes/no questions */
+async function apClaude(text){
+  const dr=ap.dr, t=apTaste();
+  const days=TRIP.map(d=>`${d} (${WD3[wdIdx(d)]})${dr.trip[d]?` [day trip: ${regionName(dr.trip[d])}]`:""}${dr.free.has(d)?" [free day]":""}: ${[...apMan(d).map(e=>`${slotOf(e)} ${e.title} (fixed, added by the traveler)`),...apDay(dr,d).map(i=>`${i.slot} ${apP(i.pid).name} {${i.pid}}`)].join("; ")||"open"}`).join("\n");
+  const pool=PLACES.filter(p=>p.lat&&!apHas(dr,p.id)&&!t.passed.has(p.id)).map(p=>[p,apScore(p,t)+(text&&[p.name,p.area,regionName(regionOf(p)),(p.cats||[]).join(" "),p.kind].join(" ").toLowerCase().split(/\W+/).some(w=>w.length>3&&text.toLowerCase().includes(w))?2:0)]).sort((a,b)=>b[1]-a[1]).slice(0,140).map(([p])=>`${p.id} | ${p.name} | ${regionName(regionOf(p))} | ${p.kind} | ${(p.cats||[]).join(",")} | best: ${p.best||"any"}`).join("\n");
+  const un=dr.unplaced.map(u=>apP(u.pid)).filter(Boolean).map(p=>`${p.id} | ${p.name}`).join("\n")||"none";
+  const prompt=`You are refining a Tokyo trip plan. Traveler: staying at Azumabashi, Sumida (by Asakusa), Dec 15–31 2026, likes ${t.words}. Their request: "${text}"
+
+Current plan (slot, place, {id}):
+${days}
+
+Kept places that aren't placed yet:
+${un}
+
+Other places you may add (id | name | area | kind | tags | best time):
+${pool}
+
+Propose up to 8 changes that answer the request. Rules: use only ids shown above; dates 2026-12-15 to 2026-12-31; slot is morning, afternoon, evening or night; never touch items marked fixed; keep each day geographically tight; most museums and gardens close from Dec 28; dark by 4:30pm. Each reason is one friendly sentence, under 25 words.`;
+  const schema={type:"object",properties:{changes:{type:"array",items:{type:"object",properties:{action:{type:"string",enum:["add","remove","move"]},id:{type:"string"},date:{type:"string"},slot:{type:"string",enum:["morning","afternoon","evening","night"]},reason:{type:"string"}},required:["action","id","date","slot","reason"],additionalProperties:false}}},required:["changes"],additionalProperties:false};
+  let out=null;
+  if(IN_CLAUDE){ const sample=window.claude&&window.claude.use?await window.claude.use("sample"):null; if(!sample) throw new Error("Claude isn't available here."); out=await sample.json(prompt+`\nReply with only JSON: {"changes":[{"action":"add|remove|move","id":"...","date":"2026-12-xx","slot":"morning|afternoon|evening|night","reason":"..."}]}`,{modelTier:"default",cache:false}); }
+  else {
+    if(!AnthropicSDK) AnthropicSDK=(await import(SDK_URL)).default;
+    const Anthropic=AnthropicSDK, client=new Anthropic({apiKey:keys.anthropic,dangerouslyAllowBrowser:true});
+    try{
+      const r=await client.beta.messages.create({model:"claude-opus-5-5",max_tokens:8000,betas:["server-side-fallback-2026-07-01"],fallbacks:"default",output_config:{effort:"low",format:{type:"json_schema",schema}},messages:[{role:"user",content:prompt}]});
+      if(r.stop_reason==="refusal") throw new Error("Claude couldn't help with that one.");
+      out=JSON.parse(r.content.filter(b=>b.type==="text").map(b=>b.text).join(""));
+    }catch(error){
+      if(error instanceof Anthropic.AuthenticationError) throw new Error("Your Anthropic key was rejected. Check it in Power-ups.");
+      if(error instanceof Anthropic.RateLimitError) throw new Error("Claude is rate limited right now. Try again in a minute.");
+      if(error instanceof Anthropic.APIError) throw new Error(`Claude error ${error.status}. Try again later.`);
+      throw error;
+    }
+  }
+  const ch=(out&&Array.isArray(out.changes)?out.changes:[]).slice(0,8);
+  return ch.map(c=>({ic:"✦",make:()=>{
+    const p=apP(c.id); if(!p||!TRIP.includes(c.date)||!SLOT_NAME[c.slot]) return null;
+    const why=String(c.reason||"").slice(0,220);
+    if(c.action==="add"){ if(apHas(dr,p.id)||dr.free.has(c.date)) return null; return {title:`Add ${p.name} on ${apD(c.date)}?`,body:why,items:[{p,date:c.date,slot:c.slot}],apply:()=>{ dr.items.push({pid:p.id,date:c.date,slot:c.slot,src:"suggest",why:"Claude's pick"}); dr.unplaced=dr.unplaced.filter(u=>u.pid!==p.id); }}; }
+    const it=dr.items.find(i=>i.pid===p.id&&!i.dropped); if(!it) return null;
+    if(c.action==="remove") return {title:`Drop ${p.name} from ${apD(it.date)}?`,body:why,items:[{p,date:it.date,slot:it.slot,x:"drop"}],apply:()=>{ it.dropped=true; }};
+    if(c.action==="move"){ if(it.date===c.date&&it.slot===c.slot) return null; return {title:`Move ${p.name} to ${apD(c.date)}?`,body:why,items:[{p,date:c.date,slot:c.slot}],apply:()=>{ it.date=c.date; it.slot=c.slot; }}; }
+    return null;
+  }}));
+}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-apo],[data-apfree],[data-act]"); if(!t) return;
+  if(t.dataset.apo){ const [k,v]=t.dataset.apo.split(":"); ap.pr[k]=v; t.parentElement.querySelectorAll(".apo").forEach(b=>b.classList.toggle("on",b===t)); return; }
+  if(t.dataset.apfree){ const d=t.dataset.apfree, f=ap.pr.free; const on=!f.includes(d); ap.pr.free=on?[...f,d]:f.filter(x=>x!==d); t.classList.toggle("on",on); t.setAttribute("aria-pressed",on); t.querySelector("i").textContent=on?"free":""; return; }
+  const a=t.dataset.act;
+  if(a==="autoplan"){ openAutoPlan(); return; }
+  if(!ap) return;
+  if(a==="apGo") return apGo();
+  if(a==="apYes") return apAnswer(true);
+  if(a==="apNo") return apAnswer(false);
+  if(a==="apSkipQs"){ ap.qi=ap.Q.length; ap.cur=null; return apNext(); }
+  if(a==="apDrop"){ const i=ap.dr.items[+t.dataset.i]; if(i){ i.dropped=true; buzz(6); renderAP(true); } return; }
+  if(a==="apRedo"){ ap.step="prefs"; renderAP(); return; }
+  if(a==="apApply") return apApply();
+  if(a==="apClaude"){
+    const box=document.getElementById("apAsk"), text=(box&&box.value||"").trim(); if(!text){ if(box) box.focus(); return; }
+    ap.step="busy"; ap.busyMsg="Claude is reading your plan"; renderAP();
+    apClaude(text).then(Q=>{ if(!ap) return; ap.Q=Q; ap.qi=0; ap.claude=true; if(!Q.length) toast("Claude had no changes for that. Try saying it another way."); apNext(); })
+      .catch(err=>{ if(!ap) return; ap.step="review"; renderAP(); toast((err&&err.message)||"Couldn't reach Claude. Try again."); });
+    return;
+  }
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Enter"&&e.target&&e.target.id==="apAsk"){ e.preventDefault(); const b=document.querySelector('[data-act="apClaude"]'); if(b) b.click(); } });
+
+window.__azb={openDetail:x=>openDetail(typeof x==="string"?findItem(x):x),deck:()=>deck,apPlan:pr=>apPlan(Object.assign(apDefaults(),pr||{})),apQuestions:dr=>apQuestions(dr),regionOf:id=>regionOf(findItem(id)),places:()=>PLACES.map(p=>({id:p.id,name:p.name,lat:p.lat,lng:p.lng,area:p.area,src:p.src}))};
 })();
 </script>
 

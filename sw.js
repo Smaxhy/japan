@@ -2,7 +2,7 @@
 // the cached copy is only used when there's no signal.
 const VERSION = "__BUILD__";
 const SHELL = "azb-shell-" + VERSION;
-const ASSETS = ["./", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
+const ASSETS = ["./", "./places.js", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
   self.skipWaiting();
